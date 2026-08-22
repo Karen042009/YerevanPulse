@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Flame, ShieldAlert, Sparkles, TrendingUp } from 'lucide-react';
+import { Flame } from 'lucide-react';
 import { soundFX } from '../utils/audioFX';
 
 export default function DistrictLeaderboard({ districts }) {

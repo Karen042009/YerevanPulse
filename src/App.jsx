@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import confetti from 'canvas-confetti';
 import Header from './components/Header';
 import HomeView from './components/HomeView';
@@ -13,39 +13,43 @@ import PitchGuideModal from './components/PitchGuideModal';
 import ReportExhibitModal from './components/ReportExhibitModal';
 import { initialExhibits, initialDistricts } from './data/exhibits';
 import { soundFX } from './utils/audioFX';
+import { readJson, readNumber, readString, writeJson, writeStorage } from './utils/storage';
+
+
+const defaultUser = {
+  name: 'Անի Սարգսյան',
+  id: 'YR-USR-0924',
+  email: 'demo@yerevanpulse.am',
+  district: 'Կենտրոն',
+  level: 4,
+  points: 850,
+  avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAJSdFTmOPkvDaEO4y292rWxM574-584MJGI6BJRBkCjytZUExR3P9IdCqTxqWHH2T-r4brj_93V_c4vtZsNqNFYRE1tdd1MKa2V7lNLpbsQ-anh2iWquqgXSiaW47JWLQUeFEsIqWIsOCzg3SkrXYxPABAd4bUCBA-B8jVHcq73-5GYHFj7r8-GTj3hiySNpEvkkkrth4k8hrrQ-nw1vCmrwg3iyTgYOCtKQZCAMBUUgiNG65H0N8'
+};
+const guestUser = {  name: 'Հյուր',  id: 'guest',  email: '',  district: 'Կենտրոն',  level: 1,  points: 0,  isGuest: true,  avatar: '/logo.png'};
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [currentLang, setCurrentLang] = useState(() => {
-    return localStorage.getItem('yp_lang') || 'hy';
+    return readString('yp_lang', 'hy');
   });
 
   const [exhibits, setExhibits] = useState(() => {
-    const saved = localStorage.getItem('yp_exhibits');
-    return saved ? JSON.parse(saved) : initialExhibits;
+    return readJson('yp_exhibits', initialExhibits);
   });
 
   const [districts, setDistricts] = useState(() => {
-    const saved = localStorage.getItem('yp_districts');
-    return saved ? JSON.parse(saved) : initialDistricts;
+    return readJson('yp_districts', initialDistricts);
   });
 
   const [userPoints, setUserPoints] = useState(() => {
-    const saved = localStorage.getItem('yp_points');
-    return saved ? parseInt(saved, 10) : 0;
+    return readNumber('yp_points', 0);
   });
 
   const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem('yp_current_user');
-    return saved ? JSON.parse(saved) : {
-      name: 'Անի Սարգսյան',
-      id: 'YR-USR-0924',
-      district: 'Կենտրոն',
-      level: 4,
-      points: 850,
-      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAJSdFTmOPkvDaEO4Ay292rWxM574-584MJGI6BJRBkCjytZUExR3P9IdCqTxqWHH2T-r4brj_93V_c4vtZsNqNFYRE1tdd1MKa2V7lNLpbsQ-anh2iWquqgXSiaW47JWLQUeFEsIqWIsOCzg3SkrXYxPABAd4bUCBA-B8jVHcq73-5GYHFj7r8-GTj3hiySNpEvkkkrth4k8hrrQ-nw1vCmrwg3iyTgYOCtKQZCAMBUUgiNG65H0N8'
-    };
+    return { ...defaultUser, ...readJson('yp_current_user', {}) };
   });
+
+  const cleaningIdsRef = useRef(new Set());
 
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -53,31 +57,39 @@ export default function App() {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('yp_exhibits', JSON.stringify(exhibits));
+    writeJson('yp_exhibits', exhibits);
   }, [exhibits]);
 
   useEffect(() => {
-    localStorage.setItem('yp_districts', JSON.stringify(districts));
+    writeJson('yp_districts', districts);
   }, [districts]);
 
   useEffect(() => {
-    localStorage.setItem('yp_points', userPoints.toString());
-  }, [userPoints]);
+    writeStorage('yp_points_' + currentUser.id, userPoints.toString());
+  }, [userPoints, currentUser.id]);
 
   useEffect(() => {
-    localStorage.setItem('yp_lang', currentLang);
+    writeStorage('yp_lang', currentLang);
   }, [currentLang]);
+
+  useEffect(() => {
+    writeJson('yp_current_user', currentUser);
+  }, [currentUser]);
 
   const toggleLanguage = () => {
     setCurrentLang((prev) => (prev === 'hy' ? 'en' : 'hy'));
   };
 
   const handleCleanExhibit = (exhibitId) => {
+    if (cleaningIdsRef.current.has(exhibitId)) return;
+
     const target = exhibits.find((e) => e.id === exhibitId);
     if (!target || target.cleaned) return;
 
+    cleaningIdsRef.current.add(exhibitId);
+
     setExhibits((prev) =>
-      prev.map((e) => (e.id === exhibitId ? { ...e, cleaned: true, cleanedBy: currentUser.name } : e))
+      prev.map((e) => (e.id === exhibitId ? { ...e, cleaned: true, cleanedBy: currentUser.name, cleanedAt: new Date().toISOString() } : e))
     );
 
     setUserPoints((prev) => prev + target.points);
@@ -125,19 +137,24 @@ export default function App() {
 
   const handleScanSuccess = (exhibitCode) => {
     setIsScannerOpen(false);
-    const target = exhibits.find((e) => e.code.toLowerCase() === exhibitCode.toLowerCase());
+    const normalizedCode = exhibitCode.trim().toLowerCase();
+    const target = exhibits.find((e) => e.code.toLowerCase() === normalizedCode);
 
     if (target) {
       handleCleanExhibit(target.id);
       setActiveTab('exhibits');
-    } else {
-      soundFX.playSuccess();
-      const firstUncleaned = exhibits.find((e) => !e.cleaned);
-      if (firstUncleaned) {
-        handleCleanExhibit(firstUncleaned.id);
-        setActiveTab('exhibits');
-      }
     }
+  };
+
+  const handleAuthSuccess = (user) => {
+    setCurrentUser(user);
+    setUserPoints(readNumber("yp_points_" + user.id, 0));
+  };
+
+  const handleLogout = () => {
+    setUserPoints(0);
+    setCurrentUser(guestUser);
+    setIsAuthOpen(false);
   };
 
   const cleanedCount = exhibits.filter((e) => e.cleaned).length;
@@ -157,10 +174,10 @@ export default function App() {
       />
 
       {/* Main Content Layout Wrapper (Desktop Grid vs Mobile Viewport) */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-6 pb-24 md:pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-4 pb-24 lg:py-6 lg:pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main Active Tab Content Column (Full width on Mobile, 8 cols on Desktop) */}
-          <div className="md:col-span-8 space-y-6">
+          <div className="lg:col-span-8 space-y-6">
             {activeTab === 'home' && (
               <HomeView
                 onOpenScanner={() => setIsScannerOpen(true)}
@@ -193,6 +210,7 @@ export default function App() {
               <RanksView
                 districts={districts}
                 userPoints={userPoints}
+                currentUser={currentUser}
                 onOpenScanner={() => setIsScannerOpen(true)}
                 currentLang={currentLang}
               />
@@ -202,13 +220,14 @@ export default function App() {
               <ProfileView
                 userPoints={userPoints}
                 cleanedCount={cleanedCount}
+                currentUser={currentUser}
                 currentLang={currentLang}
               />
             )}
           </div>
 
           {/* Desktop Right Sidebar Widget Column (Hidden on Mobile, 4 cols on Desktop) */}
-          <aside className="hidden md:block md:col-span-4 space-y-6">
+          <aside className="hidden lg:block lg:col-span-4 space-y-6">
             {/* User Profile Card Widget */}
             <div className="museum-label-active p-5 space-y-4 shadow-xl">
               <div className="flex items-center gap-3">
@@ -226,7 +245,7 @@ export default function App() {
               <div className="bg-[#121414] p-3 border border-[#4d4732] flex justify-between items-center text-xs">
                 <span>ՎԱՍՏԱԿԱԾ ՄԻԱՎՈՐՆԵՐ․</span>
                 <span className="font-['Archivo_Narrow'] font-black text-[#ffd700] text-sm">
-                  {850 + userPoints} PTS
+                  {currentUser.points + userPoints} PTS
                 </span>
               </div>
 
@@ -290,7 +309,9 @@ export default function App() {
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
-        onLoginSuccess={(user) => setCurrentUser(user)}
+        currentUser={currentUser}
+        onLogout={handleLogout}
+        onLoginSuccess={handleAuthSuccess}
       />
 
       <PitchGuideModal
@@ -303,10 +324,12 @@ export default function App() {
         onClose={() => setIsReportOpen(false)}
         onAddExhibit={handleAddExhibit}
         districts={districts}
+        exhibits={exhibits}
+        currentUser={currentUser}
       />
 
       {/* Mobile Bottom Navigation Bar (Hidden on Desktop md:hidden) */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <BottomNav
           activeTab={activeTab}
           onChangeTab={setActiveTab}

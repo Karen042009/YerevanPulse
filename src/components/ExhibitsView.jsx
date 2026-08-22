@@ -11,16 +11,16 @@ export default function ExhibitsView({
   onOpenReport,
   currentLang = 'hy' 
 }) {
-  const [selectedExhibit, setSelectedExhibit] = useState(null);
+  const [selectedExhibitId, setSelectedExhibitId] = useState(null);
   const [activeCategoryFilter, setActiveCategoryFilter] = useState('ALL');
   const [statusFilter, setStatusFilter] = useState('ALL'); // ALL | ACTIVE | CLEANED
-  const [severityFilter, setSeverityFilter] = useState('ALL'); // ALL | low | medium | high | critical
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('points'); // points | lifespan | code
   const [showShareToast, setShowShareToast] = useState(false);
   const [qrModalExhibit, setQrModalExhibit] = useState(null);
 
   const t = translations[currentLang] || translations.hy;
+  const selectedExhibit = exhibits.find((exhibit) => exhibit.id === selectedExhibitId);
 
   const categories = ['ALL', 'Պլաստիկ', 'Ծխախոտ', 'Ապակի', 'Մետաղ', 'Թուղթ/Պլաստիկ', 'Էլեկտրոնիկա'];
 
@@ -31,8 +31,7 @@ export default function ExhibitsView({
       }
       if (statusFilter === 'ACTIVE' && exhibit.cleaned) return false;
       if (statusFilter === 'CLEANED' && !exhibit.cleaned) return false;
-      if (severityFilter !== 'ALL' && exhibit.severity !== severityFilter) return false;
-      
+            
       if (searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const title = (currentLang === 'en' && exhibit.titleEn ? exhibit.titleEn : exhibit.title).toLowerCase();
@@ -52,11 +51,7 @@ export default function ExhibitsView({
     });
 
   const handleClean = (exhibitId) => {
-    soundFX.playSuccess();
     onCleanExhibit(exhibitId);
-    if (selectedExhibit && selectedExhibit.id === exhibitId) {
-      setSelectedExhibit((prev) => ({ ...prev, cleaned: true, cleanedBy: 'Անի Սարգսյան' }));
-    }
   };
 
   const handleShare = () => {
@@ -186,7 +181,7 @@ export default function ExhibitsView({
             <button
               onClick={() => {
                 soundFX.playClick();
-                setSelectedExhibit(null);
+                setSelectedExhibitId(null);
               }}
               className="flex items-center gap-2 text-[#ffd700] hover:opacity-80 font-['Archivo_Narrow'] text-base font-bold uppercase"
             >
@@ -342,7 +337,7 @@ export default function ExhibitsView({
                   key={exhibit.id}
                   onClick={() => {
                     soundFX.playClick();
-                    setSelectedExhibit(exhibit);
+                    setSelectedExhibitId(exhibit.id);
                   }}
                   className={`museum-label p-5 cursor-pointer transition-all hover:border-[#ffd700] relative group ${
                     exhibit.cleaned ? 'opacity-75 border-l-4 border-l-[#78dc77]' : 'border-l-4 border-l-[#ffd700]'

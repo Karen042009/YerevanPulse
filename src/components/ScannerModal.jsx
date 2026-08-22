@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { soundFX } from '../utils/audioFX';
 
 export default function ScannerModal({ isOpen, onClose, onScanSuccess, exhibits = [] }) {
   const [scannedCode, setScannedCode] = useState('');
   const [isScanning, setIsScanning] = useState(false);
   const [feedbackMsg, setFeedbackMsg] = useState('');
+  const scanTimerRef = useRef(null);
+
+  useEffect(() => () => clearTimeout(scanTimerRef.current), []);
 
   if (!isOpen) return null;
 
@@ -13,9 +16,23 @@ export default function ScannerModal({ isOpen, onClose, onScanSuccess, exhibits 
     setIsScanning(true);
     setFeedbackMsg(`Սկանավորվում է #${code}...`);
 
-    setTimeout(() => {
+    clearTimeout(scanTimerRef.current);
+    scanTimerRef.current = setTimeout(() => {
       setIsScanning(false);
-      onScanSuccess(code);
+      const normalizedCode = code.trim().toLowerCase();
+      const exhibit = exhibits.find((item) => item.code.toLowerCase() === normalizedCode);
+
+      if (!exhibit) {
+        setFeedbackMsg("Չգտնվեց ցուցանմուշ՝ #" + code);
+        return;
+      }
+
+      if (exhibit.cleaned) {
+        setFeedbackMsg("Այս ցուցանմուշն արդեն մաքրված է");
+        return;
+      }
+
+      onScanSuccess(exhibit.code);
     }, 1200);
   };
 
@@ -60,7 +77,7 @@ export default function ScannerModal({ isOpen, onClose, onScanSuccess, exhibits 
           </span>
 
           <p className="text-xs font-['Archivo_Narrow'] text-[#e2e2e2] uppercase font-bold tracking-widest">
-            {isScanning ? feedbackMsg : 'ՏԵՍԱԽՑԻԿՆ ԱԿՏԻՎ Է...'}
+            {feedbackMsg || 'ՏԵՍԱԽՑԻԿՆ ԱԿՏԻՎ Է...'}
           </p>
         </div>
 
@@ -70,41 +87,12 @@ export default function ScannerModal({ isOpen, onClose, onScanSuccess, exhibits 
             ⚡ ԴԵՄՈ ՓՈՐՁԱՐԿՈՒՄ (ԱՐԱԳ ԸՆՏՐՈՒԹՅՈՒՆ)․
           </label>
           <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={() => handleSimulatedScan('YVN-042')}
-              disabled={isScanning}
-              className="p-2 bg-[#282a2b] border border-[#ffd700]/50 hover:border-[#ffd700] text-xs font-['Archivo_Narrow'] font-bold text-left text-white flex items-center justify-between"
-            >
-              <span>🍾 Շիշ #042</span>
-              <span className="text-[10px] text-[#ffd700] font-mono">+50 pt</span>
-            </button>
-
-            <button
-              onClick={() => handleSimulatedScan('YVN-108')}
-              disabled={isScanning}
-              className="p-2 bg-[#282a2b] border border-[#ffd700]/50 hover:border-[#ffd700] text-xs font-['Archivo_Narrow'] font-bold text-left text-white flex items-center justify-between"
-            >
-              <span>🚬 Ծխախոտ #108</span>
-              <span className="text-[10px] text-[#ffd700] font-mono">+30 pt</span>
-            </button>
-
-            <button
-              onClick={() => handleSimulatedScan('YVN-089')}
-              disabled={isScanning}
-              className="p-2 bg-[#282a2b] border border-[#ffd700]/50 hover:border-[#ffd700] text-xs font-['Archivo_Narrow'] font-bold text-left text-white flex items-center justify-between"
-            >
-              <span>🛍️ Տոպրակ #089</span>
-              <span className="text-[10px] text-[#ffd700] font-mono">+40 pt</span>
-            </button>
-
-            <button
-              onClick={() => handleSimulatedScan('YVN-501')}
-              disabled={isScanning}
-              className="p-2 bg-[#282a2b] border border-[#ffd700]/50 hover:border-[#ffd700] text-xs font-['Archivo_Narrow'] font-bold text-left text-white flex items-center justify-between"
-            >
-              <span>🍾 Ապակի #501</span>
-              <span className="text-[10px] text-[#ffd700] font-mono">+100 pt</span>
-            </button>
+            {exhibits.slice(0, 4).map((exhibit) => (
+              <button key={exhibit.id} onClick={() => handleSimulatedScan(exhibit.code)} disabled={isScanning || exhibit.cleaned} className="p-2 bg-[#282a2b] border border-[#ffd700]/50 hover:border-[#ffd700] text-xs font-['Archivo_Narrow'] font-bold text-left text-white flex items-center justify-between">
+                <span>{exhibit.icon} {exhibit.code}</span>
+                <span className="text-[10px] text-[#ffd700] font-mono">+{exhibit.points} pt</span>
+              </button>
+            ))}
           </div>
         </div>
 

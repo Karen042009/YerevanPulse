@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { soundFX } from '../utils/audioFX';
 import { translations } from '../data/translations';
 
-export default function RanksView({ districts, userPoints, onOpenScanner, currentLang = 'hy' }) {
+export default function RanksView({ districts, userPoints, currentUser, onOpenScanner, currentLang = 'hy' }) {
   const [activeTab, setActiveTab] = useState('neighborhoods');
   const [selectedDistrictModal, setSelectedDistrictModal] = useState(null);
 
@@ -13,7 +13,7 @@ export default function RanksView({ districts, userPoints, onOpenScanner, curren
 
   const individuals = [
     { id: 1, rank: 1, name: 'Agent X (Yerevan Leader)', role: 'The Master Sweeper', points: 4250 + userPoints, avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuA6JAOaB0i-hIpxJhXZIqu8Zo2MeiYhN9l--ILfdhANCmRhDDFTNXkl9u2xb2vq-Dd8a1g6TAh4j_RVdXRfy1bTgnFFFh5xKVJeeJsRabEdc3ZcH7sPUO50NqCpT5-KUXqEmn4mqXia_mkhbKNQpKzkoKGUWSNboq5O6i-0s8gx2U55AoDtruwmKX4b7Jp4S7wXInu8YYyCuRMUNNoxLWJK80yalMKcCFPol0ES0HnwEaLlqbKlBYs8" },
-    { id: 2, rank: 2, name: 'Անի Սարգսյան (Դուք / You)', role: 'Քաղաքի Պահապան', points: 850 + userPoints, avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCQpNq7HbWrbpBblgG84H55zx-4_Bz1YHNIsrK72zduA1A7DGMIhRMeOam288p244hYY5ysEfj2z3cMYH950zV2sR4pitQe1fkDfKl02193q0I1SCI6_JKaxu_XCIOTiRGUyWhqbwhUMlw3ZPdikIitMCG8q0rRJP_tD-dN7pd8fV79RN0TjCuX_H9Yj42IV5Llfy64F4SbvPYkILMUg3kdxNmEuROjRpggdtlpJyk18KWgS15jeKW5" },
+    { id: 2, rank: 2, name: currentUser.name, role: currentUser.district, points: currentUser.points + userPoints, avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCQpNq7HbWrbpBblgG84H55zx-4_Bz1YHNIsrK72zduA1A7DGMIhRMeOam288p244hYY5ysEfj2z3cMYH950zV2sR4pitQe1fkDfKl02193q0I1SCI6_JKaxu_XCIOTiRGUyWhqbwhUMlw3ZPdikIitMCG8q0rRJP_tD-dN7pd8fV79RN0TjCuX_H9Yj42IV5Llfy64F4SbvPYkILMUg3kdxNmEuROjRpggdtlpJyk18KWgS15jeKW5" },
     { id: 3, rank: 3, name: 'Yerevanian99', role: 'Urban Activist', points: 3800, avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuA7le_QlZYDjWGbzDE-crC4bz4wDK5gzxKYszeuQhU0mKyoa67YfqVD9SL5OcR5d3-fedHFOXqj7OxozM7m4AWy2p-1ZoDGVxhu-yRSrfNp-eWw7Y5Za4o9jpBTOPXASuUyb-SXH8TyuguDUHtgPMcS1qJptdqi63Qn0CEwXaig3rKBwHmiboGq0MHh0noWiU6BAAEOfUnmR0QY-7SsmkbFCNdf9G5fDjWaTcLo4Oe8G83M4YoXmC-5" },
     { id: 4, rank: 4, name: 'Armen Eco', role: 'Cascade Cleaner', points: 2950, avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" },
     { id: 5, rank: 5, name: 'Elena_YVN', role: 'Recycling Champ', points: 2400, avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80" },

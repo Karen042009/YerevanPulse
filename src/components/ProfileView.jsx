@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { soundFX } from '../utils/audioFX';
 import { translations } from '../data/translations';
 
-export default function ProfileView({ userPoints, cleanedCount, currentLang = 'hy' }) {
+export default function ProfileView({ userPoints, cleanedCount, currentUser, currentLang = 'hy' }) {
   const [logLimit, setLogLimit] = useState(4);
   const [selectedBadgeModal, setSelectedBadgeModal] = useState(null);
 
   const t = translations[currentLang] || translations.hy;
 
-  const totalPoints = 850 + userPoints;
+  const totalPoints = currentUser.points + userPoints;
   const totalCleaned = 12 + cleanedCount;
 
   const achievements = [
@@ -34,24 +34,24 @@ export default function ProfileView({ userPoints, cleanedCount, currentLang = 'h
       <section className="museum-label-active p-6 flex flex-col md:flex-row items-center gap-6 relative overflow-hidden shadow-2xl">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#ffd700_1px,transparent_1px)] [background-size:12px_12px]" />
         
-        {/* Avatar with LVL 4 Badge */}
+        {/* Avatar with LVL {currentUser.level} Badge */}
         <div className="w-28 h-28 md:w-36 md:h-36 rounded-none border-4 border-[#ffd700] relative z-10 shrink-0 shadow-xl">
           <img 
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJSdFTmOPkvDaEO4Ay292rWxM574-584MJGI6BJRBkCjytZUExR3P9IdCqTxqWHH2T-r4brj_93V_c4vtZsNqNFYRE1tdd1MKa2V7lNLpbsQ-anh2iWquqgXSiaW47JWLQUeFEsIqWIsOCzg3SkrXYxPABAd4bUCBA-B8jVHcq73-5GYHFj7r8-GTj3hiySNpEvkkkrth4k8hrrQ-nw1vCmrwg3iyTgYOCtKQZCAMBUUgiNG65H0N8" 
-            alt="Անի Սարգսյան" 
+            alt={currentUser.name} 
             className="w-full h-full object-cover grayscale contrast-125"
           />
           <div className="absolute bottom-0 right-0 bg-[#ffd700] text-[#1A1A1A] px-2 py-0.5 font-['Archivo_Narrow'] text-xs font-black border border-[#121414]">
-            LVL 4
+            LVL {currentUser.level}
           </div>
         </div>
 
         <div className="flex flex-col items-center md:items-start text-center md:text-left z-10 w-full">
           <div className="font-['Montserrat'] text-xs text-[#ffd700] tracking-[0.2em] mb-1 font-mono">
-            ID: YR-USR-0924 // SECTOR: ԿԵՆՏՐՈՆ
+            ID: {currentUser.id} // SECTOR: {currentUser.district.toUpperCase()}
           </div>
           <h2 className="font-['Archivo_Narrow'] text-3xl md:text-4xl font-extrabold uppercase text-[#e2e2e2] mb-2">
-            Անի Սարգսյան
+            {currentUser.name}
           </h2>
           <div className="bg-[#121414] text-[#ffd700] px-4 py-1.5 border border-[#ffd700] inline-flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-sm">verified_user</span>

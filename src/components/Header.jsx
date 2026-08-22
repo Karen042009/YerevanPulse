@@ -14,6 +14,7 @@ export default function Header({
 }) {
   const [isMuted, setIsMuted] = React.useState(() => soundFX.isMuted);
   const t = translations[currentLang] || translations.hy;
+  const isGuest = currentUser?.isGuest;
 
   const toggleSound = () => {
     const muted = soundFX.toggleMute();
@@ -22,14 +23,14 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-[#121414]/90 border-b-2 border-[#ffd700]/30 px-3 md:px-8 h-16 flex justify-between items-center backdrop-blur-md">
+    <header className="app-header sticky top-0 w-full z-50 bg-[#0b0e14]/95 border-b-2 border-[#ffc700]/40 px-3 md:px-6 h-16 flex justify-between items-center backdrop-blur-md shadow-lg">
       {/* Brand & Logo */}
       <div 
         onClick={() => {
           soundFX.playClick();
           onChangeTab('home');
         }}
-        className="flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity"
+        className="app-brand flex items-center gap-2.5 cursor-pointer hover:opacity-90 transition-opacity shrink-0"
       >
         <button 
           type="button"
@@ -38,7 +39,7 @@ export default function Header({
             soundFX.playScanChirp();
             onOpenScanner();
           }}
-          className="text-[#ffd700] hover:scale-105 active:scale-95 transition-all p-1.5 bg-[#1a1c1c] border border-[#ffd700] flex items-center justify-center shadow-[2px_2px_0px_0px_#ffd700]"
+          className="text-[#ffc700] hover:scale-105 active:scale-95 transition-all p-1.5 bg-[#121620] border border-[#ffc700] flex items-center justify-center shadow-[2px_2px_0px_0px_#ffc700] rounded-sm"
           title={t.modals.scanQR}
         >
           <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -46,25 +47,25 @@ export default function Header({
           </span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="app-brand-lockup flex items-center gap-2">
           <img 
             src="/logo.png" 
             alt="Yerevan Pulse Logo" 
-            className="h-8 md:h-9 w-auto object-contain border border-[#ffd700] p-0.5 bg-black rounded-sm shadow-[2px_2px_0px_0px_#ffd700]"
+            className="h-8 md:h-9 w-auto object-contain border border-[#ffc700] p-0.5 bg-black rounded-sm shadow-[2px_2px_0px_0px_#ffc700]"
           />
-          <div>
-            <h1 className="font-['Archivo_Narrow'] text-base md:text-xl font-extrabold tracking-tighter text-[#ffd700] uppercase leading-none">
-              {t.appName}
+          <div className="flex flex-col">
+            <h1 className="font-['Outfit'] app-brand-name text-base md:text-lg font-black tracking-tight text-[#ffc700] uppercase leading-none">
+              YEREVAN PULSE
             </h1>
-            <span className="hidden sm:block font-['Montserrat'] text-[8px] md:text-[9px] text-[#d0c6ab] uppercase tracking-widest font-mono">
-              {t.tagline}
+            <span className="hidden md:block font-['Space_Grotesk'] text-[9px] text-gray-400 uppercase tracking-wider">
+              {currentLang === 'hy' ? 'ՔԱՂԱՔԱՅԻՆ ԻՆՏԵՐՎԵՆՑԻԱ' : 'CIVIC INTERVENTION'}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Desktop Navigation Links */}
-      <nav className="hidden md:flex items-center gap-3">
+      {/* Navigation Links */}
+      <nav className="hidden lg:flex items-center gap-2">
         {[
           { id: 'home', label: t.nav.home, icon: 'home' },
           { id: 'exhibits', label: t.nav.exhibits, icon: 'museum' },
@@ -75,10 +76,10 @@ export default function Header({
           <button
             key={tab.id}
             onClick={() => { soundFX.playClick(); onChangeTab(tab.id); }}
-            className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 border transition-all ${
+            className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 rounded border transition-all ${
               activeTab === tab.id 
-                ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700] shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)]' 
-                : 'text-[#d0c6ab] border-transparent hover:border-[#ffd700] hover:text-white'
+                ? 'bg-[#ffc700] text-[#0b0e14] border-[#ffc700] shadow-[0_0_15px_rgba(255,199,0,0.3)]' 
+                : 'text-gray-300 border-transparent hover:border-[#ffc700] hover:text-white'
             }`}
           >
             <span className="material-symbols-outlined text-base">{tab.icon}</span>
@@ -87,25 +88,25 @@ export default function Header({
         ))}
       </nav>
 
-      {/* Header Actions (Language, Sound, Civic Report & User Profile) */}
-      <div className="flex items-center gap-2 md:gap-3">
+      {/* Header Actions */}
+      <div className="app-actions flex items-center gap-2">
         {/* Language Switcher */}
         <button
           onClick={() => {
             soundFX.playClick();
             if (onToggleLang) onToggleLang();
           }}
-          className="text-[#ffd700] font-['Archivo_Narrow'] text-xs font-bold uppercase px-2 py-1 bg-[#1a1c1c] border border-[#ffd700]/60 hover:border-[#ffd700] transition-all flex items-center gap-1"
+          className="app-lang text-[#ffc700] font-['Space_Grotesk'] text-xs font-bold uppercase px-2.5 py-1.5 bg-[#121620] border border-[#ffc700]/60 hover:border-[#ffc700] transition-all flex items-center gap-1.5 rounded"
           title="Փոխել լեզուն / Switch Language"
         >
           <span className="material-symbols-outlined text-sm">language</span>
           <span>{currentLang === 'hy' ? 'ARM 🇦🇲' : 'ENG 🇬🇧'}</span>
         </button>
 
-        {/* Sound FX Toggle Button */}
+        {/* Sound FX Toggle */}
         <button
           onClick={toggleSound}
-          className="text-[#d0c6ab] hover:text-[#ffd700] p-1.5 bg-[#1a1c1c] border border-[#4d4732] flex items-center justify-center transition-all"
+          className="text-gray-300 hover:text-[#ffc700] p-1.5 bg-[#121620] border border-gray-700 flex items-center justify-center transition-all rounded"
           title={isMuted ? 'Muted' : 'Sound On'}
         >
           <span className="material-symbols-outlined text-lg">
@@ -113,57 +114,33 @@ export default function Header({
           </span>
         </button>
 
-        {/* Add Exhibit Civic Button */}
+        {/* Add Exhibit Button */}
         <button
           onClick={() => {
             soundFX.playClick();
             if (onOpenReport) onOpenReport();
           }}
-          className="hidden lg:flex border border-[#ffd700] text-[#ffd700] hover:bg-[#ffd700] hover:text-[#1a1a1a] px-2.5 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all items-center gap-1"
-          title={t.hero.reportExhibit}
+          className="hidden sm:flex border border-[#ffc700] text-[#ffc700] hover:bg-[#ffc700] hover:text-[#0b0e14] px-2.5 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all items-center gap-1 rounded"
         >
           <span className="material-symbols-outlined text-base">add_location_alt</span>
-          <span>{t.hero.reportExhibit}</span>
+          <span>+ {t.hero.reportExhibit}</span>
         </button>
 
-        {/* QR Scanner Button */}
+        {/* Auth / Account Register Button */}
         <button
           onClick={() => {
-            soundFX.playScanChirp();
-            onOpenScanner();
+            soundFX.playClick();
+            onOpenAuth();
           }}
-          className="hidden sm:flex bg-[#ffd700] text-[#1a1a1a] px-3 py-1.5 text-xs font-['Archivo_Narrow'] font-black uppercase tracking-wider items-center gap-1.5 hover:bg-[#e9c400] transition-all border border-white shadow-[2px_2px_0px_0px_#ffffff]"
+          className="app-account bg-[#121620] border border-[#ffc700] text-[#ffc700] hover:bg-[#ffc700] hover:text-[#0b0e14] px-3 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all flex items-center gap-1.5 rounded shadow-[0_0_10px_rgba(255,199,0,0.15)]"
         >
-          <span className="material-symbols-outlined text-base">qr_code_2</span>
-          <span>{t.modals.scanQR}</span>
+          <span className="material-symbols-outlined text-base">
+            {isGuest ? 'account_circle' : 'person'}
+          </span>
+          <span className="hidden sm:inline">
+            {isGuest ? (currentLang === 'hy' ? 'ԳՐԱՆՑՈՒՄ / ՄՈՒՏՔ' : 'REGISTER / LOGIN') : currentUser.name}
+          </span>
         </button>
-
-        {currentUser ? (
-          <button
-            onClick={() => {
-              soundFX.playClick();
-              onChangeTab('profile');
-            }}
-            className="hover:scale-105 transition-all cursor-pointer rounded-full overflow-hidden w-9 h-9 border-2 border-[#ffd700] shadow-[0_0_10px_rgba(255,215,0,0.4)] flex-shrink-0"
-            title={currentUser.name}
-          >
-            <img 
-              src={currentUser.avatar} 
-              alt={currentUser.name} 
-              className="w-full h-full object-cover grayscale contrast-125" 
-            />
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              soundFX.playClick();
-              onOpenAuth();
-            }}
-            className="border border-[#ffd700] text-[#ffd700] hover:bg-[#ffd700] hover:text-[#1a1a1a] px-3 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all"
-          >
-            {t.modals.login}
-          </button>
-        )}
       </div>
     </header>
   );

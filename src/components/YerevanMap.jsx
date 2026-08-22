@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Filter, AlertTriangle, CheckCircle2, Sparkles, Navigation } from 'lucide-react';
+import { MapPin, CheckCircle2, Sparkles, Navigation } from 'lucide-react';
 
 export default function YerevanMap({ exhibits, onSelectExhibit, onCleanExhibit }) {
   const [filter, setFilter] = useState('all'); // all | active | cleaned

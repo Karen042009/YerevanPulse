@@ -6,28 +6,35 @@ export default function HomeView({ onOpenScanner, onChangeTab, currentLang = 'hy
   const t = translations[currentLang] || translations.hy;
 
   return (
-    <div className="space-y-8 px-2 md:px-0 py-4 animate-fadeIn">
-      {/* Hero Section */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-        <div className="md:col-span-7 space-y-6">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-['Archivo_Narrow'] font-black text-white leading-none uppercase tracking-tight sticker-effect p-3">
+    <div className="space-y-10 px-2 md:px-0 py-4 animate-fadeIn">
+      {/* Ultra-Vibrant Hero Section */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="lg:col-span-7 space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1a202c] border border-[#ffc700]/50 rounded-full shadow-[0_0_15px_rgba(255,199,0,0.2)]">
+            <span className="w-2 h-2 rounded-full bg-[#ffc700] animate-ping" />
+            <span className="font-['Space_Grotesk'] text-xs font-bold tracking-widest text-[#ffc700] uppercase">
+              LIVE CIVIC MONITORING V2.0
+            </span>
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl font-['Outfit'] font-black text-white leading-none uppercase tracking-tight">
             {t.hero.title1} <br />
-            <span className="text-[#ffd700] bg-[#1a1a1a] px-3 py-1 border-2 border-[#ffd700] inline-block mt-2">
+            <span className="text-gradient-gold bg-[#121620] px-4 py-1.5 border-2 border-[#ffc700] inline-block mt-3 shadow-[0_0_30px_rgba(255,199,0,0.25)] rounded-sm">
               {t.hero.title2}
             </span>
           </h1>
 
-          <p className="text-base md:text-lg font-['Montserrat'] text-[#d0c6ab] leading-relaxed max-w-xl border-l-4 border-[#ffd700] pl-4 italic">
+          <p className="text-base sm:text-lg font-['Montserrat'] text-gray-300 leading-relaxed max-w-xl border-l-4 border-[#ffc700] pl-4 italic">
             {t.subtitle}
           </p>
 
-          <div className="pt-2 flex flex-col sm:flex-row gap-4">
+          <div className="pt-3 flex flex-col sm:flex-row gap-4">
             <button 
               onClick={() => {
                 soundFX.playScanChirp();
                 onOpenScanner();
               }}
-              className="bg-[#ffd700] text-[#1a1a1a] px-8 py-5 flex items-center justify-center gap-4 hover:bg-[#e9c400] active:scale-[0.98] transition-all border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] group w-full sm:w-auto"
+              className="btn-primary-glow px-8 py-5 flex items-center justify-center gap-4 group w-full sm:w-auto"
             >
               <span className="material-symbols-outlined text-[32px] group-hover:rotate-12 transition-transform" style={{ fontVariationSettings: "'FILL' 1" }}>
                 qr_code_2
@@ -42,7 +49,7 @@ export default function HomeView({ onOpenScanner, onChangeTab, currentLang = 'hy
                 soundFX.playClick();
                 onChangeTab('exhibits');
               }}
-              className="border-2 border-[#ffd700] text-[#ffd700] px-6 py-5 flex items-center justify-center gap-3 hover:bg-[#ffd700] hover:text-[#1a1a1a] transition-all font-['Archivo_Narrow'] text-lg font-extrabold uppercase tracking-wide"
+              className="border-2 border-[#ffc700] text-[#ffc700] hover:bg-[#ffc700] hover:text-[#0b0e14] px-6 py-5 flex items-center justify-center gap-3 transition-all font-['Archivo_Narrow'] text-lg font-extrabold uppercase tracking-wide shadow-[0_0_20px_rgba(255,199,0,0.15)]"
             >
               <span className="material-symbols-outlined text-2xl">museum</span>
               <span>{t.nav.exhibits}</span>
@@ -50,86 +57,96 @@ export default function HomeView({ onOpenScanner, onChangeTab, currentLang = 'hy
           </div>
         </div>
 
-        {/* Visual Graphic of City with Heartbeat Pulse */}
-        <div className="md:col-span-5 relative h-64 md:h-84 w-full bg-[#1A1A1A] border-2 border-[#ffd700] flex items-center justify-center overflow-hidden group shadow-2xl">
-          <div className="absolute top-2 left-2 z-10 text-xs font-['Montserrat'] text-[#e2e2e2] bg-[#121414] px-2.5 py-1 border border-[#ffd700]/50 font-mono">
-            YR-2026-PULSE
+        {/* Visual Animated Cyber Pulse Graphic Box */}
+        <div className="lg:col-span-5 relative h-72 lg:h-96 w-full bg-gradient-to-br from-[#121620] to-[#0b0e14] border-2 border-[#ffc700] flex items-center justify-center overflow-hidden group shadow-[0_0_40px_rgba(255,199,0,0.2)] rounded-lg">
+          <div className="absolute top-3 left-3 z-10 text-xs font-mono text-[#ffc700] bg-[#06080c]/90 px-3 py-1 border border-[#ffc700]/60 rounded">
+            SYS-ID: YR-2026-PULSE
           </div>
 
-          <div className="text-center p-6 space-y-3 z-10">
-            <div className="relative inline-block cursor-pointer" onClick={() => soundFX.playScanChirp()}>
-              <span className="material-symbols-outlined text-7xl text-[#ffd700] animate-pulse">
-                ecg
-              </span>
-              <div className="absolute inset-0 bg-[#ffd700]/25 rounded-full blur-xl animate-ping"></div>
+          <div className="text-center p-6 space-y-4 z-10">
+            <div 
+              className="relative inline-block cursor-pointer group-hover:scale-110 transition-transform"
+              onClick={() => soundFX.playScanChirp()}
+            >
+              <div className="w-24 h-24 rounded-full border-2 border-[#ffc700] flex items-center justify-center pulse-radar bg-[#ffc700]/10">
+                <span className="material-symbols-outlined text-6xl text-[#ffc700] animate-pulse">
+                  ecg
+                </span>
+              </div>
             </div>
-            <h3 className="font-['Archivo_Narrow'] text-xl font-black uppercase text-[#e2e2e2] tracking-wider">
-              YEREVAN URBAN PULSE
+            <h3 className="font-['Outfit'] text-2xl font-black uppercase text-gradient-gold tracking-wider">
+              YEREVAN ECOLOGICAL PULSE
             </h3>
-            <p className="font-['Montserrat'] text-xs text-[#d0c6ab] max-w-xs mx-auto">
+            <p className="font-['Montserrat'] text-xs text-gray-300 max-w-xs mx-auto">
               {currentLang === 'hy' 
                 ? 'ՔԱՂԱՔԱՅԻՆ ԻՐԱՎԻՃԱԿԻ ՌԵԱԼ-ԺԱՄԱՆԱԿՅԱ ՄՈՆԻՏՈՐԻՆԳ'
                 : 'REAL-TIME URBAN ECOLOGICAL MONITORING'}
             </p>
           </div>
           
-          <div className="absolute inset-0 bg-[radial-gradient(#ffd700_1px,transparent_1px)] [background-size:16px_16px] opacity-15"></div>
+          {/* Cyber Grid Overlay */}
+          <div className="absolute inset-0 bg-[radial-gradient(#ffc700_1px,transparent_1px)] [background-size:20px_20px] opacity-20 pointer-events-none" />
         </div>
       </section>
 
-      {/* Impact Stats (Bento Grid Style) */}
+      {/* Impact Stats Bento Grid */}
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="bg-[#2A2A2A] museum-border p-6 relative flex flex-col justify-between h-48 group hover:bg-[#333535] transition-all">
-          <div className="absolute top-4 right-4">
-            <span className="material-symbols-outlined text-[#ffd700] text-4xl">delete</span>
+        <div className="museum-label p-6 relative flex flex-col justify-between h-52 group cursor-pointer border-l-4 border-l-[#ffc700]">
+          <div className="absolute top-4 right-4 w-12 h-12 bg-[#ffc700]/10 border border-[#ffc700]/40 rounded-xl flex items-center justify-center text-[#ffc700] group-hover:scale-110 transition-transform">
+            <span className="material-symbols-outlined text-3xl">delete</span>
           </div>
-          <div className="text-xs font-['Montserrat'] text-[#d0c6ab] uppercase tracking-widest font-mono">
-            STAT-01
+          <div className="text-xs font-mono text-[#ffc700] uppercase tracking-widest">
+            METRIC-01
           </div>
           <div>
-            <h3 className="font-['Archivo_Narrow'] text-4xl font-black text-[#ffd700]">12,450 ԿԳ</h3>
-            <p className="font-['Archivo_Narrow'] text-sm font-bold text-[#e2e2e2] mt-1 tracking-wider uppercase">
+            <h3 className="font-['Outfit'] text-4xl font-black text-gradient-gold">12,450 ԿԳ</h3>
+            <p className="font-['Archivo_Narrow'] text-sm font-bold text-gray-200 mt-1 tracking-wider uppercase">
               {t.stats.cleanedTrash}
             </p>
           </div>
         </div>
 
-        <div className="bg-[#2A2A2A] museum-border-white p-6 relative flex flex-col justify-between h-48 group hover:bg-[#333535] transition-all">
-          <div className="absolute top-4 right-4">
-            <span className="material-symbols-outlined text-[#e2e2e2] text-4xl">groups</span>
+        <div className="museum-label p-6 relative flex flex-col justify-between h-52 group cursor-pointer border-l-4 border-l-[#00f5d4]">
+          <div className="absolute top-4 right-4 w-12 h-12 bg-[#00f5d4]/10 border border-[#00f5d4]/40 rounded-xl flex items-center justify-center text-[#00f5d4] group-hover:scale-110 transition-transform">
+            <span className="material-symbols-outlined text-3xl">groups</span>
           </div>
-          <div className="text-xs font-['Montserrat'] text-[#d0c6ab] uppercase tracking-widest font-mono">
-            STAT-02
+          <div className="text-xs font-mono text-[#00f5d4] uppercase tracking-widest">
+            METRIC-02
           </div>
           <div>
-            <h3 className="font-['Archivo_Narrow'] text-4xl font-black text-[#e2e2e2]">3,200</h3>
-            <p className="font-['Archivo_Narrow'] text-sm font-bold text-[#ffd700] mt-1 tracking-wider uppercase">
+            <h3 className="font-['Outfit'] text-4xl font-black text-gradient-cyan">3,200</h3>
+            <p className="font-['Archivo_Narrow'] text-sm font-bold text-gray-200 mt-1 tracking-wider uppercase">
               {t.stats.activeCitizens}
             </p>
           </div>
         </div>
 
-        <div className="bg-[#2A2A2A] museum-border p-6 relative flex flex-col justify-between h-48 group hover:bg-[#333535] transition-all">
-          <div className="absolute top-4 right-4">
-            <span className="material-symbols-outlined text-[#78dc77] text-4xl">location_on</span>
+        <div className="museum-label p-6 relative flex flex-col justify-between h-52 group cursor-pointer border-l-4 border-l-[#ff007a]">
+          <div className="absolute top-4 right-4 w-12 h-12 bg-[#ff007a]/10 border border-[#ff007a]/40 rounded-xl flex items-center justify-center text-[#ff007a] group-hover:scale-110 transition-transform">
+            <span className="material-symbols-outlined text-3xl">location_on</span>
           </div>
-          <div className="text-xs font-['Montserrat'] text-[#d0c6ab] uppercase tracking-widest font-mono">
-            STAT-03
+          <div className="text-xs font-mono text-[#ff007a] uppercase tracking-widest">
+            METRIC-03
           </div>
           <div>
-            <h3 className="font-['Archivo_Narrow'] text-4xl font-black text-[#78dc77]">12 SECTORS</h3>
-            <p className="font-['Archivo_Narrow'] text-sm font-bold text-[#e2e2e2] mt-1 tracking-wider uppercase">
+            <h3 className="font-['Outfit'] text-4xl font-black text-gradient-magenta">12 SECTORS</h3>
+            <p className="font-['Archivo_Narrow'] text-sm font-bold text-gray-200 mt-1 tracking-wider uppercase">
               {currentLang === 'hy' ? '12 ԹԱՂԱՄԱՍԵՐՈՒՄ' : 'COVERED DISTRICTS'}
             </p>
           </div>
         </div>
       </section>
 
-      {/* What is this Section */}
-      <section className="space-y-6 pt-4">
-        <h2 className="font-['Archivo_Narrow'] text-2xl md:text-3xl font-black text-[#e2e2e2] uppercase border-b-2 border-[#ffd700] pb-2 inline-block tracking-wider">
-          {currentLang === 'hy' ? 'Ի՞ՆՉ Է ՍԱ (CONCEPT)' : 'HOW IT WORKS'}
-        </h2>
+      {/* 3-Step Interactive Process */}
+      <section className="space-y-6 pt-6">
+        <div className="flex items-center gap-3 border-b-2 border-[#ffc700] pb-3 shadow-[0_4px_15px_-5px_rgba(255,199,0,0.1)]">
+          <div className="w-10 h-10 bg-[#ffc700]/10 rounded flex items-center justify-center border border-[#ffc700]/40">
+            <span className="material-symbols-outlined text-[#ffc700] text-2xl">model_training</span>
+          </div>
+          <h2 className="font-['Outfit'] text-2xl md:text-3xl font-black text-white uppercase tracking-wider text-gradient-gold">
+            {currentLang === 'hy' ? 'Ի՞ՆՉ Է ՍԱ (CONCEPT)' : 'HOW IT WORKS'}
+          </h2>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div 
@@ -137,14 +154,18 @@ export default function HomeView({ onOpenScanner, onChangeTab, currentLang = 'hy
               soundFX.playClick();
               onOpenScanner();
             }}
-            className="bg-[#121414] p-6 border-l-4 border-[#ffd700] hover:bg-[#1A1A1A] transition-all border border-[#4d4732] cursor-pointer group"
+            className="museum-label p-6 border-l-4 border-l-[#ffc700] cursor-pointer group hover:bg-[#ffc700]/5 transition-all h-full flex flex-col"
           >
-            <span className="material-symbols-outlined text-[#ffd700] text-4xl mb-4 group-hover:scale-110 transition-transform" style={{ fontVariationSettings: "'FILL' 1" }}>
-              my_location
-            </span>
-            <h4 className="font-['Archivo_Narrow'] text-xl font-bold text-[#e2e2e2] mb-2 uppercase">1. Document</h4>
-            <p className="font-['Montserrat'] text-sm text-[#d0c6ab] leading-relaxed">
-              Find an urban friction point. A trash pile or plastic bottle. Scan the area and log it into the public record as an "exhibit".
+            <div className="w-14 h-14 bg-[#ffc700]/10 border border-[#ffc700] rounded-xl flex items-center justify-center text-[#ffc700] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,199,0,0.2)]">
+              <span className="material-symbols-outlined text-3xl">my_location</span>
+            </div>
+            <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[#ffc700] transition-colors">
+              {currentLang === 'hy' ? '1. ՖԻՔՍԵԼ' : '1. DOCUMENT'}
+            </h4>
+            <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed flex-1">
+              {currentLang === 'hy' 
+                ? 'Գտեք քաղաքային աղբ (օր.՝ պլաստիկ շիշ): Սկանավորեք և գրանցեք այն որպես թանգարանային ցուցանմուշ՝ ավելացնելով բազայում:'
+                : 'Find an urban friction point. A plastic bottle or cigarette butts. Scan and log it into the public record as a museum exhibit.'}
             </p>
           </div>
 
@@ -153,14 +174,18 @@ export default function HomeView({ onOpenScanner, onChangeTab, currentLang = 'hy
               soundFX.playClick();
               onChangeTab('exhibits');
             }}
-            className="bg-[#121414] p-6 border-l-4 border-[#e2e2e2] hover:bg-[#1A1A1A] transition-all border border-[#4d4732] cursor-pointer group"
+            className="museum-label p-6 border-l-4 border-l-[#00f5d4] cursor-pointer group hover:bg-[#00f5d4]/5 transition-all h-full flex flex-col"
           >
-            <span className="material-symbols-outlined text-[#e2e2e2] text-4xl mb-4 group-hover:scale-110 transition-transform" style={{ fontVariationSettings: "'FILL' 1" }}>
-              campaign
-            </span>
-            <h4 className="font-['Archivo_Narrow'] text-xl font-bold text-[#e2e2e2] mb-2 uppercase">2. Expose</h4>
-            <p className="font-['Montserrat'] text-sm text-[#d0c6ab] leading-relaxed">
-              The object is framed in a museum label with its decomposition lifespan plaque. Neglect is put on display for all citizens to see.
+            <div className="w-14 h-14 bg-[#00f5d4]/10 border border-[#00f5d4] rounded-xl flex items-center justify-center text-[#00f5d4] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(0,245,212,0.2)]">
+              <span className="material-symbols-outlined text-3xl">campaign</span>
+            </div>
+            <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[#00f5d4] transition-colors">
+              {currentLang === 'hy' ? '2. ՑՈՒՑԱԴՐԵԼ' : '2. EXPOSE'}
+            </h4>
+            <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed flex-1">
+              {currentLang === 'hy'
+                ? 'Առարկան ստանում է թանգարանային ցուցանակ՝ իր քայքայման տևողությամբ: Անփութությունը դրվում է ցուցադրության բոլորի համար:'
+                : 'The object is framed in a museum label with its decomposition lifespan plaque. Neglect is put on display for all citizens to see.'}
             </p>
           </div>
 
@@ -169,14 +194,18 @@ export default function HomeView({ onOpenScanner, onChangeTab, currentLang = 'hy
               soundFX.playClick();
               onChangeTab('ranks');
             }}
-            className="bg-[#121414] p-6 border-l-4 border-[#ffd700] hover:bg-[#1A1A1A] transition-all border border-[#4d4732] cursor-pointer group"
+            className="museum-label p-6 border-l-4 border-l-[#ff007a] cursor-pointer group hover:bg-[#ff007a]/5 transition-all h-full flex flex-col"
           >
-            <span className="material-symbols-outlined text-[#ffd700] text-4xl mb-4 group-hover:scale-110 transition-transform" style={{ fontVariationSettings: "'FILL' 1" }}>
-              build
-            </span>
-            <h4 className="font-['Archivo_Narrow'] text-xl font-bold text-[#e2e2e2] mb-2 uppercase">3. Resolve</h4>
-            <p className="font-['Montserrat'] text-sm text-[#d0c6ab] leading-relaxed">
-              Mobilize civic action. Clean exhibits, earn Eco-Pulse points, elevate your district leaderboard position, and unlock stencil badges.
+            <div className="w-14 h-14 bg-[#ff007a]/10 border border-[#ff007a] rounded-xl flex items-center justify-center text-[#ff007a] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,0,122,0.2)]">
+              <span className="material-symbols-outlined text-3xl">build</span>
+            </div>
+            <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[#ff007a] transition-colors">
+              {currentLang === 'hy' ? '3. ՄԱՔՐԵԼ' : '3. RESOLVE'}
+            </h4>
+            <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed flex-1">
+              {currentLang === 'hy'
+                ? 'Ակտիվացրեք քաղաքացիական ուժը: Մաքրեք ցուցանմուշները, վաստակեք միավորներ և բարձրացրեք ձեր թաղամասի վարկանիշը:'
+                : 'Mobilize civic action. Clean exhibits, earn Eco-Pulse points, elevate your district leaderboard position, and unlock badges.'}
             </p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, MapPin, CheckCircle2, Volume2, VolumeX, Sparkles, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Clock, MapPin, CheckCircle2, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { soundFX } from '../utils/audioFX';
 
 export default function ExhibitCard({ exhibit, onCleanExhibit }) {

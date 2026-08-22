@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import { soundFX } from '../utils/audioFX';
 
-export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, districts }) {
+export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, districts, exhibits = [], currentUser }) {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Պլաստիկ');
   const [district, setDistrict] = useState(districts[0]?.name || 'Կենտրոն');
   const [location, setLocation] = useState('');
   const [quote, setQuote] = useState('');
   const [severity, setSeverity] = useState('high');
-  const [selectedPhotoPreset, setSelectedPhotoPreset] = useState('https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=800&auto=format&fit=crop&q=80');
+  const [imagePreview, setImagePreview] = useState('/images/plastic_bottle.jpg');
+  const selectedDistrict = districts.find((item) => item.name === district);
+
 
   if (!isOpen) return null;
 
   const photoPresets = [
-    { label: '🍾 Շիշ', url: 'https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=800&auto=format&fit=crop&q=80' },
-    { label: '🚬 Ծխախոտ', url: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&auto=format&fit=crop&q=80' },
-    { label: '🛍️ Տոպրակ', url: 'https://images.unsplash.com/photo-1526951521990-620dc14c214b?w=800&auto=format&fit=crop&q=80' },
-    { label: '🥤 Տարա', url: 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80' },
-    { label: '☕ Բաժակ', url: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80' },
-    { label: '📱 Վեյփ', url: 'https://images.unsplash.com/photo-1527011046414-4781f1f94f8c?w=800&auto=format&fit=crop&q=80' }
+    { label: '🍾 Շիշ (Bottle)', url: '/images/plastic_bottle.jpg' },
+    { label: '🚬 Ծխախոտ (Cigarette)', url: '/images/cigarette_butt.jpg' },
+    { label: '📱 Վեյփ (Vape Device)', url: '/images/vape_device.jpg' },
+    { label: '☕ Բաժակ (Coffee Cup)', url: '/images/coffee_cup.jpg' },
+    { label: '🍾 Ապակի (Glass)', url: '/images/shattered_glass.jpg' }
   ];
 
   const categoryIcons = {
@@ -48,25 +49,45 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
     'Էլեկտրոնիկա': 80,
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim() || !location.trim()) return;
 
     soundFX.playSuccess();
 
-    const randomCodeNum = Math.floor(100 + Math.random() * 900);
+    const usedCodes = new Set(exhibits.map((exhibit) => exhibit.code.toLowerCase()));
+    let randomCodeNum;
+    do {
+      randomCodeNum = Math.floor(100 + Math.random() * 900);
+    } while (usedCodes.has(`yvn-${randomCodeNum}`));
     const newExhibit = {
       id: `ex-${Date.now()}`,
       code: `YVN-${randomCodeNum}`,
       title: title.trim(),
+      titleEn: title.trim(),
       category: category,
       location: location.trim(),
+      locationEn: location.trim(),
       district: district,
+      districtEn: selectedDistrict?.nameEn || district,
       lifespanYears: categoryLifespans[category] || 100,
-      curator: 'Քաղաքացիական Ակտիվիստ',
+      curator: currentUser?.name || 'Քաղաքացիական Ակտիվիստ',
       points: categoryPoints[category] || 50,
       quote: quote.trim() || `XXI դարի ${category.toLowerCase()} արտեֆակտ Երևանի փողոցում:`,
+      quoteEn: quote.trim() || `21st century ${category.toLowerCase()} artifact on Yerevan street.`,
       audioText: `Նոր ֆիքսված ցուցանմուշ ${district} թաղամասում՝ ${location.trim()} հասցեում։`,
+      audioTextEn: `New documented exhibit in ${district} district at ${location.trim()}.`,
       cleaned: false,
       cleanedBy: null,
       cleanedAt: null,
@@ -76,7 +97,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
       },
       icon: categoryIcons[category] || '🗑️',
       severity: severity,
-      imageUrl: selectedPhotoPreset
+      imageUrl: imagePreview
     };
 
     onAddExhibit(newExhibit);
@@ -86,36 +107,73 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
     setTitle('');
     setLocation('');
     setQuote('');
+    setImagePreview('/images/plastic_bottle.jpg');
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-      <div className="bg-[#121414] border-2 border-[#ffd700] p-6 max-w-lg w-full shadow-[0_0_50px_rgba(255,215,0,0.2)] space-y-6 relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+      <div className="bg-[#121620] border-2 border-[#ffc700] p-6 max-w-lg w-full shadow-[0_0_50px_rgba(255,199,0,0.25)] space-y-6 relative max-h-[90vh] overflow-y-auto rounded-lg">
         {/* Header */}
-        <div className="flex justify-between items-start border-b border-[#4d4732] pb-4">
+        <div className="flex justify-between items-start border-b border-gray-700 pb-4">
           <div>
-            <span className="text-[10px] font-mono text-[#ffd700] uppercase tracking-widest bg-black px-2 py-0.5 border border-[#ffd700]">
+            <span className="text-[10px] font-mono text-[#ffc700] uppercase tracking-widest bg-black px-2 py-0.5 border border-[#ffc700] rounded">
               + CIVIC REPORTING
             </span>
-            <h2 className="font-['Archivo_Narrow'] text-2xl font-black uppercase text-[#e2e2e2] mt-1">
+            <h2 className="font-['Outfit'] text-2xl font-black uppercase text-white mt-1">
               ԱՎԵԼԱՑՆԵԼ ՆՈՐ ՑՈՒՑԱՆՄՈՒՇ
             </h2>
-            <p className="text-xs text-[#d0c6ab] mt-0.5">
-              Արձանագրեք Երևանի փողոցներում գտնված «հավերժական արտեֆակտը»
+            <p className="text-xs text-gray-300 mt-0.5">
+              Արձանագրեք Երևանի փողոցում գտնված «հավերժական արտեֆակտը» ({currentUser?.name})
             </p>
           </div>
           <button
             onClick={() => { soundFX.playClick(); onClose(); }}
-            className="text-[#d0c6ab] hover:text-[#ffd700] text-xl font-bold p-1"
+            className="text-gray-400 hover:text-[#ffc700] text-xl font-bold p-1"
           >
             ✕
           </button>
         </div>
 
-        {/* Form */}
+        {/* Image Preview & Upload Box */}
+        <div className="space-y-2">
+          <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase">
+            Ցուցանմուշի Լուսանկար / Image Upload
+          </label>
+          
+          <div className="relative h-48 w-full bg-black border-2 border-[#ffc700] overflow-hidden rounded flex items-center justify-center group">
+            <img 
+              src={imagePreview} 
+              alt="Preview" 
+              className="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity" 
+            />
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <label className="bg-[#ffc700] text-[#0b0e14] px-4 py-2 text-xs font-bold uppercase cursor-pointer rounded shadow-lg">
+                📷 Բեռնել Նկար (Upload Photo)
+                <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+              </label>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
+            {photoPresets.map((preset, idx) => (
+              <button
+                type="button"
+                key={idx}
+                onClick={() => setImagePreview(preset.url)}
+                className={`p-2 border text-xs font-['Archivo_Narrow'] font-bold flex items-center justify-center gap-1 transition-all rounded ${
+                  imagePreview === preset.url ? 'bg-[#ffc700] text-black border-white shadow-md' : 'bg-[#1a202c] text-gray-200 border-gray-700 hover:border-[#ffc700]'
+                }`}
+              >
+                <span>{preset.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Form Fields */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
               Ցուցանմուշի Անվանումը *
             </label>
             <input
@@ -124,40 +182,19 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
               placeholder="օր. Պլաստիկ Ջրի Շիշ #109"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-[#1a1c1c] border border-[#4d4732] focus:border-[#ffd700] px-3 py-2 text-xs text-[#e2e2e2] outline-none"
+              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
             />
-          </div>
-
-          {/* Photo Preset Selector */}
-          <div>
-            <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
-              Ընտրեք Լուսանկար / Photo Preset
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              {photoPresets.map((preset, idx) => (
-                <button
-                  type="button"
-                  key={idx}
-                  onClick={() => setSelectedPhotoPreset(preset.url)}
-                  className={`p-1.5 border text-xs font-['Archivo_Narrow'] font-bold flex items-center gap-1 transition-all ${
-                    selectedPhotoPreset === preset.url ? 'bg-[#ffd700] text-black border-white' : 'bg-[#1a1c1c] text-[#e2e2e2] border-[#4d4732]'
-                  }`}
-                >
-                  <span>{preset.label}</span>
-                </button>
-              ))}
-            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
+              <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
                 Աղբի Կատեգորիա
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-[#1a1c1c] border border-[#4d4732] focus:border-[#ffd700] px-3 py-2 text-xs text-[#e2e2e2] outline-none"
+                className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
               >
                 <option value="Պլաստիկ">🍾 Պլաստիկ (450 տարի)</option>
                 <option value="Ծխախոտ">🚬 Ծխախոտ (12 տարի)</option>
@@ -169,13 +206,13 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
             </div>
 
             <div>
-              <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
+              <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
                 Թաղամաս
               </label>
               <select
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
-                className="w-full bg-[#1a1c1c] border border-[#4d4732] focus:border-[#ffd700] px-3 py-2 text-xs text-[#e2e2e2] outline-none"
+                className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
               >
                 {districts.map((d) => (
                   <option key={d.id} value={d.name}>
@@ -187,7 +224,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
           </div>
 
           <div>
-            <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
               Տեղակայում / Հասցե *
             </label>
             <input
@@ -196,12 +233,12 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
               placeholder="օր. Սարյան փողոց, Սուրճի կրպակի մոտ"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-[#1a1c1c] border border-[#4d4732] focus:border-[#ffd700] px-3 py-2 text-xs text-[#e2e2e2] outline-none"
+              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
               Վտանգավորության Աստիճան
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -214,8 +251,8 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
                   type="button"
                   key={sev.id}
                   onClick={() => setSeverity(sev.id)}
-                  className={`py-2 text-[10px] font-['Archivo_Narrow'] font-bold uppercase border transition-all ${
-                    severity === sev.id ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700]' : `bg-[#1a1c1c] ${sev.color}`
+                  className={`py-2 text-[10px] font-['Space_Grotesk'] font-bold uppercase border transition-all rounded ${
+                    severity === sev.id ? 'bg-[#ffc700] text-black border-[#ffc700]' : `bg-[#0b0e14] ${sev.color}`
                   }`}
                 >
                   {sev.label}
@@ -225,7 +262,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
           </div>
 
           <div>
-            <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
               «Թանգարանային» Նկարագրություն / Quote
             </label>
             <textarea
@@ -233,20 +270,20 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
               placeholder="օր. Քաղաքային անփութության և հավերժական պլաստիկի սիմվոլ..."
               value={quote}
               onChange={(e) => setQuote(e.target.value)}
-              className="w-full bg-[#1a1c1c] border border-[#4d4732] focus:border-[#ffd700] px-3 py-2 text-xs text-[#e2e2e2] outline-none resize-none"
+              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none resize-none rounded"
             />
           </div>
 
-          <div className="bg-[#1a1c1c] p-3 border border-[#4d4732] flex justify-between items-center text-xs">
-            <span className="text-[#d0c6ab]">ՊԱՐԳԵՎԱՏՐՈՒՄ ՄԱՔՐԵԼՈՒ ՀԱՄԱՐ:</span>
-            <span className="font-['Archivo_Narrow'] font-black text-[#ffd700]">
+          <div className="bg-[#0b0e14] p-3 border border-gray-700 flex justify-between items-center text-xs rounded">
+            <span className="text-gray-300">ՊԱՐԳԵՎԱՏՐՈՒՄ ՄԱՔՐԵԼՈՒ ՀԱՄԱՐ:</span>
+            <span className="font-['Space_Grotesk'] font-black text-[#ffc700]">
               +{categoryPoints[category] || 50} PTS
             </span>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-[#ffd700] text-[#1a1a1a] py-3 font-['Archivo_Narrow'] text-sm font-black uppercase tracking-wider hover:bg-[#e9c400] transition-all border border-white shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)]"
+            className="btn-primary-glow w-full py-3.5 text-sm font-black uppercase tracking-wider rounded"
           >
             + ԱՎԵԼԱՑՆԵԼ ՑՈՒՑԱՆՄՈՒՇԸ ՏՎՅԱԼՆԵՐԻ ԲԱԶԱ
           </button>

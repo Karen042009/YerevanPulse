@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Award, Info, Sparkles, QrCode } from 'lucide-react';
+import { Info, Sparkles, QrCode } from 'lucide-react';
 
 export default function Navbar({ ecoPoints, cleanedCount, onOpenPitch, onOpenScanner }) {
   return (
