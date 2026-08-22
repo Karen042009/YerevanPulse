@@ -16,18 +16,25 @@ import { soundFX } from './utils/audioFX';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
+  const [currentLang, setCurrentLang] = useState(() => {
+    return localStorage.getItem('yp_lang') || 'hy';
+  });
+
   const [exhibits, setExhibits] = useState(() => {
     const saved = localStorage.getItem('yp_exhibits');
     return saved ? JSON.parse(saved) : initialExhibits;
   });
+
   const [districts, setDistricts] = useState(() => {
     const saved = localStorage.getItem('yp_districts');
     return saved ? JSON.parse(saved) : initialDistricts;
   });
+
   const [userPoints, setUserPoints] = useState(() => {
     const saved = localStorage.getItem('yp_points');
     return saved ? parseInt(saved, 10) : 0;
   });
+
   const [currentUser, setCurrentUser] = useState(() => {
     const saved = localStorage.getItem('yp_current_user');
     return saved ? JSON.parse(saved) : {
@@ -57,12 +64,20 @@ export default function App() {
     localStorage.setItem('yp_points', userPoints.toString());
   }, [userPoints]);
 
+  useEffect(() => {
+    localStorage.setItem('yp_lang', currentLang);
+  }, [currentLang]);
+
+  const toggleLanguage = () => {
+    setCurrentLang((prev) => (prev === 'hy' ? 'en' : 'hy'));
+  };
+
   const handleCleanExhibit = (exhibitId) => {
     const target = exhibits.find((e) => e.id === exhibitId);
     if (!target || target.cleaned) return;
 
     setExhibits((prev) =>
-      prev.map((e) => (e.id === exhibitId ? { ...e, cleaned: true } : e))
+      prev.map((e) => (e.id === exhibitId ? { ...e, cleaned: true, cleanedBy: currentUser.name } : e))
     );
 
     setUserPoints((prev) => prev + target.points);
@@ -80,12 +95,14 @@ export default function App() {
       )
     );
 
+    soundFX.playSuccess();
+
     // Confetti celebration
     confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.7 },
-      colors: ['#ffd700', '#ffffff', '#78dc77'],
+      particleCount: 100,
+      spread: 80,
+      origin: { y: 0.65 },
+      colors: ['#ffd700', '#ffffff', '#78dc77', '#ec4899'],
     });
   };
 
@@ -126,7 +143,7 @@ export default function App() {
   const cleanedCount = exhibits.filter((e) => e.cleaned).length;
 
   return (
-    <div className="min-h-screen bg-[#121414] text-[#e2e2e2] flex flex-col font-['Montserrat']">
+    <div className="min-h-screen bg-[#121414] text-[#e2e2e2] flex flex-col font-['Montserrat'] selection:bg-[#ffd700] selection:text-black">
       {/* Universal Top Navigation Bar */}
       <Header
         activeTab={activeTab}
@@ -135,6 +152,8 @@ export default function App() {
         onOpenReport={() => setIsReportOpen(true)}
         onOpenAuth={() => setIsAuthOpen(true)}
         currentUser={currentUser}
+        currentLang={currentLang}
+        onToggleLang={toggleLanguage}
       />
 
       {/* Main Content Layout Wrapper (Desktop Grid vs Mobile Viewport) */}
@@ -146,6 +165,7 @@ export default function App() {
               <HomeView
                 onOpenScanner={() => setIsScannerOpen(true)}
                 onChangeTab={setActiveTab}
+                currentLang={currentLang}
               />
             )}
 
@@ -155,6 +175,7 @@ export default function App() {
                 onCleanExhibit={handleCleanExhibit}
                 onOpenScanner={() => setIsScannerOpen(true)}
                 onOpenReport={() => setIsReportOpen(true)}
+                currentLang={currentLang}
               />
             )}
 
@@ -163,6 +184,8 @@ export default function App() {
                 exhibits={exhibits}
                 districts={districts}
                 onSelectExhibit={() => setActiveTab('exhibits')}
+                onCleanExhibit={handleCleanExhibit}
+                currentLang={currentLang}
               />
             )}
 
@@ -171,6 +194,7 @@ export default function App() {
                 districts={districts}
                 userPoints={userPoints}
                 onOpenScanner={() => setIsScannerOpen(true)}
+                currentLang={currentLang}
               />
             )}
 
@@ -178,6 +202,7 @@ export default function App() {
               <ProfileView
                 userPoints={userPoints}
                 cleanedCount={cleanedCount}
+                currentLang={currentLang}
               />
             )}
           </div>
@@ -185,7 +210,7 @@ export default function App() {
           {/* Desktop Right Sidebar Widget Column (Hidden on Mobile, 4 cols on Desktop) */}
           <aside className="hidden md:block md:col-span-4 space-y-6">
             {/* User Profile Card Widget */}
-            <div className="museum-label-active p-5 space-y-4">
+            <div className="museum-label-active p-5 space-y-4 shadow-xl">
               <div className="flex items-center gap-3">
                 <img src="/logo.png" alt="Yerevan Pulse" className="h-10 w-auto border border-[#ffd700] p-0.5 bg-black" />
                 <div>
@@ -207,20 +232,20 @@ export default function App() {
 
               <button
                 onClick={() => { soundFX.playScanChirp(); setIsScannerOpen(true); }}
-                className="w-full bg-[#ffd700] text-[#1a1a1a] py-3 font-['Archivo_Narrow'] text-xs font-black uppercase tracking-wider hover:bg-[#e9c400] transition-all border border-white"
+                className="w-full bg-[#ffd700] text-[#1a1a1a] py-3 font-['Archivo_Narrow'] text-xs font-black uppercase tracking-wider hover:bg-[#e9c400] transition-all border border-white shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)]"
               >
                 + ԳՏՆԵԼ/ՍԿԱՆԱՎՈՐԵԼ ՑՈՒՑԱՆՄՈՒՇ
               </button>
             </div>
 
             {/* Live Pollution Map Mini Preview */}
-            <div className="museum-label p-4 space-y-3">
+            <div className="museum-label p-4 space-y-3 shadow-xl">
               <div className="flex justify-between items-center border-b border-[#4d4732] pb-2">
                 <h4 className="font-['Archivo_Narrow'] text-xs font-bold text-[#e2e2e2] uppercase">
                   ԵՐԵՎԱՆԻ ՔԱՐՏԵԶ (LIVE)
                 </h4>
                 <button 
-                  onClick={() => setActiveTab('map')} 
+                  onClick={() => { soundFX.playClick(); setActiveTab('map'); }} 
                   className="text-[10px] text-[#ffd700] font-bold uppercase hover:underline"
                 >
                   ԲԱՑԵԼ ՔԱՐՏԵԶԸ ➔
@@ -228,11 +253,11 @@ export default function App() {
               </div>
               <div className="bg-[#121414] h-44 border border-[#4d4732] flex items-center justify-center p-3 text-center">
                 <div>
-                  <span className="material-symbols-outlined text-4xl text-[#ffd700] mb-1">map</span>
+                  <span className="material-symbols-outlined text-4xl text-[#ffd700] mb-1 animate-pulse">map</span>
                   <p className="font-['Archivo_Narrow'] text-xs font-bold uppercase text-[#e2e2e2]">
                     12,450 ԿԳ ՄԱՔՐՎԱԾ ԱՂԲ
                   </p>
-                  <p className="text-[10px] text-[#d0c6ab] mt-1">7 ԱԿՏԻՎ ԹԱՂԱՄԱՍԵՐՈՒՄ</p>
+                  <p className="text-[10px] text-[#d0c6ab] mt-1">12 ԱԿՏԻՎ ԹԱՂԱՄԱՍԵՐՈՒՄ</p>
                 </div>
               </div>
             </div>
@@ -246,10 +271,10 @@ export default function App() {
           soundFX.playClick();
           setIsPitchOpen(true);
         }}
-        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-[#ffd700] text-[#1a1a1a] p-3 rounded-full border-2 border-white shadow-[0_0_20px_rgba(255,215,0,0.4)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
-        title="Նախագծի Պրեզենտացիա"
+        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-[#ffd700] text-[#1a1a1a] p-3.5 rounded-full border-2 border-white shadow-[0_0_25px_rgba(255,215,0,0.5)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+        title="Նախագծի Պրեզենտացիա (Pitch Deck)"
       >
-        <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+        <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
           lightbulb
         </span>
       </button>
@@ -259,6 +284,7 @@ export default function App() {
         isOpen={isScannerOpen}
         onClose={() => setIsScannerOpen(false)}
         onScanSuccess={handleScanSuccess}
+        exhibits={exhibits}
       />
 
       <AuthModal

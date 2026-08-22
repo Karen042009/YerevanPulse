@@ -8,8 +8,18 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
   const [location, setLocation] = useState('');
   const [quote, setQuote] = useState('');
   const [severity, setSeverity] = useState('high');
+  const [selectedPhotoPreset, setSelectedPhotoPreset] = useState('https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=800&auto=format&fit=crop&q=80');
 
   if (!isOpen) return null;
+
+  const photoPresets = [
+    { label: '🍾 Շիշ', url: 'https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=800&auto=format&fit=crop&q=80' },
+    { label: '🚬 Ծխախոտ', url: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&auto=format&fit=crop&q=80' },
+    { label: '🛍️ Տոպրակ', url: 'https://images.unsplash.com/photo-1526951521990-620dc14c214b?w=800&auto=format&fit=crop&q=80' },
+    { label: '🥤 Տարա', url: 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80' },
+    { label: '☕ Բաժակ', url: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80' },
+    { label: '📱 Վեյփ', url: 'https://images.unsplash.com/photo-1527011046414-4781f1f94f8c?w=800&auto=format&fit=crop&q=80' }
+  ];
 
   const categoryIcons = {
     'Պլաստիկ': '🍾',
@@ -61,11 +71,12 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
       cleanedBy: null,
       cleanedAt: null,
       coordinates: { 
-        x: Math.floor(20 + Math.random() * 60), 
-        y: Math.floor(20 + Math.random() * 60) 
+        x: Math.floor(25 + Math.random() * 50), 
+        y: Math.floor(25 + Math.random() * 50) 
       },
       icon: categoryIcons[category] || '🗑️',
-      severity: severity
+      severity: severity,
+      imageUrl: selectedPhotoPreset
     };
 
     onAddExhibit(newExhibit);
@@ -115,6 +126,27 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
               onChange={(e) => setTitle(e.target.value)}
               className="w-full bg-[#1a1c1c] border border-[#4d4732] focus:border-[#ffd700] px-3 py-2 text-xs text-[#e2e2e2] outline-none"
             />
+          </div>
+
+          {/* Photo Preset Selector */}
+          <div>
+            <label className="block text-xs font-['Archivo_Narrow'] font-bold text-[#ffd700] uppercase mb-1">
+              Ընտրեք Լուսանկար / Photo Preset
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {photoPresets.map((preset, idx) => (
+                <button
+                  type="button"
+                  key={idx}
+                  onClick={() => setSelectedPhotoPreset(preset.url)}
+                  className={`p-1.5 border text-xs font-['Archivo_Narrow'] font-bold flex items-center gap-1 transition-all ${
+                    selectedPhotoPreset === preset.url ? 'bg-[#ffd700] text-black border-white' : 'bg-[#1a1c1c] text-[#e2e2e2] border-[#4d4732]'
+                  }`}
+                >
+                  <span>{preset.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -214,7 +246,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
 
           <button
             type="submit"
-            className="w-full bg-[#ffd700] text-[#1a1a1a] py-3 font-['Archivo_Narrow'] text-sm font-black uppercase tracking-wider hover:bg-[#e9c400] transition-all border border-white"
+            className="w-full bg-[#ffd700] text-[#1a1a1a] py-3 font-['Archivo_Narrow'] text-sm font-black uppercase tracking-wider hover:bg-[#e9c400] transition-all border border-white shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)]"
           >
             + ԱՎԵԼԱՑՆԵԼ ՑՈՒՑԱՆՄՈՒՇԸ ՏՎՅԱԼՆԵՐԻ ԲԱԶԱ
           </button>

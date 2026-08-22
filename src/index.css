@@ -1,16 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,300..900;1,300..900&family=Outfit:wght@400;600;800;900&display=swap');
+
 :root {
-  --bg-background: #121414;
-  --surface-container: #1e2020;
-  --surface-container-low: #1a1c1c;
-  --surface-container-high: #282a2b;
-  --surface-container-highest: #333535;
-  --primary-container: #ffd700;
-  --on-primary-container: #1a1a1a;
-  --on-background: #e2e2e2;
-  --on-surface-variant: #d0c6ab;
-  --outline: #999077;
-  --outline-variant: #4d4732;
-  --tertiary-dim: #78dc77;
+  --bg-background: #0d0f0f;
+  --bg-deep: #080a0a;
+  --surface-container: #161818;
+  --surface-container-low: #111313;
+  --surface-container-high: #202323;
+  --surface-container-highest: #2b2e2e;
+  --primary-gold: #ffd700;
+  --primary-gold-glow: rgba(255, 215, 0, 0.25);
+  --on-primary: #121414;
+  --on-background: #ece8dc;
+  --on-surface-variant: #c4bdab;
+  --outline: #756f5c;
+  --outline-variant: #3a3f3a;
+  --tertiary-emerald: #5eead4;
+  --accent-rose: #f43f5e;
 }
 
 * {
@@ -20,6 +25,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  background-color: var(--bg-deep);
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--bg-background);
   color: var(--on-background);
@@ -27,6 +37,25 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(circle at 80% -20%, rgba(255, 215, 0, 0.09), transparent 45rem),
+    radial-gradient(circle at 10% 90%, rgba(94, 234, 212, 0.05), transparent 40rem),
+    linear-gradient(180deg, var(--bg-background) 0%, var(--bg-deep) 100%);
+  position: relative;
+}
+
+/* Futuristic Subtle Grid Overlay */
+body::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  opacity: 0.12;
+  background-image: 
+    linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px), 
+    linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 #root {
@@ -35,7 +64,7 @@ body {
   min-height: 100vh;
   width: 100%;
   position: relative;
-  background-color: var(--bg-background);
+  z-index: 1;
 }
 
 /* Material Symbols Utility */
@@ -56,36 +85,48 @@ body {
 
 /* Brutalist Custom Utilities */
 .museum-border {
-  border: 2px solid var(--primary-container);
+  border: 2px solid var(--primary-gold);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.1);
 }
 
 .museum-border-white {
   border: 2px solid var(--on-background);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .museum-label {
-  border: 1px solid var(--outline);
-  background-color: #2A2A2A;
+  border: 1px solid var(--outline-variant);
+  background: linear-gradient(145deg, rgba(32, 35, 35, 0.95), rgba(18, 20, 20, 0.95));
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.museum-label:hover {
+  border-color: var(--primary-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), 0 0 20px var(--primary-gold-glow);
 }
 
 .museum-label-active {
-  border: 2px solid var(--primary-container);
-  background-color: #2A2A2A;
+  border: 2px solid var(--primary-gold);
+  background: linear-gradient(145deg, rgba(38, 42, 42, 0.98), rgba(22, 25, 25, 0.98));
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--primary-gold-glow);
 }
 
 .sticker-effect {
   border: 1px solid var(--on-background);
-  box-shadow: 2px 2px 0px 0px var(--on-background);
+  box-shadow: 4px 4px 0px 0px var(--on-background);
 }
 
 .sticker-yellow {
-  border: 2px solid var(--primary-container);
-  box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--primary-gold);
+  box-shadow: 4px 4px 0px 0px var(--primary-gold);
 }
 
 .font-headline {
   font-family: 'Archivo Narrow', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
@@ -96,19 +137,73 @@ body {
   text-transform: uppercase;
 }
 
-.font-museum-meta {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
+/* Custom Gold Glow Button */
+.btn-gold-glow {
+  background: var(--primary-gold);
+  color: var(--on-primary);
+  border: 2px solid #ffffff;
+  box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 0.3), 0 0 15px var(--primary-gold-glow);
+  transition: all 0.2s ease;
 }
 
-/* Custom Scrollbar */
+.btn-gold-glow:hover {
+  background: #ffe14d;
+  box-shadow: 6px 6px 0px 0px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 215, 0, 0.4);
+  transform: translate(-2px, -2px);
+}
+
+.btn-gold-glow:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.3);
+}
+
+/* Audio Wave Equalizer */
+.audio-bar {
+  display: block;
+  width: 3px;
+  height: 14px;
+  background: var(--primary-gold);
+  animation: audioPulse 600ms ease-in-out infinite alternate;
+}
+.audio-bar:nth-child(2) { animation-delay: 100ms; height: 22px; }
+.audio-bar:nth-child(3) { animation-delay: 200ms; height: 12px; }
+.audio-bar:nth-child(4) { animation-delay: 300ms; height: 18px; }
+.audio-bar:nth-child(5) { animation-delay: 400ms; height: 9px; }
+
+@keyframes audioPulse {
+  from { opacity: 0.4; transform: scaleY(0.5); }
+  to { opacity: 1; transform: scaleY(1.2); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-background);
+  background: var(--bg-deep);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-container);
+  background: #524d40;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-gold);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

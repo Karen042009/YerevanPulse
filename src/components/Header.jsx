@@ -1,5 +1,6 @@
 import React from 'react';
 import { soundFX } from '../utils/audioFX';
+import { translations } from '../data/translations';
 
 export default function Header({ 
   activeTab, 
@@ -7,24 +8,28 @@ export default function Header({
   onOpenScanner, 
   onOpenReport,
   onOpenAuth, 
-  currentUser 
+  currentUser,
+  currentLang = 'hy',
+  onToggleLang
 }) {
   const [isMuted, setIsMuted] = React.useState(() => soundFX.isMuted);
+  const t = translations[currentLang] || translations.hy;
 
   const toggleSound = () => {
     const muted = soundFX.toggleMute();
     setIsMuted(muted);
     if (!muted) soundFX.playClick();
   };
+
   return (
-    <header className="sticky top-0 w-full z-50 bg-[#121414] border-b-2 border-[#4d4732] px-4 md:px-8 h-16 flex justify-between items-center">
-      {/* Brand & Logo matching Stitch design */}
+    <header className="sticky top-0 w-full z-50 bg-[#121414]/90 border-b-2 border-[#ffd700]/30 px-3 md:px-8 h-16 flex justify-between items-center backdrop-blur-md">
+      {/* Brand & Logo */}
       <div 
         onClick={() => {
           soundFX.playClick();
           onChangeTab('home');
         }}
-        className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+        className="flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity"
       >
         <button 
           type="button"
@@ -33,8 +38,8 @@ export default function Header({
             soundFX.playScanChirp();
             onOpenScanner();
           }}
-          className="text-[#ffd700] hover:opacity-80 transition-opacity flex items-center justify-center p-1.5 bg-[#1a1c1c] border border-[#ffd700]"
-          title="Scan QR Code"
+          className="text-[#ffd700] hover:scale-105 active:scale-95 transition-all p-1.5 bg-[#1a1c1c] border border-[#ffd700] flex items-center justify-center shadow-[2px_2px_0px_0px_#ffd700]"
+          title={t.modals.scanQR}
         >
           <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
             qr_code_scanner
@@ -48,86 +53,60 @@ export default function Header({
             className="h-8 md:h-9 w-auto object-contain border border-[#ffd700] p-0.5 bg-black rounded-sm shadow-[2px_2px_0px_0px_#ffd700]"
           />
           <div>
-            <h1 className="font-['Archivo_Narrow'] text-lg md:text-xl font-extrabold tracking-tighter text-[#ffd700] uppercase leading-none">
-              YEREVAN PULSE
+            <h1 className="font-['Archivo_Narrow'] text-base md:text-xl font-extrabold tracking-tighter text-[#ffd700] uppercase leading-none">
+              {t.appName}
             </h1>
             <span className="hidden sm:block font-['Montserrat'] text-[8px] md:text-[9px] text-[#d0c6ab] uppercase tracking-widest font-mono">
-              ԵՐԵՎԱՆԸ ՑՈՒՑԱՍՐԱՀ ՉԷ
+              {t.tagline}
             </span>
           </div>
         </div>
       </div>
 
       {/* Desktop Navigation Links */}
-      <nav className="hidden md:flex items-center gap-4">
-        <button
-          onClick={() => { soundFX.playClick(); onChangeTab('home'); }}
-          className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 border transition-all ${
-            activeTab === 'home' 
-              ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700]' 
-              : 'text-[#d0c6ab] border-transparent hover:border-[#ffd700]'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">home</span>
-          <span>HOME</span>
-        </button>
-
-        <button
-          onClick={() => { soundFX.playClick(); onChangeTab('exhibits'); }}
-          className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 border transition-all ${
-            activeTab === 'exhibits' 
-              ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700]' 
-              : 'text-[#d0c6ab] border-transparent hover:border-[#ffd700]'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">museum</span>
-          <span>EXHIBITS</span>
-        </button>
-
-        <button
-          onClick={() => { soundFX.playClick(); onChangeTab('map'); }}
-          className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 border transition-all ${
-            activeTab === 'map' 
-              ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700]' 
-              : 'text-[#d0c6ab] border-transparent hover:border-[#ffd700]'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">map</span>
-          <span>MAP</span>
-        </button>
-
-        <button
-          onClick={() => { soundFX.playClick(); onChangeTab('ranks'); }}
-          className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 border transition-all ${
-            activeTab === 'ranks' 
-              ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700]' 
-              : 'text-[#d0c6ab] border-transparent hover:border-[#ffd700]'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">leaderboard</span>
-          <span>RANKS</span>
-        </button>
-
-        <button
-          onClick={() => { soundFX.playClick(); onChangeTab('profile'); }}
-          className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 border transition-all ${
-            activeTab === 'profile' 
-              ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700]' 
-              : 'text-[#d0c6ab] border-transparent hover:border-[#ffd700]'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">person</span>
-          <span>PROFILE</span>
-        </button>
+      <nav className="hidden md:flex items-center gap-3">
+        {[
+          { id: 'home', label: t.nav.home, icon: 'home' },
+          { id: 'exhibits', label: t.nav.exhibits, icon: 'museum' },
+          { id: 'map', label: t.nav.map, icon: 'map' },
+          { id: 'ranks', label: t.nav.ranks, icon: 'leaderboard' },
+          { id: 'profile', label: t.nav.profile, icon: 'person' },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => { soundFX.playClick(); onChangeTab(tab.id); }}
+            className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 border transition-all ${
+              activeTab === tab.id 
+                ? 'bg-[#ffd700] text-[#1a1a1a] border-[#ffd700] shadow-[2px_2px_0px_0px_rgba(255,255,255,0.2)]' 
+                : 'text-[#d0c6ab] border-transparent hover:border-[#ffd700] hover:text-white'
+            }`}
+          >
+            <span className="material-symbols-outlined text-base">{tab.icon}</span>
+            <span>{tab.label}</span>
+          </button>
+        ))}
       </nav>
 
-      {/* Header Actions (Scanner, Sound Toggle, Add Exhibit & User Avatar) */}
+      {/* Header Actions (Language, Sound, Civic Report & User Profile) */}
       <div className="flex items-center gap-2 md:gap-3">
+        {/* Language Switcher */}
+        <button
+          onClick={() => {
+            soundFX.playClick();
+            if (onToggleLang) onToggleLang();
+          }}
+          className="text-[#ffd700] font-['Archivo_Narrow'] text-xs font-bold uppercase px-2 py-1 bg-[#1a1c1c] border border-[#ffd700]/60 hover:border-[#ffd700] transition-all flex items-center gap-1"
+          title="Փոխել լեզուն / Switch Language"
+        >
+          <span className="material-symbols-outlined text-sm">language</span>
+          <span>{currentLang === 'hy' ? 'ARM 🇦🇲' : 'ENG 🇬🇧'}</span>
+        </button>
+
         {/* Sound FX Toggle Button */}
         <button
           onClick={toggleSound}
           className="text-[#d0c6ab] hover:text-[#ffd700] p-1.5 bg-[#1a1c1c] border border-[#4d4732] flex items-center justify-center transition-all"
-          title={isMuted ? 'Միացնել Ձայնային Էֆեկտները' : 'Անջատել Ձայնային Էֆեկտները'}
+          title={isMuted ? 'Muted' : 'Sound On'}
         >
           <span className="material-symbols-outlined text-lg">
             {isMuted ? 'volume_off' : 'volume_up'}
@@ -141,10 +120,10 @@ export default function Header({
             if (onOpenReport) onOpenReport();
           }}
           className="hidden lg:flex border border-[#ffd700] text-[#ffd700] hover:bg-[#ffd700] hover:text-[#1a1a1a] px-2.5 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all items-center gap-1"
-          title="Ավելացնել նոր ցուցանմուշ"
+          title={t.hero.reportExhibit}
         >
           <span className="material-symbols-outlined text-base">add_location_alt</span>
-          <span>+ ՑՈՒՑԱՆՄՈՒՇ</span>
+          <span>{t.hero.reportExhibit}</span>
         </button>
 
         {/* QR Scanner Button */}
@@ -156,7 +135,7 @@ export default function Header({
           className="hidden sm:flex bg-[#ffd700] text-[#1a1a1a] px-3 py-1.5 text-xs font-['Archivo_Narrow'] font-black uppercase tracking-wider items-center gap-1.5 hover:bg-[#e9c400] transition-all border border-white shadow-[2px_2px_0px_0px_#ffffff]"
         >
           <span className="material-symbols-outlined text-base">qr_code_2</span>
-          <span>ՍԿԱՆԱՎՈՐԵԼ QR</span>
+          <span>{t.modals.scanQR}</span>
         </button>
 
         {currentUser ? (
@@ -165,12 +144,12 @@ export default function Header({
               soundFX.playClick();
               onChangeTab('profile');
             }}
-            className="hover:opacity-80 transition-opacity cursor-pointer rounded-full overflow-hidden w-9 h-9 border-2 border-[#ffd700] shadow-[0_0_8px_rgba(255,215,0,0.4)] flex-shrink-0"
+            className="hover:scale-105 transition-all cursor-pointer rounded-full overflow-hidden w-9 h-9 border-2 border-[#ffd700] shadow-[0_0_10px_rgba(255,215,0,0.4)] flex-shrink-0"
             title={currentUser.name}
           >
             <img 
               src={currentUser.avatar} 
-              alt="User profile avatar" 
+              alt={currentUser.name} 
               className="w-full h-full object-cover grayscale contrast-125" 
             />
           </button>
@@ -182,7 +161,7 @@ export default function Header({
             }}
             className="border border-[#ffd700] text-[#ffd700] hover:bg-[#ffd700] hover:text-[#1a1a1a] px-3 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all"
           >
-            ՄՈՒՏՔ
+            {t.modals.login}
           </button>
         )}
       </div>
