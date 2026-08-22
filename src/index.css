@@ -1,0 +1,114 @@
+:root {
+  --bg-background: #121414;
+  --surface-container: #1e2020;
+  --surface-container-low: #1a1c1c;
+  --surface-container-high: #282a2b;
+  --surface-container-highest: #333535;
+  --primary-container: #ffd700;
+  --on-primary-container: #1a1a1a;
+  --on-background: #e2e2e2;
+  --on-surface-variant: #d0c6ab;
+  --outline: #999077;
+  --outline-variant: #4d4732;
+  --tertiary-dim: #78dc77;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-background);
+  color: var(--on-background);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-background);
+}
+
+/* Material Symbols Utility */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Brutalist Custom Utilities */
+.museum-border {
+  border: 2px solid var(--primary-container);
+}
+
+.museum-border-white {
+  border: 2px solid var(--on-background);
+}
+
+.museum-label {
+  border: 1px solid var(--outline);
+  background-color: #2A2A2A;
+}
+
+.museum-label-active {
+  border: 2px solid var(--primary-container);
+  background-color: #2A2A2A;
+}
+
+.sticker-effect {
+  border: 1px solid var(--on-background);
+  box-shadow: 2px 2px 0px 0px var(--on-background);
+}
+
+.sticker-yellow {
+  border: 2px solid var(--primary-container);
+  box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 0.2);
+}
+
+.font-headline {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.font-label-caps {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.font-museum-meta {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-container);
+}
