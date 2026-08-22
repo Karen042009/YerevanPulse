@@ -214,7 +214,9 @@ export default function ExhibitsView({
 
               {/* Museum Narration Audio Guide Player Component */}
               <AudioGuidePlayer
+                key={`${selectedExhibit.code}-${currentLang}`}
                 text={currentLang === 'en' && selectedExhibit.audioTextEn ? selectedExhibit.audioTextEn : selectedExhibit.audioText}
+                audioUrl={currentLang === 'en' ? selectedExhibit.audioUrlEn : selectedExhibit.audioUrl}
                 lang={currentLang}
                 title={`${t.exhibits.audioGuide} — #${selectedExhibit.code}`}
               />

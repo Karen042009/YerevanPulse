@@ -65,7 +65,7 @@ class SoundFX {
       osc.start();
       osc.stop(this.ctx.currentTime + 0.05);
     } catch {
-      console.log('Audio error:', e);
+      console.log('Audio error');
     }
   }
 
@@ -95,7 +95,7 @@ class SoundFX {
         osc.stop(now + idx * 0.06 + 0.28);
       });
     } catch {
-      console.log('Audio error:', e);
+      console.log('Audio error');
     }
   }
 
@@ -126,7 +126,7 @@ class SoundFX {
       osc.start(now);
       osc.stop(now + 0.12);
     } catch {
-      console.log('Audio error:', e);
+      console.log('Audio error');
     }
   }
 
@@ -149,8 +149,45 @@ class SoundFX {
   }
 
   // High Quality Speech Synthesis for Armenian & English
+  playAudioGuide(audioUrl, text, lang = "hy", onEndCallback = null) {
+    if (!audioUrl) {
+      this.speakAudioGuide(text, lang, onEndCallback);
+      return;
+    }
+
+    if (this.isMuted) {
+      if (onEndCallback) onEndCallback();
+      return;
+    }
+
+    this.stopSpeech();
+    this.isSpeaking = true;
+
+    try {
+      const audio = new Audio(audioUrl);
+      this.audioElement = audio;
+      audio.onended = () => {
+        this.isSpeaking = false;
+        this.audioElement = null;
+        if (onEndCallback) onEndCallback();
+      };
+      audio.onerror = () => {
+        this.audioElement = null;
+        this.isSpeaking = false;
+        this.speakAudioGuide(text, lang, onEndCallback);
+      };
+      audio.play().catch(() => {
+        this.audioElement = null;
+        this.isSpeaking = false;
+        this.speakAudioGuide(text, lang, onEndCallback);
+      });
+    } catch {
+      this.isSpeaking = false;
+      this.speakAudioGuide(text, lang, onEndCallback);
+    }
+  }
   speakAudioGuide(text, lang = 'hy', onEndCallback = null) {
-    if (this.isMuted) return;
+    if (this.isMuted) { if (onEndCallback) onEndCallback(); return; }
     this.stopSpeech();
     this.isSpeaking = true;
 

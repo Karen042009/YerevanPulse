@@ -17,14 +17,14 @@ export default function HomeView({ onOpenScanner, onChangeTab, currentLang = 'hy
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-['Outfit'] font-black text-white leading-none uppercase tracking-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-['Outfit'] font-black text-white leading-none uppercase tracking-tight break-words">
             {t.hero.title1} <br />
-            <span className="text-gradient-gold bg-[#121620] px-4 py-1.5 border-2 border-[#ffc700] inline-block mt-3 shadow-[0_0_30px_rgba(255,199,0,0.25)] rounded-sm">
+            <span className="text-gradient-gold bg-[#121620] px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-[#ffc700] inline-block mt-2 sm:mt-3 shadow-[0_0_30px_rgba(255,199,0,0.25)] rounded-sm max-w-full overflow-hidden text-ellipsis">
               {t.hero.title2}
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg font-['Montserrat'] text-gray-300 leading-relaxed max-w-xl border-l-4 border-[#ffc700] pl-4 italic">
+          <p className="text-sm sm:text-base lg:text-lg font-['Montserrat'] text-gray-300 leading-relaxed max-w-xl border-l-4 border-[#ffc700] pl-3 sm:pl-4 italic">
             {t.subtitle}
           </p>
 

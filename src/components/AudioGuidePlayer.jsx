@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { soundFX } from '../utils/audioFX';
 
-export default function AudioGuidePlayer({ text, lang = 'hy', title = 'Թանգարանային Աուդիո-Գիդ' }) {
+export default function AudioGuidePlayer({ text, audioUrl, lang = 'hy', title = 'Թանգարանային Աուդիո-Գիդ' }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function AudioGuidePlayer({ text, lang = 'hy', title = 'Թանգ�
     } else {
       soundFX.playClick();
       setIsPlaying(true);
-      soundFX.speakAudioGuide(text, lang, () => {
+      soundFX.playAudioGuide(audioUrl, text, lang, () => {
         setIsPlaying(false);
       });
     }

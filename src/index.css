@@ -281,10 +281,6 @@ main {
 }
 
 @media (max-width: 1023px) {
-  .app-header {
-    padding-inline: clamp(.625rem, 2vw, 1rem);
-  }
-
   .app-header nav {
     display: none;
   }
@@ -300,57 +296,7 @@ main {
   .app-map-mode { width: 100%; }
 
   .app-map-mode button { flex: 1 1 0; padding-inline: .25rem; font-size: .62rem; }
-  .app-header {
-    height: 3.75rem;
-    gap: .35rem;
-  }
-
-  .app-brand {
-    gap: .35rem;
-    flex: 1 1 auto;
-  }
-
-  .app-brand-lockup {
-    gap: .35rem;
-  }
-
-  .app-brand-lockup img {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .app-brand-name {
-    font-size: .78rem;
-    letter-spacing: -.02em;
-  }
-
-  .app-actions {
-    flex: 0 0 auto;
-    gap: .25rem;
-  }
-
-  .app-lang {
-    width: 2.25rem;
-    padding-inline: 0;
-    justify-content: center;
-    font-size: 0;
-  }
-
-  .app-lang .material-symbols-outlined {
-    font-size: 1.1rem;
-  }
-
-  .app-account {
-    width: 2.25rem;
-    max-width: 2.25rem;
-    padding-inline: 0;
-    justify-content: center;
-  }
-
-  .app-account > span:last-child {
-    display: none;
-  }
-
+  
   .app-bottom-nav {
     min-height: 4rem;
     padding-bottom: calc(.5rem + env(safe-area-inset-bottom));
