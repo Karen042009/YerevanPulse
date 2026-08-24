@@ -111,7 +111,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+    <div className="fixed inset-0 z-[70] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
       <div className="bg-[#121620] border-2 border-[#ffc700] p-6 max-w-lg w-full shadow-[0_0_50px_rgba(255,199,0,0.25)] space-y-6 relative max-h-[90vh] overflow-y-auto rounded-lg">
         {/* Header */}
         <div className="flex justify-between items-start border-b border-gray-700 pb-4">

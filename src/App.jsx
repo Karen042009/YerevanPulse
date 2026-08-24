@@ -300,7 +300,7 @@ export default function App() {
       />
 
       {/* Main Content Layout Wrapper (Desktop Full Screen Grid vs Mobile Viewport) */}
-      <main className="flex-1 w-full max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-10 xl:px-12 py-4 pb-24 lg:py-6 lg:pb-12">
+      <main className="flex-1 w-full max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-10 xl:px-12 py-4 pb-28 sm:pb-24 lg:py-6 lg:pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Active Tab Content Column (Full width on Mobile, 8 cols on Laptop, 9 cols on Desktop) */}
           <div className="lg:col-span-8 xl:col-span-9 space-y-6">
@@ -502,10 +502,10 @@ export default function App() {
           soundFX.playClick();
           setIsPitchOpen(true);
         }}
-        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-[#ffd700] text-[#1a1a1a] p-3.5 rounded-full border-2 border-white shadow-[0_0_25px_rgba(255,215,0,0.5)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+        className="fixed bottom-20 right-3.5 sm:bottom-24 sm:right-5 md:bottom-6 md:right-6 z-40 bg-[var(--primary-gold)] text-black p-2.5 sm:p-3.5 rounded-full border-2 border-white shadow-[0_0_20px_var(--primary-gold-glow)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
         title="Նախագծի Պրեզենտացիա (Pitch Deck)"
       >
-        <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+        <span className="material-symbols-outlined text-xl sm:text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
           lightbulb
         </span>
       </button>
@@ -578,6 +578,7 @@ export default function App() {
         <BottomNav
           activeTab={activeTab}
           onChangeTab={setActiveTab}
+          currentLang={currentLang}
         />
       </div>
     </div>

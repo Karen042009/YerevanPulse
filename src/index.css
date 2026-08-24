@@ -88,6 +88,46 @@
   --border-gold: rgba(181, 23, 158, 0.5);
 }
 
+/* Theme 5: Sevan Cyber Blue */
+[data-theme="sevan-blue"] {
+  --bg-deep: #020c1b;
+  --bg-main: #051923;
+  --surface-1: #0a2540;
+  --surface-2: #0f355c;
+  --surface-3: #184b7a;
+
+  --primary-gold: #00f5d4;
+  --primary-gold-bright: #70e4ef;
+  --primary-gold-glow: rgba(0, 245, 212, 0.4);
+
+  --accent-cyan: #00b4d8;
+  --accent-cyan-glow: rgba(0, 180, 216, 0.35);
+
+  --accent-magenta: #7209b7;
+  --accent-magenta-glow: rgba(114, 9, 183, 0.35);
+  --border-gold: rgba(0, 245, 212, 0.5);
+}
+
+/* Theme 6: Yerevan Cascade Amber Sunset */
+[data-theme="cascade-amber"] {
+  --bg-deep: #140a04;
+  --bg-main: #1e0f06;
+  --surface-1: #2c170b;
+  --surface-2: #3b2010;
+  --surface-3: #4d2b17;
+
+  --primary-gold: #ff9e00;
+  --primary-gold-bright: #ffc300;
+  --primary-gold-glow: rgba(255, 158, 0, 0.45);
+
+  --accent-cyan: #ff6000;
+  --accent-cyan-glow: rgba(255, 96, 0, 0.35);
+
+  --accent-magenta: #d90429;
+  --accent-magenta-glow: rgba(217, 4, 41, 0.35);
+  --border-gold: rgba(255, 158, 0, 0.5);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

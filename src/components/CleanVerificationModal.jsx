@@ -61,7 +61,7 @@ export default function CleanVerificationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="bg-[#0b0e14] border-2 border-[#ffc700] p-5 sm:p-6 max-w-lg w-full relative shadow-[0_0_50px_rgba(255,199,0,0.3)] rounded-xl space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
         {/* Close Button */}
         <button

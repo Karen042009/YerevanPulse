@@ -43,7 +43,7 @@ export default function ScannerModal({ isOpen, onClose, onScanSuccess, exhibits 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="bg-[#1a1c1c] border-2 border-[#ffd700] p-6 max-w-md w-full relative shadow-[0_0_50px_rgba(255,215,0,0.3)]">
         {/* Close button */}
         <button

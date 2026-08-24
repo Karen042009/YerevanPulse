@@ -15,7 +15,7 @@ export const translations = {
       title2: "ՑՈՒՑԱՍՐԱՀ ՉԷ",
       quote: "Փողոցում լքված աղբը դարձնում ենք «թանգարանային ցուցանմուշ»՝ ստիպելով ուշադրություն դարձնել քաղաքային անփութությանը։",
       findExhibit: "ԳՏՆԵԼ ՑՈՒՑԱՆՄՈՒՇԸ",
-      reportExhibit: "+ ԱՎԵԼԱՑՆԵԼ ՑՈՒՑԱՆՄՈՒՇ",
+      reportExhibit: "ԱՎԵԼԱՑՆԵԼ ՑՈՒՑԱՆՄՈՒՇ",
     },
     stats: {
       cleanedTrash: "ՄԱՔՐՎԱԾ ԱՂԲ",
@@ -111,7 +111,7 @@ export const translations = {
       title2: "NOT AN EXHIBITION",
       quote: "We transform street litter into 'museum exhibits' to draw urgency to urban neglect.",
       findExhibit: "FIND EXHIBIT",
-      reportExhibit: "+ ADD EXHIBIT",
+      reportExhibit: "ADD EXHIBIT",
     },
     stats: {
       cleanedTrash: "CLEANED TRASH",

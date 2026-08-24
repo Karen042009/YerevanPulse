@@ -60,7 +60,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="bg-[#121620] border-2 border-[#ffc700] p-6 max-w-md w-full relative shadow-[0_0_60px_rgba(255,199,0,0.25)] rounded-lg">
         {/* Close Button */}
         <button

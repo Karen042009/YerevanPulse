@@ -20,31 +20,31 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
   ];
 
   return (
-    <div className="space-y-6 px-2 md:px-0 py-4">
+    <div className="space-y-5 px-1.5 sm:px-0 py-2 sm:py-4">
       {/* Header / Context */}
-      <div className="flex flex-col gap-2 mb-4">
+      <div className="flex flex-col gap-1.5 mb-2">
         <div className="inline-flex items-center gap-2">
-          <span className="material-symbols-outlined text-[#ffd700] text-3xl">flag</span>
-          <h2 className="text-3xl md:text-4xl font-['Archivo_Narrow'] font-black uppercase text-[#e2e2e2]">
+          <span className="material-symbols-outlined text-[var(--primary-gold)] text-2xl sm:text-3xl">flag</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-['Outfit'] font-black uppercase text-white tracking-tight">
             {t.ranks.title}
           </h2>
         </div>
-        <p className="text-xs font-['Montserrat'] text-[#d0c6ab] italic border-l-2 border-[#ffd700] pl-3 ml-1 font-mono">
+        <p className="text-xs font-['Montserrat'] text-gray-300 italic border-l-2 border-[var(--primary-gold)] pl-3 font-mono">
           Ref. YR-RNK-2026 // Real-time metric of urban intervention and civic cleanliness standings across sectors.
         </p>
       </div>
 
       {/* Brutalist Tab Switcher */}
-      <div className="flex w-full border-2 border-[#4d4732] bg-[#1a1c1c] p-1 gap-1">
+      <div className="flex w-full border-2 border-[var(--primary-gold)]/40 bg-[var(--surface-1)] p-1 gap-1 rounded-xl shadow-lg">
         <button
           onClick={() => {
             soundFX.playClick();
             setActiveTab('neighborhoods');
           }}
-          className={`flex-1 py-3 text-sm font-['Archivo_Narrow'] font-extrabold uppercase transition-all ${
+          className={`flex-1 py-2.5 sm:py-3 text-xs sm:text-sm font-['Archivo_Narrow'] font-extrabold uppercase transition-all rounded-lg ${
             activeTab === 'neighborhoods'
-              ? 'bg-[#ffd700] text-[#1a1a1a] border border-[#ffd700]'
-              : 'text-[#e2e2e2] hover:bg-[#333535] border border-transparent'
+              ? 'bg-[var(--primary-gold)] text-black font-black shadow-[0_0_12px_var(--primary-gold-glow)]'
+              : 'text-gray-300 hover:bg-white/5'
           }`}
         >
           {t.ranks.neighborhoods}
@@ -55,10 +55,10 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
             soundFX.playClick();
             setActiveTab('individuals');
           }}
-          className={`flex-1 py-3 text-sm font-['Archivo_Narrow'] font-extrabold uppercase transition-all ${
+          className={`flex-1 py-2.5 sm:py-3 text-xs sm:text-sm font-['Archivo_Narrow'] font-extrabold uppercase transition-all rounded-lg ${
             activeTab === 'individuals'
-              ? 'bg-[#ffd700] text-[#1a1a1a] border border-[#ffd700]'
-              : 'text-[#e2e2e2] hover:bg-[#333535] border border-transparent'
+              ? 'bg-[var(--primary-gold)] text-black font-black shadow-[0_0_12px_var(--primary-gold-glow)]'
+              : 'text-gray-300 hover:bg-white/5'
           }`}
         >
           {t.ranks.individuals}
@@ -67,7 +67,7 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
 
       {/* Content Area: Neighborhoods */}
       {activeTab === 'neighborhoods' && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 animate-fadeIn">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-3.5 animate-fadeIn">
           {sortedDistricts.map((d, index) => {
             const percentage = Math.round((d.points / maxPoints) * 100);
 
@@ -78,24 +78,24 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
                   soundFX.playClick();
                   setSelectedDistrictModal(d);
                 }}
-                className={`bg-[#1e2020] p-4 flex flex-col gap-3 cursor-pointer transition-all hover:border-[#ffd700] border-2 ${
-                  index === 0 ? 'border-[#ffd700] shadow-[0_0_20px_rgba(255,215,0,0.15)]' : 'border-[#4d4732]'
+                className={`bg-[var(--surface-1)] p-4 flex flex-col gap-3 cursor-pointer transition-all hover:border-[var(--primary-gold)] border-2 rounded-xl shadow-lg ${
+                  index === 0 ? 'border-[var(--primary-gold)] shadow-[0_0_20px_var(--primary-gold-glow)]' : 'border-white/10'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 flex items-center justify-center font-['Archivo_Narrow'] font-black text-lg ${
-                      index === 0 ? 'bg-[#ffd700] text-[#1a1a1a]' : index === 1 ? 'bg-slate-300 text-black' : index === 2 ? 'bg-amber-700 text-white' : 'bg-[#121414] text-[#e2e2e2] border border-[#4d4732]'
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className={`w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center font-['Archivo_Narrow'] font-black text-base sm:text-lg shrink-0 rounded-lg ${
+                      index === 0 ? 'bg-[var(--primary-gold)] text-black' : index === 1 ? 'bg-slate-300 text-black' : index === 2 ? 'bg-amber-700 text-white' : 'bg-[var(--bg-main)] text-white border border-white/20'
                     }`}>
                       {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : index + 1}
                     </div>
 
-                    <div>
-                      <h3 className="font-['Archivo_Narrow'] text-xl font-bold uppercase text-white flex items-center gap-2">
-                        <span>{currentLang === 'en' ? d.nameEn : d.name}</span>
-                        <span className="text-xs font-mono text-[#ffd700]">{d.badge}</span>
+                    <div className="min-w-0">
+                      <h3 className="font-['Outfit'] text-base sm:text-xl font-bold uppercase text-white flex items-center gap-2 truncate">
+                        <span className="truncate">{currentLang === 'en' ? d.nameEn : d.name}</span>
+                        <span className="text-[11px] font-mono text-[var(--primary-gold)] shrink-0">{d.badge}</span>
                       </h3>
-                      <div className="flex items-center gap-2 text-xs font-['Montserrat'] text-[#d0c6ab] mt-0.5">
+                      <div className="flex items-center gap-2 text-xs font-['Montserrat'] text-gray-300 mt-0.5">
                         <span>🌱 {d.cleanedExhibits} {t.ranks.cleaned}</span>
                         <span>•</span>
                         <span className="text-rose-400">🔥 {d.hotspots} hotspots</span>
@@ -103,21 +103,21 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
                     </div>
                   </div>
 
-                  <div className="text-right">
-                    <div className="font-['Archivo_Narrow'] text-2xl font-black text-[#ffd700]">
+                  <div className="text-right shrink-0">
+                    <div className="font-['Archivo_Narrow'] text-lg sm:text-2xl font-black text-[var(--primary-gold)]">
                       {d.points.toLocaleString()} PTS
                     </div>
-                    <div className="text-[10px] font-mono text-[#78dc77]">
-                      {d.cleanliness || 75}% CLEANLINESS
+                    <div className="text-[10px] font-mono text-[#10b981]">
+                      {d.cleanliness || 75}% CLEAN
                     </div>
                   </div>
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-full bg-[#121414] h-2 border border-[#4d4732] overflow-hidden">
+                <div className="w-full bg-[var(--bg-main)] h-2 border border-white/10 overflow-hidden rounded-full">
                   <div 
-                    className={`h-full transition-all duration-700 ${
-                      index === 0 ? 'bg-[#ffd700]' : index === 1 ? 'bg-slate-300' : index === 2 ? 'bg-amber-600' : 'bg-[#78dc77]'
+                    className={`h-full transition-all duration-700 rounded-full ${
+                      index === 0 ? 'bg-[var(--primary-gold)]' : index === 1 ? 'bg-slate-300' : index === 2 ? 'bg-amber-600' : 'bg-[#10b981]'
                     }`}
                     style={{ width: `${percentage}%` }}
                   />
@@ -127,13 +127,13 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
           })}
 
           {/* Contextual Action Button */}
-          <div className="mt-6 flex justify-center xl:col-span-2">
+          <div className="mt-4 flex justify-center xl:col-span-2">
             <button 
               onClick={() => {
                 soundFX.playScanChirp();
                 if (onOpenScanner) onOpenScanner();
               }}
-              className="bg-[#ffd700] text-[#1a1a1a] font-['Archivo_Narrow'] font-black text-sm px-8 py-4 border-2 border-white hover:bg-[#e9c400] transition-colors uppercase flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)]"
+              className="btn-primary-glow w-full sm:w-auto text-xs sm:text-sm px-8 py-3.5 rounded-xl uppercase flex items-center justify-center gap-2 font-black"
             >
               <span className="material-symbols-outlined text-xl">add_box</span>
               <span>Document Civic Intervention</span>
@@ -144,37 +144,37 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
 
       {/* Content Area: Individuals */}
       {activeTab === 'individuals' && (
-        <div className="flex flex-col gap-4 animate-fadeIn">
+        <div className="flex flex-col gap-3 animate-fadeIn">
           {individuals.map((ind) => (
             <div 
               key={ind.id}
-              className={`bg-[#1e2020] border-2 p-4 flex items-center justify-between transition-colors ${
-                ind.rank === 1 ? 'border-[#ffd700] bg-[#252a28]' : 'border-[#4d4732]'
+              className={`bg-[var(--surface-1)] border-2 p-3.5 sm:p-4 flex items-center justify-between transition-colors rounded-xl ${
+                ind.rank === 1 ? 'border-[var(--primary-gold)] shadow-[0_0_20px_var(--primary-gold-glow)]' : 'border-white/10'
               }`}
             >
-              <div className="flex items-center gap-4">
-                <div className={`w-10 h-10 flex items-center justify-center font-['Archivo_Narrow'] font-bold text-lg ${
-                  ind.rank === 1 ? 'bg-[#ffd700] text-black font-black' : 'bg-[#121414] text-white border border-[#4d4732]'
+              <div className="flex items-center gap-3 min-w-0">
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center font-['Archivo_Narrow'] font-bold text-sm sm:text-lg shrink-0 rounded-lg ${
+                  ind.rank === 1 ? 'bg-[var(--primary-gold)] text-black font-black' : 'bg-[var(--bg-main)] text-white border border-white/20'
                 }`}>
                   {ind.rank}
                 </div>
 
-                <div className="w-11 h-11 border-2 border-[#ffd700] overflow-hidden rounded-full">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 border-2 border-[var(--primary-gold)] overflow-hidden rounded-full shrink-0">
                   <img src={ind.avatar} alt={ind.name} className="w-full h-full object-cover grayscale contrast-125" />
                 </div>
 
-                <div>
-                  <h3 className="font-['Archivo_Narrow'] text-lg font-bold uppercase text-white">
+                <div className="min-w-0">
+                  <h3 className="font-['Outfit'] text-sm sm:text-lg font-bold uppercase text-white truncate">
                     {ind.name}
                   </h3>
-                  <div className="text-xs font-['Montserrat'] text-[#d0c6ab]">
+                  <div className="text-[11px] sm:text-xs font-['Montserrat'] text-gray-300 truncate">
                     {ind.role}
                   </div>
                 </div>
               </div>
 
-              <div className="text-right">
-                <div className="font-['Archivo_Narrow'] text-xl font-bold text-[#ffd700]">
+              <div className="text-right shrink-0">
+                <div className="font-['Archivo_Narrow'] text-base sm:text-xl font-bold text-[var(--primary-gold)]">
                   {ind.points.toLocaleString()} PTS
                 </div>
               </div>
@@ -185,27 +185,27 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
 
       {/* District Detail Modal */}
       {selectedDistrictModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-[#121414] border-2 border-[#ffd700] p-6 max-w-md w-full relative shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-3 bg-black/80 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-[var(--surface-1)] border-2 border-[var(--primary-gold)] p-5 sm:p-6 max-w-md w-full relative shadow-2xl space-y-4 rounded-2xl">
             <button
               onClick={() => setSelectedDistrictModal(null)}
-              className="absolute top-3 right-3 text-[#999077] hover:text-[#ffd700] p-1"
+              className="absolute top-3 right-3 text-gray-400 hover:text-[var(--primary-gold)] p-1 text-lg"
             >
               ✕
             </button>
 
-            <h3 className="font-['Archivo_Narrow'] text-2xl font-black text-[#ffd700] uppercase">
+            <h3 className="font-['Outfit'] text-xl sm:text-2xl font-black text-[var(--primary-gold)] uppercase">
               {currentLang === 'en' ? selectedDistrictModal.nameEn : selectedDistrictModal.name} {selectedDistrictModal.badge}
             </h3>
 
-            <div className="space-y-2 text-xs text-[#e2e2e2] border-t border-b border-[#4d4732] py-3">
+            <div className="space-y-2 text-xs text-gray-200 border-t border-b border-white/10 py-3">
               <div className="flex justify-between">
                 <span>ՎԱՍՏԱԿԱԾ ՄԻԱՎՈՐՆԵՐ․</span>
-                <span className="font-bold text-[#ffd700]">{selectedDistrictModal.points} PTS</span>
+                <span className="font-bold text-[var(--primary-gold)]">{selectedDistrictModal.points} PTS</span>
               </div>
               <div className="flex justify-between">
                 <span>ՄԱՔՐՎԱԾ ՑՈՒՑԱՆՄՈՒՇՆԵՐ․</span>
-                <span className="font-bold text-[#78dc77]">{selectedDistrictModal.cleanedExhibits}</span>
+                <span className="font-bold text-[#10b981]">{selectedDistrictModal.cleanedExhibits}</span>
               </div>
               <div className="flex justify-between">
                 <span>ԱԿՏԻՎ HOTSPOTS․</span>
@@ -213,7 +213,7 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
               </div>
               <div className="flex justify-between">
                 <span>ՄԱՔՐՈՒԹՅԱՆ ԱՍՏԻՃԱՆ․</span>
-                <span className="font-bold text-[#ffd700]">{selectedDistrictModal.cleanliness || 75}%</span>
+                <span className="font-bold text-[var(--primary-gold)]">{selectedDistrictModal.cleanliness || 75}%</span>
               </div>
             </div>
 
@@ -223,7 +223,7 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
                 setSelectedDistrictModal(null);
                 if (onOpenScanner) onOpenScanner();
               }}
-              className="w-full bg-[#ffd700] text-[#1a1a1a] py-3 font-['Archivo_Narrow'] text-xs font-black uppercase tracking-wider hover:bg-[#e9c400]"
+              className="btn-primary-glow w-full py-3 text-xs font-black uppercase rounded-xl"
             >
               + ԱՎԵԼԱՑՆԵԼ ՑՈՒՑԱՆՄՈՒՇ ԱՅՍ ԹԱՂԱՄԱՍՈՒՄ
             </button>

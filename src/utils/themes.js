@@ -36,6 +36,24 @@ export const themes = [
     secondaryColor: '#48cae4',
     accentColor: '#f72585',
     previewBg: '#190a28'
+  },
+  {
+    id: 'sevan-blue',
+    nameHy: '🌊 Sevan Cyber (Սևանա Կապույտ)',
+    nameEn: '🌊 Sevan Cyber (Deep Cobalt)',
+    primaryColor: '#00f5d4',
+    secondaryColor: '#0096c7',
+    accentColor: '#48cae4',
+    previewBg: '#031926'
+  },
+  {
+    id: 'cascade-amber',
+    nameHy: '🌇 Cascade Amber (Կասկադ Ամբեր)',
+    nameEn: '🌇 Cascade Amber (Yerevan Sunset)',
+    primaryColor: '#ff9e00',
+    secondaryColor: '#ff6000',
+    accentColor: '#ff0054',
+    previewBg: '#1c1008'
   }
 ];
 

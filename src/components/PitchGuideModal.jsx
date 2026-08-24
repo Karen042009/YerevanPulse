@@ -30,7 +30,7 @@ export default function PitchGuideModal({ isOpen, onClose }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+    <div className="fixed inset-0 z-[70] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
       <div className="bg-[#121414] border-2 border-[#ffd700] p-6 max-w-lg w-full relative shadow-[0_0_50px_rgba(255,215,0,0.3)] space-y-6">
         {/* Close button */}
         <button

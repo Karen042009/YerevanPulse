@@ -5,7 +5,7 @@ export default function ExhibitQRModal({ exhibit, isOpen, onClose }) {
   if (!isOpen || !exhibit) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="bg-[#121414] border-2 border-[#ffd700] p-6 max-w-sm w-full relative shadow-[0_0_50px_rgba(255,215,0,0.3)] space-y-4 text-center">
         {/* Close Button */}
         <button

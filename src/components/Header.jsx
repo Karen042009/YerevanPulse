@@ -25,7 +25,7 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-[var(--surface-1)]/95 border-b-2 border-[var(--primary-gold)]/40 px-2 sm:px-4 lg:px-8 xl:px-10 h-14 sm:h-16 backdrop-blur-md shadow-lg transition-colors">
+    <header className="sticky top-0 w-full z-50 bg-[var(--surface-1)]/95 border-b-2 border-[var(--primary-gold)]/40 px-2 sm:px-4 lg:px-6 h-14 sm:h-16 backdrop-blur-md shadow-lg transition-colors">
       <div className="w-full max-w-[1920px] mx-auto h-full flex justify-between items-center gap-2">
         {/* Brand & Logo */}
         <div 
@@ -33,7 +33,7 @@ export default function Header({
             soundFX.playClick();
             onChangeTab('home');
           }}
-          className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity shrink-0"
+          className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity shrink-0 min-w-0"
         >
           <button 
             type="button"
@@ -42,7 +42,7 @@ export default function Header({
               soundFX.playScanChirp();
               onOpenScanner();
             }}
-            className="text-[var(--primary-gold)] hover:scale-105 active:scale-95 transition-all p-1 sm:p-1.5 bg-[var(--bg-main)] border border-[var(--primary-gold)] flex items-center justify-center shadow-[2px_2px_0px_0px_var(--primary-gold)] rounded-sm"
+            className="text-[var(--primary-gold)] hover:scale-105 active:scale-95 transition-all p-1.5 bg-[var(--bg-main)] border border-[var(--primary-gold)] flex items-center justify-center shadow-[2px_2px_0px_0px_var(--primary-gold)] rounded-sm min-w-[34px] min-h-[34px] shrink-0"
             title={t.modals.scanQR}
           >
             <span className="material-symbols-outlined text-lg sm:text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -50,25 +50,25 @@ export default function Header({
             </span>
           </button>
 
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <img 
               src="/logo.png" 
               alt="Yerevan Pulse Logo" 
-              className="h-7 sm:h-8 md:h-9 w-auto object-contain border border-[var(--primary-gold)] p-0.5 bg-black rounded-sm shadow-[1px_1px_0px_0px_var(--primary-gold)] sm:shadow-[2px_2px_0px_0px_var(--primary-gold)]"
+              className="h-7 sm:h-8 md:h-9 w-auto object-contain border border-[var(--primary-gold)] p-0.5 bg-black rounded-sm shadow-[1px_1px_0px_0px_var(--primary-gold)] sm:shadow-[2px_2px_0px_0px_var(--primary-gold)] shrink-0"
             />
-            <div className="flex flex-col max-w-[90px] sm:max-w-none overflow-hidden">
-              <h1 className="font-['Outfit'] text-[12px] sm:text-base md:text-lg font-black tracking-tight text-[var(--primary-gold)] uppercase leading-none truncate">
+            <div className="flex flex-col min-w-0">
+              <h1 className="font-['Outfit'] text-[11px] xs:text-[13px] sm:text-base md:text-lg font-black tracking-tight text-[var(--primary-gold)] uppercase leading-none truncate">
                 YEREVAN PULSE
               </h1>
-              <span className="hidden xl:block font-['Space_Grotesk'] text-[9px] text-gray-400 uppercase tracking-wider">
+              <span className="hidden 2xl:block font-['Space_Grotesk'] text-[9px] text-gray-400 uppercase tracking-wider">
                 {currentLang === 'hy' ? 'ՔԱՂԱՔԱՅԻՆ ԻՆՏԵՐՎԵՆՑԻԱ' : 'CIVIC INTERVENTION'}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+        {/* Navigation Links - Shown only on XL+ screens (1280px+) to prevent overlap with logo & toolbar */}
+        <nav className="hidden xl:flex items-center gap-1.5">
           {[
             { id: 'home', label: t.nav.home, icon: 'home' },
             { id: 'exhibits', label: t.nav.exhibits, icon: 'museum' },
@@ -79,7 +79,7 @@ export default function Header({
             <button
               key={tab.id}
               onClick={() => { soundFX.playClick(); onChangeTab(tab.id); }}
-              className={`font-['Archivo_Narrow'] text-[11px] xl:text-xs font-bold uppercase tracking-wider flex items-center gap-1 xl:gap-1.5 py-1.5 px-2 xl:px-3 rounded border transition-all ${
+              className={`font-['Archivo_Narrow'] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 py-1.5 px-3 rounded border transition-all ${
                 activeTab === tab.id 
                   ? 'bg-[var(--primary-gold)] text-[var(--bg-deep)] border-[var(--primary-gold)] shadow-[0_0_15px_var(--primary-gold-glow)]' 
                   : 'text-gray-300 border-transparent hover:border-[var(--primary-gold)] hover:text-white'
@@ -99,11 +99,11 @@ export default function Header({
               soundFX.playClick();
               if (onToggleLang) onToggleLang();
             }}
-            className="text-[var(--primary-gold)] font-['Space_Grotesk'] text-[10px] sm:text-xs font-bold uppercase px-1.5 sm:px-2 py-1.5 bg-[var(--bg-main)] border border-[var(--primary-gold)]/60 hover:border-[var(--primary-gold)] transition-all flex items-center gap-1 rounded"
+            className="text-[var(--primary-gold)] font-['Space_Grotesk'] text-[10px] sm:text-xs font-bold uppercase px-1.5 sm:px-2 py-1.5 bg-[var(--bg-main)] border border-[var(--primary-gold)]/60 hover:border-[var(--primary-gold)] transition-all flex items-center justify-center gap-1 rounded min-w-[34px] min-h-[34px]"
             title="Փոխել լեզուն / Switch Language"
           >
             <span className="material-symbols-outlined text-sm sm:text-base">language</span>
-            <span className="hidden sm:inline">{currentLang === 'hy' ? 'ARM 🇦🇲' : 'ENG 🇬🇧'}</span>
+            <span className="hidden xl:inline">{currentLang === 'hy' ? 'ARM 🇦🇲' : 'ENG 🇬🇧'}</span>
           </button>
 
           {/* Color Themes Button */}
@@ -112,11 +112,11 @@ export default function Header({
               soundFX.playClick();
               if (onOpenTheme) onOpenTheme();
             }}
-            className="bg-[var(--bg-main)] border border-gray-700 hover:border-[var(--primary-gold)] text-gray-300 hover:text-[var(--primary-gold)] px-1.5 sm:px-2 py-1.5 text-xs font-['Space_Grotesk'] font-bold uppercase transition-all flex items-center gap-1 rounded"
-            title=" Գունային Թեմաներ / Color Themes"
+            className="bg-[var(--bg-main)] border border-gray-700 hover:border-[var(--primary-gold)] text-gray-300 hover:text-[var(--primary-gold)] px-1.5 sm:px-2 py-1.5 text-xs font-['Space_Grotesk'] font-bold uppercase transition-all flex items-center justify-center gap-1 rounded min-w-[34px] min-h-[34px]"
+            title="Գունային Թեմաներ / Color Themes"
           >
             <span className="material-symbols-outlined text-sm sm:text-base text-[var(--primary-gold)]">palette</span>
-            <span className="hidden md:inline">{currentLang === 'hy' ? '🎨 ԹԵՄԱՆԵՐ' : '🎨 THEMES'}</span>
+            <span className="hidden xl:inline">{currentLang === 'hy' ? '🎨 ԹԵՄԱՆԵՐ' : '🎨 THEMES'}</span>
           </button>
 
           {/* Civic Rewards Store Button */}
@@ -125,17 +125,17 @@ export default function Header({
               soundFX.playClick();
               if (onOpenRewards) onOpenRewards();
             }}
-            className="bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)] text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-deep)] px-1.5 sm:px-2.5 py-1.5 text-xs font-['Archivo_Narrow'] font-black uppercase transition-all flex items-center gap-1 rounded shadow-[0_0_15px_var(--primary-gold-glow)] animate-pulse"
-            title=" Civic Rewards Store"
+            className="bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)] text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-deep)] px-1.5 sm:px-2.5 py-1.5 text-xs font-['Archivo_Narrow'] font-black uppercase transition-all flex items-center justify-center gap-1 rounded shadow-[0_0_15px_var(--primary-gold-glow)] animate-pulse min-w-[34px] min-h-[34px]"
+            title="Civic Rewards Store"
           >
             <span className="material-symbols-outlined text-base">card_giftcard</span>
-            <span className="hidden sm:inline">{currentLang === 'hy' ? '🎁 ԽԱՆՈՒԹ' : '🎁 REWARDS'}</span>
+            <span className="hidden xl:inline">{currentLang === 'hy' ? '🎁 ԽԱՆՈՒԹ' : '🎁 REWARDS'}</span>
           </button>
 
           {/* Sound FX Toggle */}
           <button
             onClick={toggleSound}
-            className="text-gray-300 hover:text-[var(--primary-gold)] p-1.5 bg-[var(--bg-main)] border border-gray-700 flex items-center justify-center transition-all rounded"
+            className="text-gray-300 hover:text-[var(--primary-gold)] p-1.5 bg-[var(--bg-main)] border border-gray-700 flex items-center justify-center transition-all rounded min-w-[34px] min-h-[34px]"
             title={isMuted ? 'Muted' : 'Sound On'}
           >
             <span className="material-symbols-outlined text-base">
@@ -161,12 +161,12 @@ export default function Header({
               soundFX.playClick();
               onOpenAuth();
             }}
-            className="bg-[var(--bg-main)] border border-[var(--primary-gold)] text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-deep)] px-1.5 sm:px-2.5 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all flex items-center gap-1 rounded shadow-[0_0_10px_var(--primary-gold-glow)]"
+            className="bg-[var(--bg-main)] border border-[var(--primary-gold)] text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-deep)] px-1.5 sm:px-2.5 py-1.5 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all flex items-center justify-center gap-1 rounded shadow-[0_0_10px_var(--primary-gold-glow)] min-w-[34px] min-h-[34px]"
           >
             <span className="material-symbols-outlined text-base">
               {isGuest ? 'account_circle' : 'person'}
             </span>
-            <span className="hidden lg:inline truncate max-w-[100px]">
+            <span className="hidden xl:inline truncate max-w-[100px]">
               {isGuest ? (currentLang === 'hy' ? 'ՄՈՒՏՔ' : 'LOGIN') : currentUser.name}
             </span>
           </button>
