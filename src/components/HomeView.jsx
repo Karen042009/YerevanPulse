@@ -222,10 +222,10 @@ export default function HomeView({
         {/* Visual Cyber Pulse Interactive Graphic Box */}
         <div className="lg:col-span-5 relative h-80 lg:h-96 w-full bg-gradient-to-br from-[#121620] via-[#0f131c] to-[#0b0e14] border-2 border-[#ffc700] flex flex-col items-center justify-between p-6 overflow-hidden group shadow-[0_0_40px_rgba(255,199,0,0.2)] rounded-lg">
           <div className="w-full flex items-center justify-between z-10">
-            <div className="text-[11px] font-mono text-[#ffc700] bg-[#06080c]/90 px-3 py-1 border border-[#ffc700]/60 rounded">
+            <div className="text-xs font-mono text-[#ffc700] bg-[#06080c]/90 px-3 py-1 border border-[#ffc700]/60 rounded font-semibold">
               SYS-ID: YR-2026-PULSE
             </div>
-            <div className="text-[11px] font-mono text-[#00f5d4] bg-[#06080c]/90 px-3 py-1 border border-[#00f5d4]/60 rounded flex items-center gap-1.5">
+            <div className="text-xs font-mono text-[#00f5d4] bg-[#06080c]/90 px-3 py-1 border border-[#00f5d4]/60 rounded flex items-center gap-1.5 font-semibold">
               <span className="w-2 h-2 rounded-full bg-[#00f5d4] animate-ping" />
               <span>{pulseCount} BPM</span>
             </div>
@@ -245,7 +245,7 @@ export default function HomeView({
                 </span>
               </div>
               {pulseActive && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#ffc700] text-black font-mono text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider animate-bounce">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#ffc700] text-black font-mono text-xs font-black px-2 py-0.5 rounded uppercase tracking-wider animate-bounce">
                   PULSE DETECTED
                 </div>
               )}
@@ -266,16 +266,16 @@ export default function HomeView({
           {/* Quick Metrics Bar at bottom of cyber box */}
           <div className="w-full grid grid-cols-3 gap-2 z-10 pt-2 border-t border-[#ffc700]/30 text-center">
             <div>
-              <div className="text-[10px] font-mono text-gray-400">CLEAN RATE</div>
-              <div className="font-['Outfit'] text-sm font-bold text-[#00f5d4]">{cleanRate}%</div>
+              <div className="text-xs font-mono text-gray-400 font-medium">CLEAN RATE</div>
+              <div className="font-['Outfit'] text-base font-bold text-[#00f5d4]">{cleanRate}%</div>
             </div>
             <div>
-              <div className="text-[10px] font-mono text-gray-400">HOTSPOTS</div>
-              <div className="font-['Outfit'] text-sm font-bold text-[#ff007a]">{activeCount}</div>
+              <div className="text-xs font-mono text-gray-400 font-medium">HOTSPOTS</div>
+              <div className="font-['Outfit'] text-base font-bold text-[#ff007a]">{activeCount}</div>
             </div>
             <div>
-              <div className="text-[10px] font-mono text-gray-400">DISTRICTS</div>
-              <div className="font-['Outfit'] text-sm font-bold text-[#ffc700]">12/12</div>
+              <div className="text-xs font-mono text-gray-400 font-medium">DISTRICTS</div>
+              <div className="font-['Outfit'] text-base font-bold text-[#ffc700]">12/12</div>
             </div>
           </div>
 
@@ -302,7 +302,7 @@ export default function HomeView({
             <div className="w-full bg-[#0b0e14] h-2 rounded-full mt-3 overflow-hidden border border-[#ffc700]/30">
               <div className="bg-[#ffc700] h-full rounded-full" style={{ width: '83%' }} />
             </div>
-            <div className="text-[10px] font-mono text-gray-400 mt-1 text-right">83% OF 15,000 KG TARGET</div>
+            <div className="text-xs font-mono text-gray-400 mt-1 text-right">83% OF 15,000 KG TARGET</div>
           </div>
         </div>
 
@@ -348,7 +348,7 @@ export default function HomeView({
                 style={{ width: `${totalExhibitsCount > 0 ? (activeCount / totalExhibitsCount) * 100 : 50}%` }}
               />
             </div>
-            <div className="text-[10px] font-mono text-gray-400 mt-1 text-right">UNRESOLVED HOTSPOTS</div>
+            <div className="text-xs font-mono text-gray-400 mt-1 text-right">UNRESOLVED HOTSPOTS</div>
           </div>
         </div>
 
@@ -368,7 +368,7 @@ export default function HomeView({
             <div className="w-full bg-[#0b0e14] h-2 rounded-full mt-3 overflow-hidden border border-[#10b981]/30">
               <div className="bg-[#10b981] h-full rounded-full" style={{ width: '78%' }} />
             </div>
-            <div className="text-[10px] font-mono text-emerald-400 mt-1 text-right">HIGH IMPACT ZONE</div>
+            <div className="text-xs font-mono text-emerald-400 mt-1 text-right">HIGH IMPACT ZONE</div>
           </div>
         </div>
       </section>

@@ -139,7 +139,9 @@ html {
   background-color: var(--bg-deep);
   scroll-behavior: smooth;
   color-scheme: dark;
+  font-size: 16px;
 }
+
 
 body {
   background-color: var(--bg-main);

@@ -366,16 +366,16 @@ export default function ExhibitsView({
                   <div>
                     <div className="flex items-start justify-between gap-2 mb-2">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="font-['Archivo_Narrow'] text-[11px] font-bold text-[var(--primary-gold)] bg-[var(--bg-main)] px-2 py-0.5 border border-[var(--primary-gold)]/40 rounded">
+                        <span className="font-['Archivo_Narrow'] text-xs sm:text-sm font-bold text-[var(--primary-gold)] bg-[var(--bg-main)] px-2 py-0.5 border border-[var(--primary-gold)]/40 rounded">
                           #{exhibit.code}
                         </span>
-                        <span className="text-[10px] text-gray-400 uppercase font-mono">
+                        <span className="text-xs text-gray-400 uppercase font-mono font-medium">
                           {exhibit.category}
                         </span>
                         {getSeverityBadge(exhibit.severity)}
                       </div>
 
-                      <span className="text-[11px] font-['Archivo_Narrow'] font-black text-[var(--primary-gold)] bg-[var(--primary-gold)]/10 px-2 py-0.5 border border-[var(--primary-gold)]/30 shrink-0 rounded">
+                      <span className="text-xs sm:text-sm font-['Archivo_Narrow'] font-black text-[var(--primary-gold)] bg-[var(--primary-gold)]/10 px-2.5 py-0.5 border border-[var(--primary-gold)]/30 shrink-0 rounded">
                         +{exhibit.points} PTS
                       </span>
                     </div>
@@ -385,17 +385,17 @@ export default function ExhibitsView({
                       <span>{displayTitle}</span>
                     </h3>
 
-                    <p className="text-xs text-gray-300 italic my-2.5 line-clamp-2 border-l-2 border-white/20 pl-2">
+                    <p className="text-xs sm:text-sm text-gray-300 italic my-2.5 line-clamp-2 border-l-2 border-white/20 pl-2">
                       "{displayQuote}"
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-white/10">
+                  <div className="flex items-center justify-between text-xs sm:text-sm text-gray-400 pt-3 border-t border-white/10">
                     <span className="flex items-center gap-1 truncate max-w-[70%]">
-                      <span className="material-symbols-outlined text-sm text-[var(--primary-gold)] shrink-0">location_on</span>
+                      <span className="material-symbols-outlined text-base text-[var(--primary-gold)] shrink-0">location_on</span>
                       <span className="truncate">{displayLocation}</span>
                     </span>
-                    <span className="text-[var(--primary-gold)] font-bold group-hover:underline shrink-0 text-[11px]">
+                    <span className="text-[var(--primary-gold)] font-bold group-hover:underline shrink-0 text-xs sm:text-sm">
                       {exhibit.cleaned
                         ? `✓ ${t.exhibits.cleanedStatus}`
                         : exhibit.pendingVerification

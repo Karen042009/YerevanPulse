@@ -49,33 +49,33 @@ export default function RewardsStoreModal({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="bg-[#0b0e14] border-2 border-[var(--primary-gold)] p-4 sm:p-6 max-w-3xl w-full relative shadow-[0_0_50px_var(--primary-gold-glow)] rounded-2xl space-y-4 max-h-[90dvh] overflow-y-auto custom-scrollbar pb-28 sm:pb-8">
+      <div className="bg-[#0b0e14] border-2 border-[var(--primary-gold)] p-4 sm:p-7 max-w-3xl lg:max-w-4xl w-full relative shadow-[0_0_50px_var(--primary-gold-glow)] rounded-2xl space-y-4 max-h-[90dvh] overflow-y-auto custom-scrollbar pb-28 sm:pb-8">
         {/* Close Button */}
         <button
           onClick={() => {
             soundFX.playClick();
             onClose();
           }}
-          className="absolute top-3.5 right-3.5 text-gray-400 hover:text-[var(--primary-gold)] p-1 text-xl font-bold transition-colors rounded-full hover:bg-white/10"
+          className="absolute top-4 right-4 text-gray-400 hover:text-[var(--primary-gold)] p-1.5 text-2xl font-bold transition-colors rounded-full hover:bg-white/10"
         >
           ✕
         </button>
 
         {/* Header & Balance */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4 pr-8 sm:pr-0">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/40 rounded-full text-[10px] font-mono text-[var(--primary-gold)] uppercase tracking-wider">
-              <span className="material-symbols-outlined text-xs">storefront</span>
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/40 rounded-full text-xs font-mono text-[var(--primary-gold)] uppercase tracking-wider font-semibold">
+              <span className="material-symbols-outlined text-sm">storefront</span>
               <span>YEREVAN CIVIC MARKETPLACE</span>
             </div>
-            <h2 className="font-['Outfit'] text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+            <h2 className="font-['Outfit'] text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
               🎁 {isArmenian ? 'ՄԻԱՎՈՐՆԵՐԻ ԽԱՆՈՒԹ & ԶԵՂՉԵՐ' : 'CIVIC REWARDS STORE'}
             </h2>
           </div>
 
-          <div className="bg-[#121620] p-2.5 sm:p-3 border-2 border-[var(--primary-gold)] rounded-xl text-right shadow-lg self-start sm:self-auto">
-            <span className="text-[9px] sm:text-[10px] font-mono text-gray-400 block uppercase">YOUR BALANCE</span>
-            <span className="font-['Outfit'] font-black text-[var(--primary-gold)] text-base sm:text-lg">
+          <div className="bg-[#121620] p-3 border-2 border-[var(--primary-gold)] rounded-xl text-right shadow-lg self-start sm:self-auto">
+            <span className="text-xs font-mono text-gray-400 block uppercase font-medium">YOUR BALANCE</span>
+            <span className="font-['Outfit'] font-black text-[var(--primary-gold)] text-lg sm:text-xl">
               {userPoints} PTS
             </span>
           </div>
@@ -85,7 +85,7 @@ export default function RewardsStoreModal({
         <div className="flex border-b border-white/10 gap-2">
           <button
             onClick={() => { soundFX.playClick(); setActiveTab('store'); }}
-            className={`py-2 px-3.5 font-['Archivo_Narrow'] text-xs font-bold uppercase transition-all rounded-t-lg border-b-2 ${
+            className={`py-2.5 px-4 font-['Archivo_Narrow'] text-xs sm:text-sm font-extrabold uppercase transition-all rounded-t-lg border-b-2 ${
               activeTab === 'store'
                 ? 'border-[var(--primary-gold)] text-[var(--primary-gold)] bg-[var(--primary-gold)]/10 font-black'
                 : 'border-transparent text-gray-400 hover:text-white'
@@ -96,7 +96,7 @@ export default function RewardsStoreModal({
 
           <button
             onClick={() => { soundFX.playClick(); setActiveTab('my_coupons'); }}
-            className={`py-2 px-3.5 font-['Archivo_Narrow'] text-xs font-bold uppercase transition-all rounded-t-lg border-b-2 flex items-center gap-1.5 ${
+            className={`py-2.5 px-4 font-['Archivo_Narrow'] text-xs sm:text-sm font-extrabold uppercase transition-all rounded-t-lg border-b-2 flex items-center gap-1.5 ${
               activeTab === 'my_coupons'
                 ? 'border-[#10b981] text-[#10b981] bg-[#10b981]/10 font-black'
                 : 'border-transparent text-gray-400 hover:text-white'
@@ -108,7 +108,7 @@ export default function RewardsStoreModal({
 
         {/* Content: Store Perks */}
         {activeTab === 'store' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {initialRewards.map((reward) => {
               const title = isArmenian ? reward.titleHy : reward.titleEn;
               const desc = isArmenian ? reward.descHy : reward.descEn;
@@ -117,30 +117,30 @@ export default function RewardsStoreModal({
               return (
                 <div
                   key={reward.id}
-                  className="bg-[#121620] border border-white/10 hover:border-[var(--primary-gold)] p-4 rounded-xl flex flex-col justify-between space-y-3 transition-all group relative overflow-hidden shadow-md"
+                  className="bg-[#121620] border border-white/10 hover:border-[var(--primary-gold)] p-4 sm:p-5 rounded-xl flex flex-col justify-between space-y-3.5 transition-all group relative overflow-hidden shadow-md"
                 >
-                  <div className="space-y-2">
+                  <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-2xl p-2 bg-[#0b0e14] border border-white/10 rounded-lg">
+                      <span className="text-2xl p-2.5 bg-[#0b0e14] border border-white/10 rounded-lg">
                         <span className="material-symbols-outlined text-2xl" style={{ color: reward.color }}>
                           {reward.icon}
                         </span>
                       </span>
-                      <span className="font-['Outfit'] text-xs font-black text-[var(--primary-gold)] bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/30 px-2.5 py-1 rounded-full">
+                      <span className="font-['Outfit'] text-xs sm:text-sm font-black text-[var(--primary-gold)] bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/30 px-3 py-1 rounded-full">
                         {reward.ptsCost} PTS
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest block">
+                      <span className="text-xs font-mono text-gray-400 uppercase tracking-widest block font-medium">
                         {reward.category} • {reward.partner}
                       </span>
-                      <h4 className="font-['Outfit'] text-base font-bold text-white uppercase mt-0.5 group-hover:text-[var(--primary-gold)] transition-colors">
+                      <h4 className="font-['Outfit'] text-base sm:text-lg font-bold text-white uppercase mt-0.5 group-hover:text-[var(--primary-gold)] transition-colors">
                         {title}
                       </h4>
                     </div>
 
-                    <p className="text-xs font-['Montserrat'] text-gray-300 leading-relaxed">
+                    <p className="text-xs sm:text-sm font-['Montserrat'] text-gray-300 leading-relaxed">
                       {desc}
                     </p>
                   </div>
@@ -148,13 +148,13 @@ export default function RewardsStoreModal({
                   <button
                     onClick={() => handleRedeem(reward)}
                     disabled={!canAfford}
-                    className={`w-full py-3 font-['Archivo_Narrow'] text-xs font-extrabold uppercase transition-all rounded-xl flex items-center justify-center gap-1.5 ${
+                    className={`w-full py-3.5 font-['Archivo_Narrow'] text-xs sm:text-sm lg:text-base font-extrabold uppercase transition-all rounded-xl flex items-center justify-center gap-1.5 ${
                       canAfford
                         ? 'btn-primary-glow text-black'
                         : 'bg-gray-800 text-gray-500 border border-gray-700 cursor-not-allowed'
                     }`}
                   >
-                    <span className="material-symbols-outlined text-base">confirmation_number</span>
+                    <span className="material-symbols-outlined text-lg">confirmation_number</span>
                     <span>
                       {canAfford
                         ? isArmenian ? 'ՍՏԱՆԱԼ ԿՈՒՊՈՆԸ' : 'REDEEM PERK'
