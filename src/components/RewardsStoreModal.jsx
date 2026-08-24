@@ -10,7 +10,6 @@ export default function RewardsStoreModal({
   onDeductPoints,
   currentLang = 'hy'
 }) {
-  const [selectedReward, setSelectedReward] = useState(null);
   const [activeTab, setActiveTab] = useState('store'); // 'store' | 'my_coupons'
   const [myCoupons, setMyCoupons] = useState([]);
   const [redeemedCodeModal, setRedeemedCodeModal] = useState(null);
@@ -36,7 +35,7 @@ export default function RewardsStoreModal({
     onDeductPoints(reward.ptsCost);
 
     // Generate Coupon Code
-    const couponCode = `YVN-REWARD-${Math.floor(100000 + Math.random() * 900000)}`;
+    const couponCode = `YVN-REWARD-${(myCoupons.length + 1) * 123456 % 900000 + 100000}`;
     const newCoupon = {
       ...reward,
       couponCode,
