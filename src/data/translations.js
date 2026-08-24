@@ -80,6 +80,19 @@ export const translations = {
       login: "ՄՈՒՏՔ",
       register: "ԳՐԱՆՑՈՒՄ",
       pitchGuide: "ՊՐԵԶԵՆՏԱՑԻԱ",
+    },
+    cleanVerification: {
+      modalTitle: "📸 ՄԱՔՐՄԱՆ ԱՊԱՑՈՒՅՑԻ ՈՒՂԱՐԿՈՒՄ",
+      subtitle: "Լուսանկարիր կամ բեռնիր մաքրված տարածքի լուսանկարը՝ հաստատման ուղարկելու համար:",
+      uploadPhoto: "📸 ԲԵՌՆԵԼ / ՆԿԱՐԵԼ ԼՈՒՍԱՆԿԱՐԸ",
+      changePhoto: "🔄 ՓՈԽԵԼ ԼՈՒՍԱՆԿԱՐԸ",
+      addNote: "Նշումներ (ըստ ցանկության)․",
+      notePlaceholder: "Նկարագրիր մաքրման ընթացքը (օր.՝ ապակին հանձնվել է վերամշակման)...",
+      submitBtn: "🚀 ՈՒՂԱՐԿԵԼ ՀԱՍՏԱՏՄԱՆ",
+      pendingStatus: "⏳ ԳՆԱՑ ՀԱՍՏԱՏՄԱՆ",
+      pendingNotice: "Լուսանկարն ուղարկված է քաղաքացիական ադմինիստրատորին և AI ստուգմանը: Հաստատումից հետո կստանաք միավորները:",
+      adminApprove: "✓ ՀԱՍՏԱՏԵԼ ՄԱՔՐՈՒՄԸ",
+      adminPendingTitle: "⏳ ՀԱՍՏԱՏՄԱՆ ՍՊԱՍՈՂ ՄԱՔՐՈՒՄՆԵՐ",
     }
   },
   en: {
@@ -163,6 +176,19 @@ export const translations = {
       login: "LOGIN",
       register: "REGISTER",
       pitchGuide: "PRESENTATION",
+    },
+    cleanVerification: {
+      modalTitle: "📸 SUBMIT CLEANUP PROOF",
+      subtitle: "Upload or capture a photo of the cleaned site to submit for verification.",
+      uploadPhoto: "📸 UPLOAD / CAPTURE PHOTO",
+      changePhoto: "🔄 CHANGE PHOTO",
+      addNote: "Notes (optional):",
+      notePlaceholder: "Describe cleanup details (e.g. glass sent for recycling)...",
+      submitBtn: "🚀 SUBMIT FOR VERIFICATION",
+      pendingStatus: "⏳ PENDING VERIFICATION",
+      pendingNotice: "Photo submitted for AI & Admin verification. Points will be awarded upon approval.",
+      adminApprove: "✓ APPROVE CLEANUP",
+      adminPendingTitle: "⏳ PENDING CLEANUP SUBMISSIONS",
     }
   }
 };

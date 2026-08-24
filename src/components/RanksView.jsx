@@ -67,7 +67,7 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
 
       {/* Content Area: Neighborhoods */}
       {activeTab === 'neighborhoods' && (
-        <div className="flex flex-col gap-4 animate-fadeIn">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 animate-fadeIn">
           {sortedDistricts.map((d, index) => {
             const percentage = Math.round((d.points / maxPoints) * 100);
 
@@ -127,7 +127,7 @@ export default function RanksView({ districts, userPoints, currentUser, onOpenSc
           })}
 
           {/* Contextual Action Button */}
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6 flex justify-center xl:col-span-2">
             <button 
               onClick={() => {
                 soundFX.playScanChirp();

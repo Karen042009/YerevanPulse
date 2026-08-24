@@ -23,7 +23,8 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-[#0b0e14]/95 border-b-2 border-[#ffc700]/40 px-2 sm:px-3 md:px-6 h-14 sm:h-16 flex justify-between items-center backdrop-blur-md shadow-lg">
+    <header className="sticky top-0 w-full z-50 bg-[#0b0e14]/95 border-b-2 border-[#ffc700]/40 px-3 sm:px-6 lg:px-10 xl:px-12 h-14 sm:h-16 backdrop-blur-md shadow-lg">
+      <div className="w-full max-w-[1920px] mx-auto h-full flex justify-between items-center">
       {/* Brand & Logo */}
       <div 
         onClick={() => {
@@ -142,6 +143,7 @@ export default function Header({
           </span>
         </button>
       </div>
-    </header>
+    </div>
+  </header>
   );
 }

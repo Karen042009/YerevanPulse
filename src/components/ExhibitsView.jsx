@@ -271,6 +271,11 @@ export default function ExhibitsView({
                     <span className="material-symbols-outlined text-2xl">check_circle</span>
                     <span>{t.exhibits.cleanedStatus} (+{selectedExhibit.points} PTS)</span>
                   </div>
+                ) : selectedExhibit.pendingVerification ? (
+                  <div className="w-full bg-[#00f5d4]/20 text-[#00f5d4] border-2 border-[#00f5d4] py-4 text-center font-['Archivo_Narrow'] text-lg font-extrabold uppercase flex items-center justify-center gap-3 animate-pulse">
+                    <span className="material-symbols-outlined text-2xl">schedule</span>
+                    <span>{currentLang === 'hy' ? '⏳ ԳՆԱՑ ՀԱՍՏԱՏՄԱՆ (ՍՊԱՍՎՈՒՄ Է ՍՏՈՒԳՄԱՆ)' : '⏳ PENDING VERIFICATION'}</span>
+                  </div>
                 ) : (
                   <button 
                     onClick={() => handleClean(selectedExhibit.id)}
@@ -328,7 +333,7 @@ export default function ExhibitsView({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredExhibits.map((exhibit) => {
               const displayTitle = currentLang === 'en' && exhibit.titleEn ? exhibit.titleEn : exhibit.title;
               const displayLocation = currentLang === 'en' && exhibit.locationEn ? exhibit.locationEn : exhibit.location;
@@ -377,7 +382,11 @@ export default function ExhibitsView({
                       {displayLocation}
                     </span>
                     <span className="text-[#ffd700] font-bold group-hover:underline">
-                      {exhibit.cleaned ? `✓ ${t.exhibits.cleanedStatus}` : `${t.exhibits.viewDetail}`}
+                      {exhibit.cleaned
+                        ? `✓ ${t.exhibits.cleanedStatus}`
+                        : exhibit.pendingVerification
+                        ? `⏳ ${currentLang === 'hy' ? 'ԳՆԱՑ ՀԱՍՏԱՏՄԱՆ' : 'PENDING'}`
+                        : `${t.exhibits.viewDetail}`}
                     </span>
                   </div>
                 </div>

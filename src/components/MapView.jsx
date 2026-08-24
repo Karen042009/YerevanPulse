@@ -115,7 +115,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
 
       {/* Real Yandex Maps Embed Mode */}
       {mapMode === 'yandex' ? (
-        <div className="relative w-full h-96 sm:h-[450px] bg-[#0e1111] border-2 border-[#ffc700] overflow-hidden rounded-lg shadow-2xl">
+        <div className="relative w-full h-[400px] sm:h-[480px] lg:h-[580px] xl:h-[640px] bg-[#0e1111] border-2 border-[#ffc700] overflow-hidden rounded-lg shadow-2xl">
           <iframe 
             title="Yerevan Yandex Map"
             src={yandexMapUrl} 
@@ -128,7 +128,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
             <span className="font-['Space_Grotesk'] text-[10px] font-bold text-[#ffc700] uppercase block">
               📍 YANDEX HOTSPOT MARKERS ({filteredExhibits.length})
             </span>
-            <div className="space-y-1.5 max-h-48 overflow-y-auto no-scrollbar">
+            <div className="space-y-1.5 max-h-60 overflow-y-auto no-scrollbar">
               {filteredExhibits.map(ex => (
                 <div
                   key={ex.id}
@@ -151,7 +151,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
         </div>
       ) : (
         /* Vector Yerevan Map Canvas */
-        <div className="relative w-full h-80 sm:h-96 bg-[#0e1111] border-2 border-[#ffc700] overflow-hidden p-4 rounded-lg shadow-2xl">
+        <div className="relative w-full h-[400px] sm:h-[480px] lg:h-[580px] xl:h-[640px] bg-[#0e1111] border-2 border-[#ffc700] overflow-hidden p-4 rounded-lg shadow-2xl">
           <div 
             className="absolute inset-0 opacity-20 pointer-events-none"
             style={{ 
@@ -242,8 +242,8 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
               <span className="text-xs font-mono text-gray-300 uppercase">
                 {selectedPin.category}
               </span>
-              <span className={`text-[10px] px-2 py-0.5 font-bold uppercase rounded ${selectedPin.cleaned ? 'bg-emerald-500 text-black' : 'bg-rose-500 text-white'}`}>
-                {selectedPin.cleaned ? t.exhibits.cleanedStatus : 'ACTIVE'}
+              <span className={`text-[10px] px-2 py-0.5 font-bold uppercase rounded ${selectedPin.cleaned ? 'bg-emerald-500 text-black' : selectedPin.pendingVerification ? 'bg-[#00f5d4] text-black animate-pulse' : 'bg-rose-500 text-white'}`}>
+                {selectedPin.cleaned ? t.exhibits.cleanedStatus : selectedPin.pendingVerification ? '⏳ PENDING' : 'ACTIVE'}
               </span>
             </div>
             <h3 className="font-['Outfit'] text-xl font-bold text-white uppercase">
@@ -256,15 +256,21 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
           </div>
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
-            {!selectedPin.cleaned && onCleanExhibit && (
-              <button
-                onClick={() => {
-                  onCleanExhibit(selectedPin.id);
-                }}
-                className="bg-[#10b981] text-black px-4 py-2 text-xs font-['Archivo_Narrow'] font-black uppercase hover:bg-emerald-400 border border-white rounded shadow-lg"
-              >
-                ✓ ՄԱՔՐԵԼ (+{selectedPin.points} PTS)
-              </button>
+            {!selectedPin.cleaned && (
+              selectedPin.pendingVerification ? (
+                <div className="bg-[#00f5d4]/20 text-[#00f5d4] border border-[#00f5d4] px-4 py-2 text-xs font-['Archivo_Narrow'] font-bold uppercase rounded animate-pulse">
+                  ⏳ {currentLang === 'hy' ? 'ԳՆԱՑ ՀԱՍՏԱՏՄԱՆ' : 'PENDING'}
+                </div>
+              ) : onCleanExhibit && (
+                <button
+                  onClick={() => {
+                    onCleanExhibit(selectedPin.id);
+                  }}
+                  className="bg-[#10b981] text-black px-4 py-2 text-xs font-['Archivo_Narrow'] font-black uppercase hover:bg-emerald-400 border border-white rounded shadow-lg"
+                >
+                  ✓ ՄԱՔՐԵԼ (+{selectedPin.points} PTS)
+                </button>
+              )
             )}
 
             <button
