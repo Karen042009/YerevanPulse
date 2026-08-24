@@ -13,7 +13,9 @@ import PitchGuideModal from './components/PitchGuideModal';
 import ReportExhibitModal from './components/ReportExhibitModal';
 import CleanVerificationModal from './components/CleanVerificationModal';
 import PendingVerificationsModal from './components/PendingVerificationsModal';
+import RewardsStoreModal from './components/RewardsStoreModal';
 import { initialExhibits, initialDistricts } from './data/exhibits';
+import { initialQuests } from './data/quests';
 import { soundFX } from './utils/audioFX';
 import { readJson, readNumber, readString, writeJson, writeStorage } from './utils/storage';
 
@@ -51,6 +53,12 @@ export default function App() {
     return { ...defaultUser, ...readJson('yp_current_user', {}) };
   });
 
+  const [quests, setQuests] = useState(() => {
+    return readJson('yp_quests', initialQuests);
+  });
+
+  const [isRewardsStoreOpen, setIsRewardsStoreOpen] = useState(false);
+
   const cleaningIdsRef = useRef(new Set());
 
   const [isScannerOpen, setIsScannerOpen] = useState(false);
@@ -67,6 +75,10 @@ export default function App() {
   }, [districts]);
 
   useEffect(() => {
+    writeJson('yp_quests', quests);
+  }, [quests]);
+
+  useEffect(() => {
     writeStorage('yp_points_' + currentUser.id, userPoints.toString());
   }, [userPoints, currentUser.id]);
 
@@ -77,6 +89,33 @@ export default function App() {
   useEffect(() => {
     writeJson('yp_current_user', currentUser);
   }, [currentUser]);
+
+  // Quest progress increment helper
+  const incrementQuestProgress = (questId) => {
+    setQuests((prev) =>
+      prev.map((q) => {
+        if (q.id !== questId) return q;
+        const nextCurrent = q.current + 1;
+        const isNowCompleted = nextCurrent >= q.target;
+        return {
+          ...q,
+          current: nextCurrent,
+          completed: isNowCompleted
+        };
+      })
+    );
+  };
+
+  const handleClaimQuestReward = (questId, rewardPts) => {
+    setQuests((prev) =>
+      prev.map((q) => (q.id === questId ? { ...q, claimed: true } : q))
+    );
+    setUserPoints((prev) => prev + rewardPts);
+  };
+
+  const handleDeductPoints = (pts) => {
+    setUserPoints((prev) => Math.max(0, prev - pts));
+  };
 
   const [cleanModalExhibit, setCleanModalExhibit] = useState(null);
   const [isPendingAdminModalOpen, setIsPendingAdminModalOpen] = useState(false);
@@ -112,6 +151,8 @@ export default function App() {
           : e
       )
     );
+
+    incrementQuestProgress('q1');
 
     setSubmissionToast(
       currentLang === 'hy'
@@ -191,6 +232,7 @@ export default function App() {
 
   const handleAddExhibit = (newExhibit) => {
     setExhibits((prev) => [newExhibit, ...prev]);
+    incrementQuestProgress('q2');
 
     setDistricts((prev) =>
       prev.map((d) =>
@@ -238,6 +280,7 @@ export default function App() {
         onChangeTab={setActiveTab}
         onOpenScanner={() => setIsScannerOpen(true)}
         onOpenReport={() => setIsReportOpen(true)}
+        onOpenRewards={() => setIsRewardsStoreOpen(true)}
         onOpenAuth={() => setIsAuthOpen(true)}
         currentUser={currentUser}
         currentLang={currentLang}
@@ -257,6 +300,8 @@ export default function App() {
                 onChangeTab={setActiveTab}
                 exhibits={exhibits}
                 districts={districts}
+                quests={quests}
+                onClaimQuestReward={handleClaimQuestReward}
                 currentLang={currentLang}
               />
             )}
@@ -497,6 +542,14 @@ export default function App() {
         exhibits={exhibits}
         onApproveClean={handleApproveClean}
         onRejectClean={handleRejectClean}
+        currentLang={currentLang}
+      />
+
+      <RewardsStoreModal
+        isOpen={isRewardsStoreOpen}
+        onClose={() => setIsRewardsStoreOpen(false)}
+        userPoints={currentUser.points + userPoints}
+        onDeductPoints={handleDeductPoints}
         currentLang={currentLang}
       />
 

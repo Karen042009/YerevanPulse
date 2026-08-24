@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { soundFX } from '../utils/audioFX';
 import { translations } from '../data/translations';
+import AiVisionScanner from './AiVisionScanner';
 
 export default function CleanVerificationModal({
   exhibit,
@@ -109,19 +110,16 @@ export default function CleanVerificationModal({
             </label>
 
             {photoUrl ? (
-              <div className="relative border-2 border-[#00f5d4] rounded-lg overflow-hidden h-48 bg-black flex items-center justify-center group shadow-xl">
-                <img src={photoUrl} alt="Proof" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+              <div className="space-y-2">
+                <AiVisionScanner isScanning={true} photoUrl={photoUrl} currentLang={currentLang} />
+                <div className="flex justify-end">
                   <button
                     type="button"
                     onClick={() => setPhotoUrl(null)}
-                    className="bg-rose-600 text-white px-3 py-1.5 text-xs font-bold uppercase rounded border border-white"
+                    className="bg-rose-600/80 hover:bg-rose-600 text-white px-3 py-1 text-xs font-bold uppercase rounded border border-white/20"
                   >
                     {tc.changePhoto}
                   </button>
-                </div>
-                <div className="absolute bottom-2 left-2 bg-[#00f5d4] text-black font-mono text-[10px] px-2 py-0.5 font-bold uppercase rounded">
-                  ✓ PHOTO ATTACHED
                 </div>
               </div>
             ) : (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { soundFX } from '../utils/audioFX';
 import { translations } from '../data/translations';
+import QuestsWidget from './QuestsWidget';
 
 export default function HomeView({
   onOpenScanner,
@@ -9,6 +10,8 @@ export default function HomeView({
   onChangeTab,
   exhibits = [],
   districts = [],
+  quests = [],
+  onClaimQuestReward,
   currentLang = 'hy'
 }) {
   const t = translations[currentLang] || translations.hy;
@@ -368,6 +371,15 @@ export default function HomeView({
             <div className="text-[10px] font-mono text-emerald-400 mt-1 text-right">HIGH IMPACT ZONE</div>
           </div>
         </div>
+      </section>
+
+      {/* Daily Eco Quests Section */}
+      <section className="pt-2">
+        <QuestsWidget
+          quests={quests}
+          onClaimReward={onClaimQuestReward}
+          currentLang={currentLang}
+        />
       </section>
 
       {/* Urgent Exhibits Showcase Section */}

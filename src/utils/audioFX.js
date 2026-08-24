@@ -103,6 +103,10 @@ class SoundFX {
     this.playSuccess();
   }
 
+  playVictoryJingle() {
+    this.playSuccess();
+  }
+
   // QR Scan Chirp Sound
   playScanChirp() {
     try {

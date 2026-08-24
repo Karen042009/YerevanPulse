@@ -7,6 +7,7 @@ export default function Header({
   onChangeTab, 
   onOpenScanner, 
   onOpenReport,
+  onOpenRewards,
   onOpenAuth, 
   currentUser,
   currentLang = 'hy',
@@ -102,6 +103,19 @@ export default function Header({
         >
           <span className="material-symbols-outlined text-sm sm:text-base">language</span>
           <span className="hidden min-[400px]:inline">{currentLang === 'hy' ? 'ARM 🇦🇲' : 'ENG 🇬🇧'}</span>
+        </button>
+
+        {/* Civic Rewards Store Button */}
+        <button
+          onClick={() => {
+            soundFX.playClick();
+            if (onOpenRewards) onOpenRewards();
+          }}
+          className="bg-[#ffc700]/10 border border-[#ffc700] text-[#ffc700] hover:bg-[#ffc700] hover:text-[#0b0e14] px-2 sm:px-3 py-1.5 text-xs font-['Archivo_Narrow'] font-black uppercase transition-all flex items-center gap-1.5 rounded shadow-[0_0_15px_rgba(255,199,0,0.2)] animate-pulse"
+          title=" Civic Rewards Store"
+        >
+          <span className="material-symbols-outlined text-base sm:text-lg">card_giftcard</span>
+          <span className="hidden min-[480px]:inline">{currentLang === 'hy' ? '🎁 ԽԱՆՈՒԹ' : '🎁 REWARDS'}</span>
         </button>
 
         {/* Sound FX Toggle */}
