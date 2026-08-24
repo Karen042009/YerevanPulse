@@ -128,28 +128,28 @@ export default function HomeView({
   return (
     <div className="space-y-10 px-2 md:px-0 py-4 animate-fadeIn">
       {/* Live System Status Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 bg-[#10141e]/90 border border-[#ffc700]/30 rounded-lg backdrop-blur-md shadow-[0_0_20px_rgba(255,199,0,0.1)]">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 bg-[var(--surface-1)]/90 border border-[var(--primary-gold)]/40 rounded-lg backdrop-blur-md shadow-[0_0_20px_var(--primary-gold-glow)] transition-colors">
         <div className="flex items-center gap-3">
           <div className="relative flex items-center justify-center">
-            <span className="w-3 h-3 rounded-full bg-[#ffc700] animate-ping absolute" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ffc700] relative z-10" />
+            <span className="w-3 h-3 rounded-full bg-[var(--primary-gold)] animate-ping absolute" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[var(--primary-gold)] relative z-10" />
           </div>
-          <span className="font-['Space_Grotesk'] text-xs font-extrabold tracking-widest text-[#ffc700] uppercase">
+          <span className="font-['Space_Grotesk'] text-xs font-extrabold tracking-widest text-[var(--primary-gold)] uppercase">
             LIVE CIVIC MONITORING V2.5
           </span>
-          <span className="hidden sm:inline text-[#ffc700]/40">|</span>
+          <span className="hidden sm:inline text-[var(--primary-gold)]/40">|</span>
           <span className="hidden sm:inline font-mono text-xs text-gray-400">
-            {isArmenian ? 'ԵՐԵՎԱՆԻ ԺԱՄԱՆԱԿ՝' : 'YEREVAN TIME:'} <span className="text-[#00f5d4] font-bold">{timeString || '14:10 EVN'}</span>
+            {isArmenian ? 'ԵՐԵՎԱՆԻ ԺԱՄԱՆԱԿ՝' : 'YEREVAN TIME:'} <span className="text-[var(--accent-cyan)] font-bold">{timeString || '14:10 EVN'}</span>
           </span>
         </div>
         <div className="flex items-center gap-4 text-xs font-mono">
           <span className="text-gray-300">
             {isArmenian ? 'ԱԿՏԻՎ HOTSPOT-ՆԵՐ՝' : 'ACTIVE HOTSPOTS:'}{' '}
-            <span className="text-[#ff007a] font-bold">{activeCount}</span>
+            <span className="text-[var(--accent-magenta)] font-bold">{activeCount}</span>
           </span>
           <span className="hidden md:inline text-gray-300">
             {isArmenian ? 'ՄԱՔՐՈՒԹՅԱՆ ԻՆԴԵՔՍ՝' : 'CLEAN INDEX:'}{' '}
-            <span className="text-[#00f5d4] font-bold">{cleanRate}%</span>
+            <span className="text-[var(--accent-cyan)] font-bold">{cleanRate}%</span>
           </span>
         </div>
       </div>
@@ -157,23 +157,23 @@ export default function HomeView({
       {/* Hero Section */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-7 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#1a202c] border border-[#ffc700]/60 rounded-full shadow-[0_0_15px_rgba(255,199,0,0.25)]">
-            <span className="material-symbols-outlined text-[#ffc700] text-sm animate-pulse">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[var(--surface-2)] border border-[var(--primary-gold)]/60 rounded-full shadow-[0_0_15px_var(--primary-gold-glow)]">
+            <span className="material-symbols-outlined text-[var(--primary-gold)] text-sm animate-pulse">
               sensors
             </span>
-            <span className="font-['Space_Grotesk'] text-xs font-bold tracking-widest text-[#ffc700] uppercase">
+            <span className="font-['Space_Grotesk'] text-xs font-bold tracking-widest text-[var(--primary-gold)] uppercase">
               {isArmenian ? 'ՔԱՂԱՔԱՅԻՆ ԷԿՈ-ԱԿՏԻՎԻԶՄ' : 'CIVIC ECO-ACTION PLATFORM'}
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-['Outfit'] font-black text-white leading-none uppercase tracking-tight break-words">
             {t.hero.title1} <br />
-            <span className="text-gradient-gold bg-[#121620] px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-[#ffc700] inline-block mt-2 sm:mt-3 shadow-[0_0_30px_rgba(255,199,0,0.25)] rounded-sm max-w-full overflow-hidden text-ellipsis">
+            <span className="text-gradient-gold bg-[var(--surface-1)] px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-[var(--primary-gold)] inline-block mt-2 sm:mt-3 shadow-[0_0_30px_var(--primary-gold-glow)] rounded-sm max-w-full overflow-hidden text-ellipsis">
               {t.hero.title2}
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg font-['Montserrat'] text-gray-300 leading-relaxed max-w-xl border-l-4 border-[#ffc700] pl-3 sm:pl-4 italic bg-[#10141e]/50 py-2 rounded-r-md">
+          <p className="text-sm sm:text-base lg:text-lg font-['Montserrat'] text-gray-300 leading-relaxed max-w-xl border-l-4 border-[var(--primary-gold)] pl-3 sm:pl-4 italic bg-[var(--surface-1)]/60 py-2 rounded-r-md">
             {t.subtitle}
           </p>
 

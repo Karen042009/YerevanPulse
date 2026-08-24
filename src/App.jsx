@@ -14,8 +14,10 @@ import ReportExhibitModal from './components/ReportExhibitModal';
 import CleanVerificationModal from './components/CleanVerificationModal';
 import PendingVerificationsModal from './components/PendingVerificationsModal';
 import RewardsStoreModal from './components/RewardsStoreModal';
+import ThemeSelectorModal from './components/ThemeSelectorModal';
 import { initialExhibits, initialDistricts } from './data/exhibits';
 import { initialQuests } from './data/quests';
+import { applyTheme, getStoredTheme } from './utils/themes';
 import { soundFX } from './utils/audioFX';
 import { readJson, readNumber, readString, writeJson, writeStorage } from './utils/storage';
 
@@ -57,7 +59,16 @@ export default function App() {
     return readJson('yp_quests', initialQuests);
   });
 
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    return getStoredTheme();
+  });
+
+  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
   const [isRewardsStoreOpen, setIsRewardsStoreOpen] = useState(false);
+
+  useEffect(() => {
+    applyTheme(currentTheme);
+  }, [currentTheme]);
 
   const cleaningIdsRef = useRef(new Set());
 
@@ -273,7 +284,7 @@ export default function App() {
   const cleanedCount = exhibits.filter((e) => e.cleaned).length;
 
   return (
-    <div className="min-h-screen bg-[#121414] text-[#e2e2e2] flex flex-col font-['Montserrat'] selection:bg-[#ffd700] selection:text-black">
+    <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] flex flex-col font-['Montserrat'] selection:bg-[var(--primary-gold)] selection:text-black transition-colors duration-300">
       {/* Universal Top Navigation Bar */}
       <Header
         activeTab={activeTab}
@@ -281,6 +292,7 @@ export default function App() {
         onOpenScanner={() => setIsScannerOpen(true)}
         onOpenReport={() => setIsReportOpen(true)}
         onOpenRewards={() => setIsRewardsStoreOpen(true)}
+        onOpenTheme={() => setIsThemeModalOpen(true)}
         onOpenAuth={() => setIsAuthOpen(true)}
         currentUser={currentUser}
         currentLang={currentLang}
@@ -550,6 +562,14 @@ export default function App() {
         onClose={() => setIsRewardsStoreOpen(false)}
         userPoints={currentUser.points + userPoints}
         onDeductPoints={handleDeductPoints}
+        currentLang={currentLang}
+      />
+
+      <ThemeSelectorModal
+        isOpen={isThemeModalOpen}
+        onClose={() => setIsThemeModalOpen(false)}
+        currentTheme={currentTheme}
+        onSelectTheme={setCurrentTheme}
         currentLang={currentLang}
       />
 

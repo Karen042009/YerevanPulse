@@ -11,7 +11,7 @@ export default function BottomNav({ activeTab, onChangeTab }) {
   ];
 
   return (
-    <nav className="app-bottom-nav fixed bottom-0 left-0 right-0 w-full flex justify-around items-center px-4 py-2 bg-[#1a1c1c] z-50 border-t-2 border-[#ffd700] shadow-[0_-4px_20px_rgba(0,0,0,0.8)]">
+    <nav className="app-bottom-nav fixed bottom-0 left-0 right-0 w-full flex justify-around items-center px-4 py-2 bg-[var(--surface-1)] z-50 border-t-2 border-[var(--primary-gold)] shadow-[0_-4px_20px_rgba(0,0,0,0.8)] transition-colors">
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
 
@@ -24,8 +24,8 @@ export default function BottomNav({ activeTab, onChangeTab }) {
             }}
             className={`flex flex-col items-center justify-center transition-all ${
               isActive
-                ? 'bg-[#ffd700] text-[#1a1a1a] rounded-lg px-4 py-1 translate-y-[-2px] shadow-[0_0_10px_rgba(255,215,0,0.4)] font-bold'
-                : 'text-[#d0c6ab] hover:text-white px-3 py-1'
+                ? 'bg-[var(--primary-gold)] text-[var(--bg-deep)] rounded-lg px-4 py-1 translate-y-[-2px] shadow-[0_0_12px_var(--primary-gold-glow)] font-bold'
+                : 'text-gray-300 hover:text-white px-3 py-1'
             }`}
           >
             <span 
