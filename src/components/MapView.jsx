@@ -33,7 +33,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
               {t.map.title}
             </h2>
           </div>
-          
+
           <div className="flex items-center gap-2 justify-between sm:justify-end">
             {/* Map Mode Switcher Tabs */}
             <div className="app-map-mode flex bg-[var(--bg-main)] border border-[var(--primary-gold)]/60 p-0.5 rounded-lg">
@@ -62,7 +62,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
         </div>
 
         <p className="text-xs font-['Montserrat'] text-gray-300 italic border-l-2 border-[var(--primary-gold)] pl-3">
-          {currentLang === 'hy' 
+          {currentLang === 'hy'
             ? 'Ռեալ-ժամանակում ֆիքսված «ցուցանմուշների» տեղակայումը Երևանի 12 թաղամասերում Yandex Քարտեզի վրա։'
             : 'Real-time mapping of documented exhibits across all 12 districts of Yerevan on Yandex Map.'}
         </p>
@@ -114,32 +114,32 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
       </div>
 
       {/* Map Viewport Container */}
-      <div className="relative w-full h-[400px] sm:h-[480px] lg:h-[580px] xl:h-[640px] bg-[#0e1111] border-2 border-[var(--primary-gold)] overflow-hidden rounded-xl shadow-2xl">
+      <div className="relative w-full h-[400px] sm:h-[480px] lg:h-[580px] xl:h-[640px] bg-[var(--bg-main)] border-2 border-[var(--primary-gold)] overflow-hidden rounded-xl shadow-2xl">
         {mapMode === 'yandex' ? (
-          <iframe 
+          <iframe
             title="Yerevan Yandex Map"
-            src={yandexMapUrl} 
+            src={yandexMapUrl}
             className="w-full h-full border-0 filter contrast-125 saturate-110"
             allowFullScreen={true}
           />
         ) : (
           /* Vector Yerevan Map Canvas */
           <div className="relative w-full h-full p-4">
-            <div 
+            <div
               className="absolute inset-0 opacity-20 pointer-events-none"
-              style={{ 
-                backgroundImage: 'radial-gradient(var(--primary-gold) 1px, transparent 1px)', 
-                backgroundSize: '24px 24px' 
+              style={{
+                backgroundImage: 'radial-gradient(var(--primary-gold) 1px, transparent 1px)',
+                backgroundSize: '24px 24px'
               }}
             />
 
             <svg viewBox="0 0 100 100" className="w-full h-full">
-              <path d="M 25,0 Q 35,40 28,60 T 22,100" fill="none" stroke="#00f5d4" strokeWidth="1.2" strokeDasharray="2,2" opacity="0.7" />
-              <text x="14" y="32" fontSize="3" fill="#00f5d4" className="font-mono" opacity="0.8">
+              <path d="M 25,0 Q 35,40 28,60 T 22,100" fill="none" stroke="var(--accent-cyan)" strokeWidth="1.2" strokeDasharray="2,2" opacity="0.7" />
+              <text x="14" y="32" fontSize="3" fill="var(--accent-cyan)" className="font-mono" opacity="0.8">
                 {currentLang === 'en' ? 'Hrazdan River' : 'Հրազդան Գետ'}
               </text>
 
-              <path d="M 30,10 L 70,12 L 88,38 L 78,82 L 40,88 L 14,60 Z" fill="#181c1b" stroke="#374151" strokeWidth="0.8" />
+              <path d="M 30,10 L 70,12 L 88,38 L 78,82 L 40,88 L 14,60 Z" fill="var(--surface-2)" stroke="#374151" strokeWidth="0.8" />
 
               <polygon points="45,28 65,30 68,52 48,56" fill="var(--primary-gold)" fillOpacity="0.15" stroke="var(--primary-gold)" strokeWidth="0.5" strokeDasharray="1,1" />
               <text x="56" y="44" fontSize="3.5" textAnchor="middle" fill="var(--primary-gold)" fontWeight="bold" opacity="0.8" className="font-mono">
@@ -164,8 +164,8 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
               {filteredExhibits.map(ex => {
                 const isSelected = selectedPin?.id === ex.id;
                 return (
-                  <g 
-                    key={ex.id} 
+                  <g
+                    key={ex.id}
                     transform={`translate(${ex.coordinates?.x || 50}, ${ex.coordinates?.y || 50})`}
                     className="cursor-pointer group"
                     onClick={() => {
@@ -176,11 +176,11 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
                     {!ex.cleaned && (
                       <circle r="4.5" fill="var(--primary-gold)" fillOpacity="0.35" className="animate-ping" />
                     )}
-                    <circle 
-                      r={isSelected ? "3.8" : "2.8"} 
-                      fill={ex.cleaned ? "#10b981" : ex.severity === 'critical' ? "#ff007a" : "var(--primary-gold)"} 
-                      stroke="#0b0e14" 
-                      strokeWidth="0.8" 
+                    <circle
+                      r={isSelected ? "3.8" : "2.8"}
+                      fill={ex.cleaned ? "#10b981" : ex.severity === 'critical' ? "var(--accent-magenta)" : "var(--primary-gold)"}
+                      stroke="var(--bg-main)"
+                      strokeWidth="0.8"
                     />
                     <text y="-4" fontSize="3.5" textAnchor="middle" fill="#ffffff" fontWeight="bold" className="font-mono select-none drop-shadow-md">
                       #{ex.code}
@@ -232,8 +232,8 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
                     setIsHotspotListOpen(false); // Auto close list on mobile selection
                   }}
                   className={`p-2 border rounded-lg text-xs cursor-pointer transition-all ${
-                    selectedPin?.id === ex.id 
-                      ? 'bg-[var(--primary-gold)] text-black border-white' 
+                    selectedPin?.id === ex.id
+                      ? 'bg-[var(--primary-gold)] text-black border-white'
                       : 'bg-[var(--surface-1)] text-gray-200 border-gray-700 hover:border-[var(--primary-gold)]'
                   }`}
                 >
@@ -262,7 +262,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
               <span className="text-xs font-mono text-gray-300 uppercase">
                 {selectedPin.category}
               </span>
-              <span className={`text-[10px] px-2 py-0.5 font-bold uppercase rounded ${selectedPin.cleaned ? 'bg-[#10b981] text-black' : selectedPin.pendingVerification ? 'bg-[#00f5d4] text-black animate-pulse' : 'bg-rose-500 text-white'}`}>
+              <span className={`text-[10px] px-2 py-0.5 font-bold uppercase rounded ${selectedPin.cleaned ? 'bg-[#10b981] text-black' : selectedPin.pendingVerification ? 'bg-[var(--accent-cyan)] text-black animate-pulse' : 'bg-rose-500 text-white'}`}>
                 {selectedPin.cleaned ? t.exhibits.cleanedStatus : selectedPin.pendingVerification ? '⏳ PENDING' : 'ACTIVE'}
               </span>
             </div>
@@ -270,7 +270,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
               {selectedPin.icon} {currentLang === 'en' && selectedPin.titleEn ? selectedPin.titleEn : selectedPin.title}
             </h3>
             <p className="text-xs text-gray-300">
-              📍 {currentLang === 'en' && selectedPin.locationEn ? selectedPin.locationEn : selectedPin.location} 
+              📍 {currentLang === 'en' && selectedPin.locationEn ? selectedPin.locationEn : selectedPin.location}
               ({currentLang === 'en' && selectedPin.districtEn ? selectedPin.districtEn : selectedPin.district})
             </p>
           </div>
@@ -278,7 +278,7 @@ export default function MapView({ exhibits, districts, onSelectExhibit, onCleanE
           <div className="flex items-center gap-2 w-full sm:w-auto">
             {!selectedPin.cleaned && (
               selectedPin.pendingVerification ? (
-                <div className="bg-[#00f5d4]/20 text-[#00f5d4] border border-[#00f5d4] px-4 py-2 text-xs font-['Archivo_Narrow'] font-bold uppercase rounded-lg animate-pulse text-center w-full sm:w-auto">
+                <div className="bg-[var(--accent-cyan)]/20 text-[var(--accent-cyan)] border border-[var(--accent-cyan)] px-4 py-2 text-xs font-['Archivo_Narrow'] font-bold uppercase rounded-lg animate-pulse text-center w-full sm:w-auto">
                   ⏳ {currentLang === 'hy' ? 'ԳՆԱՑ ՀԱՍՏԱՏՄԱՆ' : 'PENDING'}
                 </div>
               ) : onCleanExhibit && (

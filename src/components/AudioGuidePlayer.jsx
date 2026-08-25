@@ -24,13 +24,13 @@ export default function AudioGuidePlayer({ text, audioUrl, lang = 'hy', title = 
   };
 
   return (
-    <div className="bg-[#1a1c1c] border-2 border-[#ffd700] p-4 relative overflow-hidden shadow-lg space-y-3">
+    <div className="bg-[var(--surface-2)] border-2 border-[var(--primary-gold)] p-4 relative overflow-hidden shadow-lg space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[#ffd700] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+          <span className="material-symbols-outlined text-[var(--primary-gold)] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
             graphic_eq
           </span>
-          <span className="font-['Archivo_Narrow'] text-xs font-bold text-[#ffd700] uppercase tracking-wider">
+          <span className="font-['Archivo_Narrow'] text-xs font-bold text-[var(--primary-gold)] uppercase tracking-wider">
             {title}
           </span>
         </div>
@@ -55,9 +55,9 @@ export default function AudioGuidePlayer({ text, audioUrl, lang = 'hy', title = 
         type="button"
         onClick={handleTogglePlay}
         className={`w-full py-2.5 px-4 font-['Archivo_Narrow'] text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all border ${
-          isPlaying 
-            ? 'bg-[#121414] text-[#ffd700] border-[#ffd700]' 
-            : 'bg-[#ffd700] text-[#1a1a1a] border-white hover:bg-[#e9c400]'
+          isPlaying
+            ? 'bg-[var(--surface-1)] text-[var(--primary-gold)] border-[var(--primary-gold)]'
+            : 'bg-[var(--primary-gold)] text-[var(--surface-2)] border-white hover:bg-[var(--primary-gold-bright)]'
         }`}
       >
         <span className="material-symbols-outlined text-lg">

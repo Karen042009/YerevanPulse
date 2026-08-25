@@ -5,10 +5,10 @@ export const themes = [
     id: 'cyber-gold',
     nameHy: '⚡ Cyber Neon (Դասական)',
     nameEn: '⚡ Cyber Neon (Default)',
-    primaryColor: '#ffc700',
-    secondaryColor: '#00f5d4',
-    accentColor: '#ff007a',
-    previewBg: '#090c12'
+    primaryColor: '#e8b94f',
+    secondaryColor: '#75b9ab',
+    accentColor: '#c97084',
+    previewBg: '#0c0f11'
   },
   {
     id: 'tufa-red',
@@ -44,7 +44,7 @@ export const themes = [
     primaryColor: '#00f5d4',
     secondaryColor: '#0096c7',
     accentColor: '#48cae4',
-    previewBg: '#031926'
+    previewBg: '#051923'
   },
   {
     id: 'cascade-amber',

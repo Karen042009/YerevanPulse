@@ -8,10 +8,10 @@ export default function QuestsWidget({ quests, onClaimReward, currentLang = 'hy'
   const completedCount = quests.filter(q => q.completed).length;
 
   return (
-    <div className="museum-label p-5 space-y-4 shadow-xl border-l-4 border-l-[#ffc700] relative overflow-hidden">
+    <div className="museum-label p-5 space-y-4 shadow-xl border-l-4 border-l-[var(--primary-gold)] relative overflow-hidden">
       <div className="flex items-center justify-between border-b border-white/10 pb-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 bg-[#ffc700]/10 border border-[#ffc700]/40 rounded-lg flex items-center justify-center text-[#ffc700]">
+          <div className="w-9 h-9 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/40 rounded-lg flex items-center justify-center text-[var(--primary-gold)]">
             <span className="material-symbols-outlined text-xl">emoji_events</span>
           </div>
           <div>
@@ -23,7 +23,7 @@ export default function QuestsWidget({ quests, onClaimReward, currentLang = 'hy'
             </p>
           </div>
         </div>
-        <span className="text-xs sm:text-sm font-mono text-[#ffc700] bg-[#ffc700]/10 border border-[#ffc700]/30 px-3 py-1 rounded font-bold">
+        <span className="text-xs sm:text-sm font-mono text-[var(--primary-gold)] bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/30 px-3 py-1 rounded font-bold">
           {completedCount}/{quests.length} {isArmenian ? 'ԱՎԱՐՏՎԱԾ' : 'DONE'}
         </span>
       </div>
@@ -37,17 +37,17 @@ export default function QuestsWidget({ quests, onClaimReward, currentLang = 'hy'
           return (
             <div
               key={quest.id}
-              className={`p-3.5 bg-[#0b0e14] border rounded-lg transition-all space-y-2.5 ${
+              className={`p-3.5 bg-[var(--bg-main)] border rounded-lg transition-all space-y-2.5 ${
                 quest.claimed
                   ? 'border-emerald-500/40 opacity-80'
                   : quest.completed
-                  ? 'border-[#ffc700] bg-[#ffc700]/5 shadow-[0_0_15px_rgba(255,199,0,0.15)]'
+                  ? 'border-[var(--primary-gold)] bg-[var(--primary-gold)]/5 shadow-[0_0_15px_var(--primary-gold-glow)]'
                   : 'border-white/10 hover:border-white/30'
               }`}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-2xl text-[#ffc700]">
+                  <span className="material-symbols-outlined text-2xl text-[var(--primary-gold)]">
                     {quest.icon || 'military_tech'}
                   </span>
                   <div>
@@ -59,7 +59,7 @@ export default function QuestsWidget({ quests, onClaimReward, currentLang = 'hy'
                     </p>
                   </div>
                 </div>
-                <span className="text-xs sm:text-sm font-mono font-bold text-[#00f5d4] bg-[#00f5d4]/10 border border-[#00f5d4]/30 px-2.5 py-0.5 rounded shrink-0">
+                <span className="text-xs sm:text-sm font-mono font-bold text-[var(--accent-cyan)] bg-[var(--accent-cyan)]/10 border border-[var(--accent-cyan)]/30 px-2.5 py-0.5 rounded shrink-0">
                   +{quest.rewardPts} PTS
                 </span>
               </div>
@@ -71,10 +71,10 @@ export default function QuestsWidget({ quests, onClaimReward, currentLang = 'hy'
                     <span>PROGRESS</span>
                     <span>{quest.current}/{quest.target}</span>
                   </div>
-                  <div className="w-full bg-[#121620] h-2 rounded-full overflow-hidden border border-white/10">
+                  <div className="w-full bg-[var(--surface-1)] h-2 rounded-full overflow-hidden border border-white/10">
                     <div
                       className={`h-full transition-all duration-500 rounded-full ${
-                        quest.completed ? 'bg-[#00f5d4]' : 'bg-[#ffc700]'
+                        quest.completed ? 'bg-[var(--accent-cyan)]' : 'bg-[var(--primary-gold)]'
                       }`}
                       style={{ width: `${progressPercent}%` }}
                     />

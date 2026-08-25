@@ -209,13 +209,13 @@ export default function ExhibitsView({
           <div className="flex flex-col md:grid md:grid-cols-12 md:gap-8">
             {/* Artifact Image Frame */}
             <div className="md:col-span-7 mb-6 md:mb-0 space-y-4">
-              <div className="relative border-2 border-[var(--primary-gold)] bg-[#1A1A1A] overflow-hidden aspect-[4/3] flex items-center justify-center group shadow-xl rounded-xl">
+              <div className="relative border-2 border-[var(--primary-gold)] bg-[var(--surface-2)] overflow-hidden aspect-[4/3] flex items-center justify-center group shadow-xl rounded-xl">
                 <img 
                   src={selectedExhibit.imageUrl || "https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=800&auto=format&fit=crop&q=80"} 
                   alt={selectedExhibit.title}
                   className="object-cover w-full h-full opacity-90 group-hover:opacity-100 transition-all duration-500"
                 />
-                <div className="absolute top-4 left-4 bg-[#1A1A1A] border-2 border-[var(--primary-gold)] px-3 py-1 rounded">
+                <div className="absolute top-4 left-4 bg-[var(--surface-2)] border-2 border-[var(--primary-gold)] px-3 py-1 rounded">
                   <span className="font-['Archivo_Narrow'] text-xs font-bold text-[var(--primary-gold)] tracking-wider uppercase">
                     YR-2026-{selectedExhibit.code}
                   </span>
@@ -285,7 +285,7 @@ export default function ExhibitsView({
                     <span>{t.exhibits.cleanedStatus} (+{selectedExhibit.points} PTS)</span>
                   </div>
                 ) : selectedExhibit.pendingVerification ? (
-                  <div className="w-full bg-[#00f5d4]/20 text-[#00f5d4] border-2 border-[#00f5d4] py-4 text-center font-['Archivo_Narrow'] text-lg font-extrabold uppercase flex items-center justify-center gap-3 animate-pulse rounded-lg">
+                  <div className="w-full bg-[var(--accent-cyan)]/20 text-[var(--accent-cyan)] border-2 border-[var(--accent-cyan)] py-4 text-center font-['Archivo_Narrow'] text-lg font-extrabold uppercase flex items-center justify-center gap-3 animate-pulse rounded-lg">
                     <span className="material-symbols-outlined text-2xl">schedule</span>
                     <span>{currentLang === 'hy' ? '⏳ ԳՆԱՑ ՀԱՍՏԱՏՄԱՆ (ՍՊԱՍՎՈՒՄ Է ՍՏՈՒԳՄԱՆ)' : '⏳ PENDING VERIFICATION'}</span>
                   </div>

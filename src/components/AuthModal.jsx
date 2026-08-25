@@ -61,21 +61,21 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="bg-[#121620] border-2 border-[#ffc700] p-6 max-w-md w-full relative shadow-[0_0_60px_rgba(255,199,0,0.25)] rounded-lg">
+      <div className="bg-[var(--surface-1)] border-2 border-[var(--primary-gold)] p-6 max-w-md w-full relative shadow-[0_0_60px_var(--primary-gold-glow)] rounded-lg">
         {/* Close Button */}
         <button
           onClick={() => {
             soundFX.playClick();
             onClose();
           }}
-          className="absolute top-3 right-3 text-gray-500 hover:text-[#ffc700] transition-colors p-1"
+          className="absolute top-3 right-3 text-gray-500 hover:text-[var(--primary-gold)] transition-colors p-1"
         >
           <span className="material-symbols-outlined text-2xl">close</span>
         </button>
 
         {/* Modal Branding Header */}
         <div className="text-center mb-6 space-y-2">
-          <div className="inline-block p-1 bg-black border-2 border-[#ffc700] shadow-[4px_4px_0px_0px_rgba(255,199,0,0.5)] rounded-md mb-2">
+          <div className="inline-block p-1 bg-black border-2 border-[var(--primary-gold)] shadow-[4px_4px_0px_0px_var(--primary-gold-glow)] rounded-md mb-2">
             <img src="/logo.png" alt="Yerevan Pulse Logo" className="h-14 w-auto object-contain" />
           </div>
           <h2 className="font-['Outfit'] text-2xl font-black uppercase text-gradient-gold tracking-wider">
@@ -89,8 +89,8 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
         </div>
 
         {currentUser && !currentUser.isGuest && (
-          <div className="mb-4 flex items-center justify-between border border-[#ffc700]/40 bg-[#0b0e14] px-3 py-2 text-xs text-gray-300">
-            <span>Մուտք գործած եք՝ <strong className="text-[#ffc700]">{currentUser.email}</strong></span>
+          <div className="mb-4 flex items-center justify-between border border-[var(--primary-gold)]/40 bg-[var(--bg-main)] px-3 py-2 text-xs text-gray-300">
+            <span>Մուտք գործած եք՝ <strong className="text-[var(--primary-gold)]">{currentUser.email}</strong></span>
             <button type="button" onClick={onLogout} className="text-rose-400 hover:text-rose-300 font-bold uppercase">Դուրս գալ</button>
           </div>
         )}
@@ -98,7 +98,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
         {error && <p className="mb-4 border border-rose-500/50 bg-rose-500/10 px-3 py-2 text-xs text-rose-300">{error}</p>}
 
         {/* Auth Tab Switcher */}
-        <div className="flex border-2 border-[#ffc700]/30 mb-6 bg-[#0b0e14] rounded overflow-hidden">
+        <div className="flex border-2 border-[var(--primary-gold)]/30 mb-6 bg-[var(--bg-main)] rounded overflow-hidden">
           <button
             type="button"
             onClick={() => {
@@ -107,7 +107,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
               setMode('register');
             }}
             className={`flex-1 py-2.5 font-['Archivo_Narrow'] text-sm font-bold uppercase transition-all ${
-              mode === 'register' ? 'bg-[#ffc700] text-[#0b0e14] shadow-[0_0_15px_rgba(255,199,0,0.4)]' : 'text-gray-400 hover:text-[#ffc700]'
+              mode === 'register' ? 'bg-[var(--primary-gold)] text-[var(--bg-main)] shadow-[0_0_15px_var(--primary-gold-glow)]' : 'text-gray-400 hover:text-[var(--primary-gold)]'
             }`}
           >
             ԳՐԱՆՑՈՒՄ
@@ -120,7 +120,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
               setMode('login');
             }}
             className={`flex-1 py-2.5 font-['Archivo_Narrow'] text-sm font-bold uppercase transition-all ${
-              mode === 'login' ? 'bg-[#ffc700] text-[#0b0e14] shadow-[0_0_15px_rgba(255,199,0,0.4)]' : 'text-gray-400 hover:text-[#ffc700]'
+              mode === 'login' ? 'bg-[var(--primary-gold)] text-[var(--bg-main)] shadow-[0_0_15px_var(--primary-gold-glow)]' : 'text-gray-400 hover:text-[var(--primary-gold)]'
             }`}
           >
             ՄՈՒՏՔ
@@ -131,7 +131,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
         <form onSubmit={handleSubmit} className="space-y-4">
           {mode === 'register' && (
             <div>
-              <label className="block font-['Space_Grotesk'] text-xs font-bold text-[#ffc700] uppercase mb-1.5">
+              <label className="block font-['Space_Grotesk'] text-xs font-bold text-[var(--primary-gold)] uppercase mb-1.5">
                 Անուն Ընտանուն / Մականուն
               </label>
               <input
@@ -140,13 +140,13 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="օր․ Անի Սարգսյան"
-                className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] text-white p-3 text-sm outline-none transition-colors rounded"
+                className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] text-white p-3 text-sm outline-none transition-colors rounded"
               />
             </div>
           )}
 
           <div>
-            <label className="block font-['Space_Grotesk'] text-xs font-bold text-[#ffc700] uppercase mb-1.5">
+            <label className="block font-['Space_Grotesk'] text-xs font-bold text-[var(--primary-gold)] uppercase mb-1.5">
               Էլ. Փոստ (Email)
             </label>
             <input
@@ -155,19 +155,19 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="ani@yerevanpulse.am"
-              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] text-white p-3 text-sm outline-none transition-colors rounded"
+              className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] text-white p-3 text-sm outline-none transition-colors rounded"
             />
           </div>
 
           {mode === 'register' && (
             <div>
-              <label className="block font-['Space_Grotesk'] text-xs font-bold text-[#ffc700] uppercase mb-1.5">
+              <label className="block font-['Space_Grotesk'] text-xs font-bold text-[var(--primary-gold)] uppercase mb-1.5">
                 Ընտրիր Քո Թաղամասը (District)
               </label>
               <select
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
-                className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] text-white p-3 text-sm outline-none transition-colors rounded"
+                className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] text-white p-3 text-sm outline-none transition-colors rounded"
               >
                 <option value="Կենտրոն">Կենտրոն (Kentron)</option>
                 <option value="Արաբկիր">Արաբկիր (Arabkir)</option>
@@ -181,7 +181,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
           )}
 
           <div>
-            <label className="block font-['Space_Grotesk'] text-xs font-bold text-[#ffc700] uppercase mb-1.5">
+            <label className="block font-['Space_Grotesk'] text-xs font-bold text-[var(--primary-gold)] uppercase mb-1.5">
               Գաղտնաբառ
             </label>
             <input
@@ -190,7 +190,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, onLogout, c
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] text-white p-3 text-sm outline-none transition-colors rounded"
+              className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] text-white p-3 text-sm outline-none transition-colors rounded"
             />
           </div>
 

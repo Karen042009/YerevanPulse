@@ -31,23 +31,23 @@ export default function PitchGuideModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[70] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-      <div className="bg-[#121414] border-2 border-[#ffd700] p-6 max-w-lg w-full relative shadow-[0_0_50px_rgba(255,215,0,0.3)] space-y-6">
+      <div className="bg-[var(--surface-1)] border-2 border-[var(--primary-gold)] p-6 max-w-lg w-full relative shadow-[0_0_50px_rgba(255,215,0,0.3)] space-y-6">
         {/* Close button */}
         <button
           onClick={() => {
             soundFX.playClick();
             onClose();
           }}
-          className="absolute top-3 right-3 text-[#999077] hover:text-[#ffd700] p-1"
+          className="absolute top-3 right-3 text-[#999077] hover:text-[var(--primary-gold)] p-1"
         >
           ✕
         </button>
 
         {/* Modal Header */}
-        <div className="flex items-center gap-3 border-b border-[#4d4732] pb-3">
-          <img src="/logo.png" alt="Yerevan Pulse Logo" className="h-10 w-auto border border-[#ffd700] p-0.5 bg-black" />
+        <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] pb-3">
+          <img src="/logo.png" alt="Yerevan Pulse Logo" className="h-10 w-auto border border-[var(--primary-gold)] p-0.5 bg-black" />
           <div>
-            <span className="text-[10px] font-mono text-[#ffd700] bg-black px-2 py-0.5 border border-[#ffd700] uppercase">
+            <span className="text-[10px] font-mono text-[var(--primary-gold)] bg-black px-2 py-0.5 border border-[var(--primary-gold)] uppercase">
               PRESENTATION SLIDE {slide + 1}/4
             </span>
             <h2 className="font-['Archivo_Narrow'] text-xl font-black uppercase text-[#e2e2e2] mt-0.5">
@@ -57,9 +57,9 @@ export default function PitchGuideModal({ isOpen, onClose }) {
         </div>
 
         {/* Active Slide Box */}
-        <div className="bg-[#1e2020] p-5 border border-[#ffd700] space-y-3 min-h-[160px] flex flex-col justify-center">
+        <div className="bg-[var(--surface-2)] p-5 border border-[var(--primary-gold)] space-y-3 min-h-[160px] flex flex-col justify-center">
           <div className="flex justify-between items-center">
-            <h3 className="font-['Archivo_Narrow'] text-lg font-black text-[#ffd700] uppercase">
+            <h3 className="font-['Archivo_Narrow'] text-lg font-black text-[var(--primary-gold)] uppercase">
               {slides[slide].title}
             </h3>
             <span className="text-[10px] font-mono text-[#78dc77] bg-black px-2 py-0.5 border border-[#78dc77]">
@@ -80,7 +80,7 @@ export default function PitchGuideModal({ isOpen, onClose }) {
               setSlide(prev => Math.max(0, prev - 1));
             }}
             disabled={slide === 0}
-            className="px-4 py-2 bg-[#1e2020] border border-[#4d4732] text-xs font-['Archivo_Narrow'] font-bold text-[#e2e2e2] hover:border-[#ffd700] disabled:opacity-30"
+            className="px-4 py-2 bg-[var(--surface-2)] border border-[var(--border-subtle)] text-xs font-['Archivo_Narrow'] font-bold text-[#e2e2e2] hover:border-[var(--primary-gold)] disabled:opacity-30"
           >
             ◄ ՆԱԽՈՐԴԸ
           </button>
@@ -91,7 +91,7 @@ export default function PitchGuideModal({ isOpen, onClose }) {
                 key={i} 
                 onClick={() => setSlide(i)}
                 className={`w-3 h-3 rounded-full cursor-pointer transition-all ${
-                  slide === i ? 'bg-[#ffd700] scale-110' : 'bg-[#4d4732]'
+                  slide === i ? 'bg-[var(--primary-gold)] scale-110' : 'bg-[var(--border-subtle)]'
                 }`}
               />
             ))}
@@ -103,7 +103,7 @@ export default function PitchGuideModal({ isOpen, onClose }) {
               setSlide(prev => Math.min(slides.length - 1, prev + 1));
             }}
             disabled={slide === slides.length - 1}
-            className="px-4 py-2 bg-[#ffd700] text-[#1a1a1a] text-xs font-['Archivo_Narrow'] font-black uppercase hover:bg-[#e9c400] disabled:opacity-30"
+            className="px-4 py-2 bg-[var(--primary-gold)] text-[var(--surface-2)] text-xs font-['Archivo_Narrow'] font-black uppercase hover:bg-[var(--primary-gold-bright)] disabled:opacity-30"
           >
             ՀԱՋՈՐԴԸ ►
           </button>

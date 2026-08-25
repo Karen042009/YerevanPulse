@@ -62,21 +62,21 @@ export default function CleanVerificationModal({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="bg-[#0b0e14] border-2 border-[#ffc700] p-5 sm:p-6 max-w-lg w-full relative shadow-[0_0_50px_rgba(255,199,0,0.3)] rounded-xl space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
+      <div className="bg-[var(--bg-main)] border-2 border-[var(--primary-gold)] p-5 sm:p-6 max-w-lg w-full relative shadow-[0_0_50px_var(--primary-gold-glow)] rounded-xl space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
         {/* Close Button */}
         <button
           onClick={() => {
             soundFX.playClick();
             onClose();
           }}
-          className="absolute top-3 right-3 text-gray-400 hover:text-[#ffc700] p-1 text-xl font-bold transition-colors"
+          className="absolute top-3 right-3 text-gray-400 hover:text-[var(--primary-gold)] p-1 text-xl font-bold transition-colors"
         >
           ✕
         </button>
 
         {/* Modal Header */}
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#ffc700]/10 border border-[#ffc700]/40 rounded text-[10px] font-mono text-[#ffc700] uppercase">
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/40 rounded text-[10px] font-mono text-[var(--primary-gold)] uppercase">
             <span>EXHIBIT #{exhibit.code}</span>
             <span>•</span>
             <span>+{exhibit.points} PTS</span>
@@ -90,7 +90,7 @@ export default function CleanVerificationModal({
         </div>
 
         {/* Selected Exhibit Summary */}
-        <div className="bg-[#121620] p-3 border border-white/10 rounded flex items-center gap-3">
+        <div className="bg-[var(--surface-1)] p-3 border border-white/10 rounded flex items-center gap-3">
           <span className="text-3xl">{exhibit.icon}</span>
           <div className="flex-1 min-w-0">
             <h4 className="font-['Outfit'] text-sm font-bold text-white uppercase truncate">
@@ -105,7 +105,7 @@ export default function CleanVerificationModal({
         {/* Photo Upload / Camera Input Section */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase">
               {currentLang === 'hy' ? '📷 ՄԱՔՐՎԱԾ ՏԱՐԱԾՔԻ ԼՈՒՍԱՆԿԱՐԸ (PROOF PHOTO)' : '📷 CLEANED SITE PROOF PHOTO'}
             </label>
 
@@ -123,14 +123,14 @@ export default function CleanVerificationModal({
                 </div>
               </div>
             ) : (
-              <div className="border-2 border-dashed border-[#ffc700]/60 hover:border-[#ffc700] bg-[#121620] p-6 rounded-lg text-center space-y-3 transition-colors cursor-pointer relative">
+              <div className="border-2 border-dashed border-[var(--primary-gold)]/60 hover:border-[var(--primary-gold)] bg-[var(--surface-1)] p-6 rounded-lg text-center space-y-3 transition-colors cursor-pointer relative">
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
                   className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                 />
-                <span className="material-symbols-outlined text-4xl text-[#ffc700] animate-bounce">
+                <span className="material-symbols-outlined text-4xl text-[var(--primary-gold)] animate-bounce">
                   add_a_photo
                 </span>
                 <div>
@@ -159,7 +159,7 @@ export default function CleanVerificationModal({
                         soundFX.playClick();
                         setPhotoUrl(sample.url);
                       }}
-                      className="p-1.5 bg-[#121620] border border-gray-700 hover:border-[#ffc700] text-[10px] font-mono text-gray-300 hover:text-white rounded truncate text-center"
+                      className="p-1.5 bg-[var(--surface-1)] border border-gray-700 hover:border-[var(--primary-gold)] text-[10px] font-mono text-gray-300 hover:text-white rounded truncate text-center"
                     >
                       {sample.label}
                     </button>
@@ -179,13 +179,13 @@ export default function CleanVerificationModal({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder={tc.notePlaceholder}
-              className="w-full bg-[#121620] border border-gray-700 focus:border-[#ffc700] p-2.5 text-xs text-white outline-none rounded font-['Montserrat'] resize-none"
+              className="w-full bg-[var(--surface-1)] border border-gray-700 focus:border-[var(--primary-gold)] p-2.5 text-xs text-white outline-none rounded font-['Montserrat'] resize-none"
             />
           </div>
 
           {/* Verification Notice */}
-          <div className="p-3 bg-[#ffc700]/10 border border-[#ffc700]/40 rounded text-xs text-gray-300 flex items-start gap-2">
-            <span className="material-symbols-outlined text-base text-[#ffc700] shrink-0 mt-0.5">info</span>
+          <div className="p-3 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/40 rounded text-xs text-gray-300 flex items-start gap-2">
+            <span className="material-symbols-outlined text-base text-[var(--primary-gold)] shrink-0 mt-0.5">info</span>
             <p className="leading-tight">
               {tc.pendingNotice}
             </p>
@@ -197,7 +197,7 @@ export default function CleanVerificationModal({
             disabled={isSubmitting || !photoUrl}
             className={`w-full py-3.5 px-4 font-['Archivo_Narrow'] text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 rounded shadow-xl ${
               photoUrl && !isSubmitting
-                ? 'btn-primary-glow text-[#0b0e14]'
+                ? 'btn-primary-glow text-[var(--bg-main)]'
                 : 'bg-gray-800 text-gray-500 border border-gray-700 cursor-not-allowed'
             }`}
           >

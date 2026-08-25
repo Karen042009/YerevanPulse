@@ -40,7 +40,7 @@ export default function ThemeSelectorModal({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-2.5 sm:p-5 bg-black/85 backdrop-blur-lg animate-fadeIn">
-      <div className="bg-[#0b0e14] border-2 border-[var(--primary-gold)] p-4 sm:p-7 max-w-3xl lg:max-w-4xl w-full relative shadow-[0_0_60px_var(--primary-gold-glow)] rounded-2xl space-y-4 max-h-[92dvh] overflow-y-auto custom-scrollbar">
+      <div className="bg-[var(--bg-main)] border-2 border-[var(--primary-gold)] p-4 sm:p-7 max-w-3xl lg:max-w-4xl w-full relative shadow-[0_0_60px_var(--primary-gold-glow)] rounded-2xl space-y-4 max-h-[92dvh] overflow-y-auto custom-scrollbar">
         {/* Close Button */}
         <button
           onClick={() => {
@@ -81,7 +81,7 @@ export default function ThemeSelectorModal({
               className={`px-4 py-2 text-xs sm:text-sm font-['Space_Grotesk'] font-bold uppercase rounded-lg border transition-all whitespace-nowrap shrink-0 ${
                 filterCategory === cat.id
                   ? 'bg-[var(--primary-gold)] text-black border-[var(--primary-gold)] shadow-[0_0_12px_var(--primary-gold-glow)]'
-                  : 'bg-[#121620] text-gray-300 border-white/10 hover:border-white/30 hover:text-white'
+                  : 'bg-[var(--surface-1)] text-gray-300 border-white/10 hover:border-white/30 hover:text-white'
               }`}
             >
               {isArmenian ? cat.labelHy : cat.labelEn}

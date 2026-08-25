@@ -55,7 +55,7 @@ export default function HomeView({
       years: 1000000,
       yearsLabel: isArmenian ? '1,000,000 ՏԱՐԻ' : '1,000,000 YEARS',
       severity: 'critical',
-      color: '#ff007a',
+      color: 'var(--accent-magenta)',
       desc: isArmenian
         ? 'Ապակին գրեթե չի քայքայվում բնության մեջ։ Ջարդված բեկորները վտանգ են ներկայացնում քաղաքացիների և կենդանիների համար։'
         : 'Glass barely decomposes in nature. Shattered shards pose acute safety hazards to citizens and fauna.'
@@ -67,7 +67,7 @@ export default function HomeView({
       years: 500,
       yearsLabel: isArmenian ? '500 ՏԱՐԻ' : '500 YEARS',
       severity: 'critical',
-      color: '#ffc700',
+      color: 'var(--primary-gold)',
       desc: isArmenian
         ? 'Լիթիում-իոնային մարտկոցը և պլաստիկ կորպուսը հողի մեջ արտանետում են ծանր մետաղներ և թունավոր քիմիկատներ։'
         : 'Lithium-ion batteries and plastic casing leak heavy metals and toxic chemicals into urban soil.'
@@ -79,7 +79,7 @@ export default function HomeView({
       years: 450,
       yearsLabel: isArmenian ? '450 ՏԱՐԻ' : '450 YEARS',
       severity: 'high',
-      color: '#ffc700',
+      color: 'var(--primary-gold)',
       desc: isArmenian
         ? 'Փոշիացման ընթացքում վերածվում է միկրոպլաստիկի՝ աղտոտելով Երևանի ջրային ռեսուրսները և հողը։'
         : 'Breaks down into hazardous microplastics, contaminating Yerevan water channels and urban soil.'
@@ -91,7 +91,7 @@ export default function HomeView({
       years: 30,
       yearsLabel: isArmenian ? '30 ՏԱՐԻ' : '30 YEARS',
       severity: 'medium',
-      color: '#00f5d4',
+      color: 'var(--accent-cyan)',
       desc: isArmenian
         ? 'Պոլիէթիլենային ներքին պաշտպանիչ շերտի պատճառով սովորական թղթի պես արագ չի քայքայվում։'
         : 'Internal polyethylene lining prevents normal paper degradation, remaining in landfills for decades.'
@@ -103,7 +103,7 @@ export default function HomeView({
       years: 12,
       yearsLabel: isArmenian ? '12 ՏԱՐԻ' : '12 YEARS',
       severity: 'medium',
-      color: '#00f5d4',
+      color: 'var(--accent-cyan)',
       desc: isArmenian
         ? 'Յուրաքանչյուր ֆիլտր պարունակում է ացետատային ցելյուլոզ և թունավոր նյութեր, որոնք աղտոտում են անձրևաջրերը։'
         : 'Contains cellulose acetate and hazardous toxins that pollute city rainwater runoff.'
@@ -126,7 +126,7 @@ export default function HomeView({
   const topDistricts = [...districts].sort((a, b) => b.points - a.points).slice(0, 3);
 
   return (
-    <div className="space-y-10 px-2 md:px-0 py-4 animate-fadeIn">
+    <div className="home-view space-y-12 px-1 md:px-0 py-3 animate-fadeIn">
       {/* Live System Status Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 bg-[var(--surface-1)]/90 border border-[var(--primary-gold)]/40 rounded-lg backdrop-blur-md shadow-[0_0_20px_var(--primary-gold-glow)] transition-colors">
         <div className="flex items-center gap-3">
@@ -155,7 +155,7 @@ export default function HomeView({
       </div>
 
       {/* Hero Section */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <section className="home-hero grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[var(--surface-2)] border border-[var(--primary-gold)]/60 rounded-full shadow-[0_0_15px_var(--primary-gold-glow)]">
             <span className="material-symbols-outlined text-[var(--primary-gold)] text-sm animate-pulse">
@@ -166,14 +166,14 @@ export default function HomeView({
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-['Outfit'] font-black text-white leading-none uppercase tracking-tight break-words">
+          <h1 className="home-hero-title text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-['Outfit'] font-black text-white leading-[0.98] uppercase tracking-[-0.045em] break-words">
             {t.hero.title1} <br />
-            <span className="text-gradient-gold bg-[var(--surface-1)] px-3 sm:px-4 py-1 sm:py-1.5 border-2 border-[var(--primary-gold)] inline-block mt-2 sm:mt-3 shadow-[0_0_30px_var(--primary-gold-glow)] rounded-sm max-w-full overflow-hidden text-ellipsis">
+            <span className="home-hero-accent text-gradient-gold inline-block mt-1.5 max-w-full overflow-hidden text-ellipsis">
               {t.hero.title2}
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg font-['Montserrat'] text-gray-300 leading-relaxed max-w-xl border-l-4 border-[var(--primary-gold)] pl-3 sm:pl-4 italic bg-[var(--surface-1)]/60 py-2 rounded-r-md">
+          <p className="home-hero-copy text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed max-w-[62ch] border-l-2 border-[var(--primary-gold)] pl-4 sm:pl-5 py-1">
             {t.subtitle}
           </p>
 
@@ -199,7 +199,7 @@ export default function HomeView({
                   soundFX.playClick();
                   onOpenReport();
                 }}
-                className="bg-[#10141e] text-[#00f5d4] border-2 border-[#00f5d4] hover:bg-[#00f5d4] hover:text-[#0b0e14] px-6 py-4.5 flex items-center justify-center gap-3 transition-all font-['Archivo_Narrow'] text-lg font-extrabold uppercase tracking-wide shadow-[0_0_20px_rgba(0,245,212,0.2)] rounded-sm w-full sm:w-auto"
+                className="bg-[var(--surface-1)] text-[var(--accent-cyan)] border border-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)] hover:text-[var(--bg-main)] px-6 py-4.5 flex items-center justify-center gap-3 transition-all font-['Archivo_Narrow'] text-lg font-extrabold uppercase tracking-wide shadow-[0_0_20px_var(--accent-cyan-glow)] rounded-sm w-full sm:w-auto"
               >
                 <span className="material-symbols-outlined text-2xl">add_location_alt</span>
                 <span>{isArmenian ? '+ ԱՎԵԼԱՑՆԵԼ' : '+ ADD EXHIBIT'}</span>
@@ -211,7 +211,7 @@ export default function HomeView({
                 soundFX.playClick();
                 onChangeTab('exhibits');
               }}
-              className="border-2 border-[#ffc700]/70 text-[#ffc700] hover:bg-[#ffc700] hover:text-[#0b0e14] px-6 py-4.5 flex items-center justify-center gap-3 transition-all font-['Archivo_Narrow'] text-lg font-extrabold uppercase tracking-wide shadow-[0_0_15px_rgba(255,199,0,0.15)] rounded-sm w-full sm:w-auto"
+              className="border-2 border-[var(--primary-gold)]/70 text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-main)] px-6 py-4.5 flex items-center justify-center gap-3 transition-all font-['Archivo_Narrow'] text-lg font-extrabold uppercase tracking-wide shadow-[0_0_15px_var(--primary-gold-glow)] rounded-sm w-full sm:w-auto"
             >
               <span className="material-symbols-outlined text-2xl">museum</span>
               <span>{t.nav.exhibits}</span>
@@ -220,13 +220,13 @@ export default function HomeView({
         </div>
 
         {/* Visual Cyber Pulse Interactive Graphic Box */}
-        <div className="lg:col-span-5 relative h-80 lg:h-96 w-full bg-gradient-to-br from-[#121620] via-[#0f131c] to-[#0b0e14] border-2 border-[#ffc700] flex flex-col items-center justify-between p-6 overflow-hidden group shadow-[0_0_40px_rgba(255,199,0,0.2)] rounded-lg">
+        <div className="lg:col-span-5 pulse-console relative h-80 lg:h-96 w-full bg-gradient-to-br from-[var(--surface-1)] via-[var(--bg-main)] to-[var(--bg-main)] border-2 border-[var(--primary-gold)] flex flex-col items-center justify-between p-6 overflow-hidden group shadow-[0_0_40px_var(--primary-gold-glow)] rounded-lg">
           <div className="w-full flex items-center justify-between z-10">
-            <div className="text-xs font-mono text-[#ffc700] bg-[#06080c]/90 px-3 py-1 border border-[#ffc700]/60 rounded font-semibold">
+            <div className="text-xs font-mono text-[var(--primary-gold)] bg-[var(--bg-deep)]/90 px-3 py-1 border border-[var(--primary-gold)]/60 rounded font-semibold">
               SYS-ID: YR-2026-PULSE
             </div>
-            <div className="text-xs font-mono text-[#00f5d4] bg-[#06080c]/90 px-3 py-1 border border-[#00f5d4]/60 rounded flex items-center gap-1.5 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#00f5d4] animate-ping" />
+            <div className="text-xs font-mono text-[var(--accent-cyan)] bg-[var(--bg-deep)]/90 px-3 py-1 border border-[var(--accent-cyan)]/60 rounded flex items-center gap-1.5 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-[var(--accent-cyan)] animate-ping" />
               <span>{pulseCount} BPM</span>
             </div>
           </div>
@@ -239,13 +239,13 @@ export default function HomeView({
               onClick={handlePulseClick}
               title={isArmenian ? 'Սեղմեք իմպուլսը ստուգելու համար' : 'Click to test eco pulse'}
             >
-              <div className="w-28 h-28 rounded-full border-2 border-[#ffc700] flex items-center justify-center pulse-radar bg-[#ffc700]/10 hover:bg-[#ffc700]/20 transition-all">
-                <span className="material-symbols-outlined text-6xl text-[#ffc700] animate-pulse">
+              <div className="w-28 h-28 rounded-full border-2 border-[var(--primary-gold)] flex items-center justify-center pulse-radar bg-[var(--primary-gold)]/10 hover:bg-[var(--primary-gold)]/20 transition-all">
+                <span className="material-symbols-outlined text-6xl text-[var(--primary-gold)] animate-pulse">
                   ecg
                 </span>
               </div>
               {pulseActive && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#ffc700] text-black font-mono text-xs font-black px-2 py-0.5 rounded uppercase tracking-wider animate-bounce">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--primary-gold)] text-black font-mono text-xs font-black px-2 py-0.5 rounded uppercase tracking-wider animate-bounce">
                   PULSE DETECTED
                 </div>
               )}
@@ -264,34 +264,34 @@ export default function HomeView({
           </div>
 
           {/* Quick Metrics Bar at bottom of cyber box */}
-          <div className="w-full grid grid-cols-3 gap-2 z-10 pt-2 border-t border-[#ffc700]/30 text-center">
+          <div className="w-full grid grid-cols-3 gap-2 z-10 pt-2 border-t border-[var(--primary-gold)]/30 text-center">
             <div>
               <div className="text-xs font-mono text-gray-400 font-medium">CLEAN RATE</div>
-              <div className="font-['Outfit'] text-base font-bold text-[#00f5d4]">{cleanRate}%</div>
+              <div className="font-['Outfit'] text-base font-bold text-[var(--accent-cyan)]">{cleanRate}%</div>
             </div>
             <div>
               <div className="text-xs font-mono text-gray-400 font-medium">HOTSPOTS</div>
-              <div className="font-['Outfit'] text-base font-bold text-[#ff007a]">{activeCount}</div>
+              <div className="font-['Outfit'] text-base font-bold text-[var(--accent-magenta)]">{activeCount}</div>
             </div>
             <div>
               <div className="text-xs font-mono text-gray-400 font-medium">DISTRICTS</div>
-              <div className="font-['Outfit'] text-base font-bold text-[#ffc700]">12/12</div>
+              <div className="font-['Outfit'] text-base font-bold text-[var(--primary-gold)]">12/12</div>
             </div>
           </div>
 
           {/* Cyber Grid Overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffc700_1px,transparent_1px)] [background-size:20px_20px] opacity-20 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(var(--primary-gold)_1px,transparent_1px)] [background-size:20px_20px] opacity-20 pointer-events-none" />
         </div>
       </section>
 
       {/* Dynamic Impact Stats Bento Grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer border-l-4 border-l-[#ffc700]">
-          <div className="absolute top-4 right-4 w-12 h-12 bg-[#ffc700]/10 border border-[#ffc700]/40 rounded-xl flex items-center justify-center text-[#ffc700] group-hover:scale-110 transition-transform">
+      <section className="impact-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-5">
+        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer lg:col-span-6 border-l-4 border-l-[var(--primary-gold)]">
+          <div className="absolute top-4 right-4 w-12 h-12 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/40 rounded-xl flex items-center justify-center text-[var(--primary-gold)] group-hover:scale-110 transition-transform">
             <span className="material-symbols-outlined text-3xl">delete_sweep</span>
           </div>
-          <div className="text-xs font-mono text-[#ffc700] uppercase tracking-widest flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ffc700]" />
+          <div className="text-xs font-mono text-[var(--primary-gold)] uppercase tracking-widest flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary-gold)]" />
             METRIC-01
           </div>
           <div>
@@ -299,19 +299,19 @@ export default function HomeView({
             <p className="font-['Archivo_Narrow'] text-sm font-bold text-gray-200 mt-1 tracking-wider uppercase">
               {t.stats.cleanedTrash}
             </p>
-            <div className="w-full bg-[#0b0e14] h-2 rounded-full mt-3 overflow-hidden border border-[#ffc700]/30">
-              <div className="bg-[#ffc700] h-full rounded-full" style={{ width: '83%' }} />
+            <div className="w-full bg-[var(--bg-main)] h-2 rounded-full mt-3 overflow-hidden border border-[var(--primary-gold)]/30">
+              <div className="bg-[var(--primary-gold)] h-full rounded-full" style={{ width: '83%' }} />
             </div>
             <div className="text-xs font-mono text-gray-400 mt-1 text-right">83% OF 15,000 KG TARGET</div>
           </div>
         </div>
 
-        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer border-l-4 border-l-[#00f5d4]">
-          <div className="absolute top-4 right-4 w-12 h-12 bg-[#00f5d4]/10 border border-[#00f5d4]/40 rounded-xl flex items-center justify-center text-[#00f5d4] group-hover:scale-110 transition-transform">
+        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer lg:col-span-6 border-l-4 border-l-[var(--accent-cyan)]">
+          <div className="absolute top-4 right-4 w-12 h-12 bg-[var(--accent-cyan)]/10 border border-[var(--accent-cyan)]/40 rounded-xl flex items-center justify-center text-[var(--accent-cyan)] group-hover:scale-110 transition-transform">
             <span className="material-symbols-outlined text-3xl">groups</span>
           </div>
-          <div className="text-xs font-mono text-[#00f5d4] uppercase tracking-widest flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f5d4]" />
+          <div className="text-xs font-mono text-[var(--accent-cyan)] uppercase tracking-widest flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)]" />
             METRIC-02
           </div>
           <div>
@@ -320,19 +320,19 @@ export default function HomeView({
               {t.stats.activeCitizens}
             </p>
             <div className="flex items-center gap-2 mt-3 text-xs text-gray-300 font-mono">
-              <span className="px-2 py-0.5 bg-[#00f5d4]/10 text-[#00f5d4] rounded border border-[#00f5d4]/30">
+              <span className="px-2 py-0.5 bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] rounded border border-[var(--accent-cyan)]/30">
                 +145 THIS WEEK
               </span>
             </div>
           </div>
         </div>
 
-        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer border-l-4 border-l-[#ff007a]">
-          <div className="absolute top-4 right-4 w-12 h-12 bg-[#ff007a]/10 border border-[#ff007a]/40 rounded-xl flex items-center justify-center text-[#ff007a] group-hover:scale-110 transition-transform">
+        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer lg:col-span-6 border-l-4 border-l-[var(--accent-magenta)]">
+          <div className="absolute top-4 right-4 w-12 h-12 bg-[var(--accent-magenta)]/10 border border-[var(--accent-magenta)]/40 rounded-xl flex items-center justify-center text-[var(--accent-magenta)] group-hover:scale-110 transition-transform">
             <span className="material-symbols-outlined text-3xl">warning</span>
           </div>
-          <div className="text-xs font-mono text-[#ff007a] uppercase tracking-widest flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ff007a]" />
+          <div className="text-xs font-mono text-[var(--accent-magenta)] uppercase tracking-widest flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-magenta)]" />
             METRIC-03
           </div>
           <div>
@@ -342,9 +342,9 @@ export default function HomeView({
             <p className="font-['Archivo_Narrow'] text-sm font-bold text-gray-200 mt-1 tracking-wider uppercase">
               {t.stats.activeHotspots}
             </p>
-            <div className="w-full bg-[#0b0e14] h-2 rounded-full mt-3 overflow-hidden border border-[#ff007a]/30">
+            <div className="w-full bg-[var(--bg-main)] h-2 rounded-full mt-3 overflow-hidden border border-[var(--accent-magenta)]/30">
               <div
-                className="bg-[#ff007a] h-full rounded-full"
+                className="bg-[var(--accent-magenta)] h-full rounded-full"
                 style={{ width: `${totalExhibitsCount > 0 ? (activeCount / totalExhibitsCount) * 100 : 50}%` }}
               />
             </div>
@@ -352,7 +352,7 @@ export default function HomeView({
           </div>
         </div>
 
-        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer border-l-4 border-l-[#10b981]">
+        <div className="museum-label p-5 relative flex flex-col justify-between h-56 group cursor-pointer lg:col-span-6 border-l-4 border-l-[#10b981]">
           <div className="absolute top-4 right-4 w-12 h-12 bg-[#10b981]/10 border border-[#10b981]/40 rounded-xl flex items-center justify-center text-[#10b981] group-hover:scale-110 transition-transform">
             <span className="material-symbols-outlined text-3xl">health_metrics</span>
           </div>
@@ -365,7 +365,7 @@ export default function HomeView({
             <p className="font-['Archivo_Narrow'] text-sm font-bold text-gray-200 mt-1 tracking-wider uppercase">
               {t.stats.cleanlinessRate}
             </p>
-            <div className="w-full bg-[#0b0e14] h-2 rounded-full mt-3 overflow-hidden border border-[#10b981]/30">
+            <div className="w-full bg-[var(--bg-main)] h-2 rounded-full mt-3 overflow-hidden border border-[#10b981]/30">
               <div className="bg-[#10b981] h-full rounded-full" style={{ width: '78%' }} />
             </div>
             <div className="text-xs font-mono text-emerald-400 mt-1 text-right">HIGH IMPACT ZONE</div>
@@ -385,10 +385,10 @@ export default function HomeView({
       {/* Urgent Exhibits Showcase Section */}
       {urgentExhibits.length > 0 && (
         <section className="space-y-6 pt-4">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#ff007a] pb-3">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[var(--accent-magenta)] pb-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#ff007a]/10 rounded flex items-center justify-center border border-[#ff007a]/40">
-                <span className="material-symbols-outlined text-[#ff007a] text-2xl animate-pulse">
+              <div className="w-10 h-10 bg-[var(--accent-magenta)]/10 rounded flex items-center justify-center border border-[var(--accent-magenta)]/40">
+                <span className="material-symbols-outlined text-[var(--accent-magenta)] text-2xl animate-pulse">
                   priority_high
                 </span>
               </div>
@@ -409,7 +409,7 @@ export default function HomeView({
                 soundFX.playClick();
                 onChangeTab('exhibits');
               }}
-              className="text-xs font-['Archivo_Narrow'] font-bold text-[#ff007a] uppercase hover:underline flex items-center gap-1 bg-[#ff007a]/10 px-3 py-1.5 border border-[#ff007a]/40 rounded"
+              className="text-xs font-['Archivo_Narrow'] font-bold text-[var(--accent-magenta)] uppercase hover:underline flex items-center gap-1 bg-[var(--accent-magenta)]/10 px-3 py-1.5 border border-[var(--accent-magenta)]/40 rounded"
             >
               <span>{isArmenian ? 'ՏԵՍՆԵԼ ԲՈԼՈՐԸ' : 'VIEW ALL EXHIBITS'}</span>
               <span className="material-symbols-outlined text-sm">arrow_forward</span>
@@ -420,15 +420,15 @@ export default function HomeView({
             {urgentExhibits.map((exhibit) => (
               <div
                 key={exhibit.id}
-                className="museum-label p-5 border-l-4 border-l-[#ff007a] flex flex-col justify-between group hover:border-[#ff007a] transition-all relative overflow-hidden"
+                className="museum-label p-5 border-l-4 border-l-[var(--accent-magenta)] flex flex-col justify-between group hover:border-[var(--accent-magenta)] transition-all relative overflow-hidden"
               >
-                <div className="absolute top-3 right-3 text-[10px] font-mono text-[#ff007a] bg-[#05070a] px-2 py-0.5 border border-[#ff007a]/40 rounded">
+                <div className="absolute top-3 right-3 text-[10px] font-mono text-[var(--accent-magenta)] bg-[var(--bg-deep)] px-2 py-0.5 border border-[var(--accent-magenta)]/40 rounded">
                   #{exhibit.code}
                 </div>
 
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl p-2 bg-[#ff007a]/10 border border-[#ff007a]/30 rounded-lg">
+                    <span className="text-3xl p-2 bg-[var(--accent-magenta)]/10 border border-[var(--accent-magenta)]/30 rounded-lg">
                       {exhibit.icon || '🍾'}
                     </span>
                     <div>
@@ -441,12 +441,12 @@ export default function HomeView({
                     </div>
                   </div>
 
-                  <div className="bg-[#090c12] p-3 rounded border border-white/10 text-xs space-y-1.5">
+                  <div className="bg-[var(--bg-main)] p-3 rounded border border-white/10 text-xs space-y-1.5">
                     <div className="flex justify-between items-center text-gray-300">
                       <span className="font-mono text-[11px] text-gray-400">
                         {isArmenian ? 'ՔԱՅՔԱՅՈՒՄ՝' : 'LIFESPAN:'}
                       </span>
-                      <span className="font-bold text-[#ffc700]">
+                      <span className="font-bold text-[var(--primary-gold)]">
                         {exhibit.lifespanYears >= 1000000
                           ? isArmenian ? '1 ՄԻԼԻՈՆ ՏԱՐԻ' : '1 MILLION YEARS'
                           : `${exhibit.lifespanYears} ${isArmenian ? 'ՏԱՐԻ' : 'YEARS'}`}
@@ -462,14 +462,14 @@ export default function HomeView({
                     </div>
                   </div>
 
-                  <p className="text-xs font-['Montserrat'] text-gray-300 italic line-clamp-2 border-l-2 border-[#ff007a]/50 pl-2">
+                  <p className="text-xs font-['Montserrat'] text-gray-300 italic line-clamp-2 border-l-2 border-[var(--accent-magenta)]/50 pl-2">
                     "{isArmenian ? exhibit.quote : exhibit.quoteEn || exhibit.quote}"
                   </p>
                 </div>
 
                 <div className="pt-4 mt-2 border-t border-white/10 flex items-center justify-between gap-2">
                   {exhibit.pendingVerification ? (
-                    <div className="bg-[#00f5d4]/10 text-[#00f5d4] border border-[#00f5d4]/40 py-2 px-3 text-xs flex-1 flex items-center justify-center gap-1.5 font-bold font-mono rounded animate-pulse">
+                    <div className="bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/40 py-2 px-3 text-xs flex-1 flex items-center justify-center gap-1.5 font-bold font-mono rounded animate-pulse">
                       <span className="material-symbols-outlined text-base">schedule</span>
                       <span>{isArmenian ? '⏳ ԳՆԱՑ ՀԱՍՏԱՏՄԱՆ' : '⏳ PENDING'}</span>
                     </div>
@@ -489,7 +489,7 @@ export default function HomeView({
                       soundFX.playClick();
                       onChangeTab('exhibits');
                     }}
-                    className="p-2 border border-white/20 text-gray-300 hover:text-white hover:border-[#ffc700] rounded transition-colors"
+                    className="p-2 border border-white/20 text-gray-300 hover:text-white hover:border-[var(--primary-gold)] rounded transition-colors"
                     title={isArmenian ? 'Դիտել ցուցանմուշը' : 'View Exhibit'}
                   >
                     <span className="material-symbols-outlined text-base">visibility</span>
@@ -503,10 +503,10 @@ export default function HomeView({
 
       {/* Interactive Waste Decomposition Matrix / Calculator */}
       <section className="space-y-6 pt-4">
-        <div className="flex items-center justify-between border-b-2 border-[#00f5d4] pb-3">
+        <div className="flex items-center justify-between border-b-2 border-[var(--accent-cyan)] pb-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#00f5d4]/10 rounded flex items-center justify-center border border-[#00f5d4]/40">
-              <span className="material-symbols-outlined text-[#00f5d4] text-2xl">
+            <div className="w-10 h-10 bg-[var(--accent-cyan)]/10 rounded flex items-center justify-center border border-[var(--accent-cyan)]/40">
+              <span className="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">
                 hourglass_bottom
               </span>
             </div>
@@ -536,15 +536,15 @@ export default function HomeView({
                 }}
                 className={`p-3 rounded-lg border text-center transition-all flex flex-col items-center justify-center gap-1.5 ${
                   isSelected
-                    ? 'bg-[#181e2b] border-[#ffc700] shadow-[0_0_20px_rgba(255,199,0,0.3)] scale-105'
-                    : 'bg-[#10141e] border-white/10 hover:border-white/30 text-gray-400 hover:text-white'
+                    ? 'bg-[var(--surface-2)] border-[var(--primary-gold)] shadow-[0_0_20px_var(--primary-gold-glow)] scale-105'
+                    : 'bg-[var(--surface-1)] border-white/10 hover:border-white/30 text-gray-400 hover:text-white'
                 }`}
               >
                 <span className="text-3xl">{item.icon}</span>
                 <span className="font-['Outfit'] text-xs font-bold text-white truncate w-full">
                   {item.name}
                 </span>
-                <span className="font-mono text-[10px] font-extrabold text-[#ffc700]">
+                <span className="font-mono text-[10px] font-extrabold text-[var(--primary-gold)]">
                   {item.yearsLabel}
                 </span>
               </button>
@@ -553,14 +553,14 @@ export default function HomeView({
         </div>
 
         {/* Selected Decomposition Detail Panel */}
-        <div className="museum-label p-6 border-l-4 border-l-[#ffc700] space-y-4">
+        <div className="museum-label p-6 border-l-4 border-l-[var(--primary-gold)] space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <span className="text-5xl p-3 bg-[#ffc700]/10 border border-[#ffc700]/30 rounded-xl">
+              <span className="text-5xl p-3 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/30 rounded-xl">
                 {selectedDecay.icon}
               </span>
               <div>
-                <span className="text-xs font-mono text-[#ffc700] uppercase tracking-widest">
+                <span className="text-xs font-mono text-[var(--primary-gold)] uppercase tracking-widest">
                   {isArmenian ? 'ԱՂՏՈՏՎԱԾՈՒԹՅԱՆ ԱՐՏԵՖԱԿՏ' : 'POLLUTION ARTIFACT'}
                 </span>
                 <h3 className="font-['Outfit'] text-2xl font-black text-white">
@@ -569,7 +569,7 @@ export default function HomeView({
               </div>
             </div>
 
-            <div className="bg-[#090c12] px-5 py-3 border border-[#ffc700]/40 rounded-lg text-right">
+            <div className="bg-[var(--bg-main)] px-5 py-3 border border-[var(--primary-gold)]/40 rounded-lg text-right">
               <div className="text-[10px] font-mono text-gray-400 uppercase">
                 {isArmenian ? 'ՔԱՅՔԱՅՄԱՆ ՏԵՎՈՂՈՒԹՅՈՒՆ' : 'DECOMPOSITION DURATION'}
               </div>
@@ -579,7 +579,7 @@ export default function HomeView({
             </div>
           </div>
 
-          <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed bg-[#0b0e14] p-4 rounded-lg border border-white/10">
+          <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed bg-[var(--bg-main)] p-4 rounded-lg border border-white/10">
             {selectedDecay.desc}
           </p>
 
@@ -588,12 +588,12 @@ export default function HomeView({
             <div className="flex justify-between text-xs font-mono text-gray-400">
               <span>{isArmenian ? 'ՄԱՐԴՈՒ ՄԻՋԻՆ ԿՅԱՆՔ (80 ՏԱՐԻ)' : 'HUMAN LIFESPAN (80 YRS)'}</span>
               <span>{isArmenian ? 'ԵՐԵՎԱՆԻ ՊԱՏՄՈՒԹՅՈՒՆ (2808 ՏԱՐԻ)' : 'YEREVAN AGE (2808 YRS)'}</span>
-              <span className="text-[#ff007a] font-bold">{selectedDecay.yearsLabel}</span>
+              <span className="text-[var(--accent-magenta)] font-bold">{selectedDecay.yearsLabel}</span>
             </div>
-            <div className="w-full bg-[#0b0e14] h-3 rounded-full overflow-hidden border border-white/20 flex">
-              <div className="bg-[#00f5d4] h-full" style={{ width: '5%' }} title="Human lifespan" />
-              <div className="bg-[#ffc700] h-full" style={{ width: '15%' }} title="Yerevan history" />
-              <div className="bg-[#ff007a] h-full flex-1" title="Waste lifespan" />
+            <div className="w-full bg-[var(--bg-main)] h-3 rounded-full overflow-hidden border border-white/20 flex">
+              <div className="bg-[var(--accent-cyan)] h-full" style={{ width: '5%' }} title="Human lifespan" />
+              <div className="bg-[var(--primary-gold)] h-full" style={{ width: '15%' }} title="Yerevan history" />
+              <div className="bg-[var(--accent-magenta)] h-full flex-1" title="Waste lifespan" />
             </div>
           </div>
         </div>
@@ -601,9 +601,9 @@ export default function HomeView({
 
       {/* 3-Step Interactive Methodology */}
       <section className="space-y-6 pt-4">
-        <div className="flex items-center gap-3 border-b-2 border-[#ffc700] pb-3 shadow-[0_4px_15px_-5px_rgba(255,199,0,0.1)]">
-          <div className="w-10 h-10 bg-[#ffc700]/10 rounded flex items-center justify-center border border-[#ffc700]/40">
-            <span className="material-symbols-outlined text-[#ffc700] text-2xl">model_training</span>
+        <div className="flex items-center gap-3 border-b-2 border-[var(--primary-gold)] pb-3 shadow-[0_4px_15px_-5px_var(--primary-gold-glow)]">
+          <div className="w-10 h-10 bg-[var(--primary-gold)]/10 rounded flex items-center justify-center border border-[var(--primary-gold)]/40">
+            <span className="material-symbols-outlined text-[var(--primary-gold)] text-2xl">model_training</span>
           </div>
           <div>
             <h2 className="font-['Outfit'] text-2xl md:text-3xl font-black text-white uppercase tracking-wider text-gradient-gold">
@@ -623,13 +623,13 @@ export default function HomeView({
               soundFX.playClick();
               onOpenScanner();
             }}
-            className="museum-label p-6 border-l-4 border-l-[#ffc700] cursor-pointer group hover:bg-[#ffc700]/5 transition-all h-full flex flex-col justify-between"
+            className="museum-label p-6 border-l-4 border-l-[var(--primary-gold)] cursor-pointer group hover:bg-[var(--primary-gold)]/5 transition-all h-full flex flex-col justify-between"
           >
             <div>
-              <div className="w-14 h-14 bg-[#ffc700]/10 border border-[#ffc700] rounded-xl flex items-center justify-center text-[#ffc700] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,199,0,0.2)]">
+              <div className="w-14 h-14 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)] rounded-xl flex items-center justify-center text-[var(--primary-gold)] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_var(--primary-gold-glow)]">
                 <span className="material-symbols-outlined text-3xl">my_location</span>
               </div>
-              <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[#ffc700] transition-colors">
+              <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[var(--primary-gold)] transition-colors">
                 {isArmenian ? '1. ՖԻՔՍԵԼ' : '1. DOCUMENT'}
               </h4>
               <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed">
@@ -638,7 +638,7 @@ export default function HomeView({
                   : 'Find an urban friction point. Scan and log it into the public record as an official museum exhibit.'}
               </p>
             </div>
-            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-xs font-['Archivo_Narrow'] font-bold text-[#ffc700] uppercase">
+            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-xs font-['Archivo_Narrow'] font-bold text-[var(--primary-gold)] uppercase">
               <span>{isArmenian ? 'ՍԿԱՆԱՎՈՐԵԼ QR ➔' : 'SCAN QR NOW ➔'}</span>
             </div>
           </div>
@@ -648,13 +648,13 @@ export default function HomeView({
               soundFX.playClick();
               onChangeTab('exhibits');
             }}
-            className="museum-label p-6 border-l-4 border-l-[#00f5d4] cursor-pointer group hover:bg-[#00f5d4]/5 transition-all h-full flex flex-col justify-between"
+            className="museum-label p-6 border-l-4 border-l-[var(--accent-cyan)] cursor-pointer group hover:bg-[var(--accent-cyan)]/5 transition-all h-full flex flex-col justify-between"
           >
             <div>
-              <div className="w-14 h-14 bg-[#00f5d4]/10 border border-[#00f5d4] rounded-xl flex items-center justify-center text-[#00f5d4] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(0,245,212,0.2)]">
+              <div className="w-14 h-14 bg-[var(--accent-cyan)]/10 border border-[var(--accent-cyan)] rounded-xl flex items-center justify-center text-[var(--accent-cyan)] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_var(--accent-cyan-glow)]">
                 <span className="material-symbols-outlined text-3xl">campaign</span>
               </div>
-              <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[#00f5d4] transition-colors">
+              <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[var(--accent-cyan)] transition-colors">
                 {isArmenian ? '2. ՑՈՒՑԱԴՐԵԼ' : '2. EXPOSE'}
               </h4>
               <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed">
@@ -663,7 +663,7 @@ export default function HomeView({
                   : 'The object is framed in a museum label with its decomposition lifespan plaque. Neglect is put on display.'}
               </p>
             </div>
-            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-xs font-['Archivo_Narrow'] font-bold text-[#00f5d4] uppercase">
+            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-xs font-['Archivo_Narrow'] font-bold text-[var(--accent-cyan)] uppercase">
               <span>{isArmenian ? 'ՑՈՒՑԱՍՐԱՀԻ ՑՈՒՑԱՆՄՈՒՇՆԵՐԸ ➔' : 'VIEW EXHIBITS ➔'}</span>
             </div>
           </div>
@@ -673,13 +673,13 @@ export default function HomeView({
               soundFX.playClick();
               onChangeTab('ranks');
             }}
-            className="museum-label p-6 border-l-4 border-l-[#ff007a] cursor-pointer group hover:bg-[#ff007a]/5 transition-all h-full flex flex-col justify-between"
+            className="museum-label p-6 border-l-4 border-l-[var(--accent-magenta)] cursor-pointer group hover:bg-[var(--accent-magenta)]/5 transition-all h-full flex flex-col justify-between"
           >
             <div>
-              <div className="w-14 h-14 bg-[#ff007a]/10 border border-[#ff007a] rounded-xl flex items-center justify-center text-[#ff007a] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,0,122,0.2)]">
+              <div className="w-14 h-14 bg-[var(--accent-magenta)]/10 border border-[var(--accent-magenta)] rounded-xl flex items-center justify-center text-[var(--accent-magenta)] mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_var(--accent-magenta-glow)]">
                 <span className="material-symbols-outlined text-3xl">build</span>
               </div>
-              <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[#ff007a] transition-colors">
+              <h4 className="font-['Outfit'] text-xl font-bold text-white mb-2 uppercase group-hover:text-[var(--accent-magenta)] transition-colors">
                 {isArmenian ? '3. ՄԱՔՐԵԼ' : '3. RESOLVE'}
               </h4>
               <p className="font-['Montserrat'] text-sm text-gray-300 leading-relaxed">
@@ -688,7 +688,7 @@ export default function HomeView({
                   : 'Mobilize civic action. Clean exhibits, earn Eco-Pulse points, and elevate your district leaderboard position.'}
               </p>
             </div>
-            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-xs font-['Archivo_Narrow'] font-bold text-[#ff007a] uppercase">
+            <div className="pt-4 mt-4 border-t border-white/10 flex items-center gap-2 text-xs font-['Archivo_Narrow'] font-bold text-[var(--accent-magenta)] uppercase">
               <span>{isArmenian ? 'ԹԱՂԱՄԱՍԵՐԻ ՎԱՐԿԱՆԻՇՆԵՐԸ ➔' : 'CHECK RANKS ➔'}</span>
             </div>
           </div>
@@ -698,10 +698,10 @@ export default function HomeView({
       {/* Top Districts Leaderboard Snapshot */}
       {topDistricts.length > 0 && (
         <section className="space-y-6 pt-4">
-          <div className="flex items-center justify-between border-b-2 border-[#ffc700] pb-3">
+          <div className="flex items-center justify-between border-b-2 border-[var(--primary-gold)] pb-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#ffc700]/10 rounded flex items-center justify-center border border-[#ffc700]/40">
-                <span className="material-symbols-outlined text-[#ffc700] text-2xl">
+              <div className="w-10 h-10 bg-[var(--primary-gold)]/10 rounded flex items-center justify-center border border-[var(--primary-gold)]/40">
+                <span className="material-symbols-outlined text-[var(--primary-gold)] text-2xl">
                   leaderboard
                 </span>
               </div>
@@ -722,7 +722,7 @@ export default function HomeView({
                 soundFX.playClick();
                 onChangeTab('ranks');
               }}
-              className="text-xs font-['Archivo_Narrow'] font-bold text-[#ffc700] uppercase hover:underline flex items-center gap-1 bg-[#ffc700]/10 px-3 py-1.5 border border-[#ffc700]/40 rounded"
+              className="text-xs font-['Archivo_Narrow'] font-bold text-[var(--primary-gold)] uppercase hover:underline flex items-center gap-1 bg-[var(--primary-gold)]/10 px-3 py-1.5 border border-[var(--primary-gold)]/40 rounded"
             >
               <span>{isArmenian ? 'ԱՄԲՈՂՋ ՎԱՐԿԱՆԻՇՆԵՐԸ' : 'ALL LEADERBOARDS'}</span>
               <span className="material-symbols-outlined text-sm">arrow_forward</span>
@@ -732,7 +732,7 @@ export default function HomeView({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {topDistricts.map((district, idx) => {
               const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉';
-              const rankColor = idx === 0 ? '#ffc700' : idx === 1 ? '#00f5d4' : '#ff007a';
+              const rankColor = idx === 0 ? 'var(--primary-gold)' : idx === 1 ? 'var(--accent-cyan)' : 'var(--accent-magenta)';
               return (
                 <div
                   key={district.id}
@@ -764,7 +764,7 @@ export default function HomeView({
                       <span>{isArmenian ? 'Մաքրված ցուցանմուշներ․' : 'Cleaned exhibits:'}</span>
                       <span className="font-bold text-white">{district.cleanedExhibits}</span>
                     </div>
-                    <div className="w-full bg-[#0b0e14] h-2 rounded-full overflow-hidden border border-white/10">
+                    <div className="w-full bg-[var(--bg-main)] h-2 rounded-full overflow-hidden border border-white/10">
                       <div
                         className="h-full rounded-full"
                         style={{
@@ -782,10 +782,10 @@ export default function HomeView({
       )}
 
       {/* Civic Bottom Action Callout Banner */}
-      <section className="bg-gradient-to-r from-[#121620] via-[#1a202c] to-[#0f131c] p-6 sm:p-8 rounded-xl border-2 border-[#ffc700] shadow-[0_0_35px_rgba(255,199,0,0.2)] relative overflow-hidden">
+      <section className="bg-gradient-to-r from-[var(--surface-1)] via-[var(--surface-2)] to-[var(--bg-main)] p-6 sm:p-8 rounded-xl border-2 border-[var(--primary-gold)] shadow-[0_0_35px_var(--primary-gold-glow)] relative overflow-hidden">
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center lg:text-left flex-1 min-w-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#ffc700]/10 border border-[#ffc700]/40 rounded text-xs font-mono text-[#ffc700] uppercase">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--primary-gold)]/10 border border-[var(--primary-gold)]/40 rounded text-xs font-mono text-[var(--primary-gold)] uppercase">
               <span className="material-symbols-outlined text-sm">campaign</span>
               <span>{isArmenian ? 'ՔԱՂԱՔԱՑԻԱԿԱՆ ԿՈՉ' : 'CIVIC CALL TO ACTION'}</span>
             </div>
@@ -826,7 +826,7 @@ export default function HomeView({
         </div>
 
         {/* Diagonal Warning Stripe Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,199,0,0.03)_25%,transparent_25%,transparent_50%,rgba(255,199,0,0.03)_50%,rgba(255,199,0,0.03)_75%,transparent_75%,transparent)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,var(--primary-gold-glow)_25%,transparent_25%,transparent_50%,var(--primary-gold-glow)_50%,var(--primary-gold-glow)_75%,transparent_75%,transparent)] [background-size:24px_24px] pointer-events-none" />
       </section>
     </div>
   );

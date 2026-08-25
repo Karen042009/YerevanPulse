@@ -25,15 +25,15 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-[var(--surface-1)]/95 border-b-2 border-[var(--primary-gold)]/50 px-2 sm:px-4 lg:px-6 h-14 sm:h-16 backdrop-blur-md shadow-lg transition-colors">
-      <div className="w-full max-w-[1920px] mx-auto h-full flex justify-between items-center gap-2">
+    <header className="app-header sticky top-0 w-full z-50 bg-[var(--surface-1)]/95 border-b-2 border-[var(--primary-gold)]/50 px-2 sm:px-4 lg:px-6 h-14 sm:h-16 backdrop-blur-md shadow-lg transition-colors">
+      <div className="w-full max-w-[1680px] mx-auto h-full flex justify-between items-center gap-2">
         {/* Brand & Logo */}
         <div 
           onClick={() => {
             soundFX.playClick();
             onChangeTab('home');
           }}
-          className="flex items-center gap-2 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity shrink-0 min-w-0"
+          className="app-brand flex items-center gap-2 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity shrink-0 min-w-0"
         >
           <button 
             type="button"
@@ -67,7 +67,7 @@ export default function Header({
         </div>
 
         {/* Navigation Links - Shown only on XL+ screens (1280px+) without overlapping */}
-        <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-2 shrink-0">
+        <nav className="app-primary-nav hidden xl:flex items-center gap-1.5 2xl:gap-2 shrink-0">
           {[
             { id: 'home', label: t.nav.home, icon: 'home' },
             { id: 'exhibits', label: t.nav.exhibits, icon: 'museum' },
@@ -91,14 +91,14 @@ export default function Header({
         </nav>
 
         {/* Header Actions Toolbar */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="app-actions flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Language Switcher */}
           <button
             onClick={() => {
               soundFX.playClick();
               if (onToggleLang) onToggleLang();
             }}
-            className="text-[var(--primary-gold)] font-['Space_Grotesk'] text-xs sm:text-sm font-bold uppercase h-9 sm:h-10 px-2 sm:px-2.5 bg-[var(--bg-main)] border border-[var(--primary-gold)]/60 hover:border-[var(--primary-gold)] transition-all flex items-center justify-center gap-1 rounded-sm shadow-[1px_1px_0px_0px_var(--primary-gold)] shrink-0 min-w-[36px]"
+            className="header-language text-[var(--primary-gold)] font-['Space_Grotesk'] text-xs sm:text-sm font-bold uppercase h-9 sm:h-10 px-2 sm:px-2.5 bg-[var(--bg-main)] border border-[var(--primary-gold)]/60 hover:border-[var(--primary-gold)] transition-all flex items-center justify-center gap-1 rounded-sm shadow-[1px_1px_0px_0px_var(--primary-gold)] shrink-0 min-w-[36px]"
             title="Փոխել լեզուն / Switch Language"
           >
             <span className="material-symbols-outlined text-base sm:text-lg">language</span>
@@ -148,10 +148,12 @@ export default function Header({
               soundFX.playClick();
               if (onOpenReport) onOpenReport();
             }}
-            className="hidden 2xl:flex border border-[var(--primary-gold)] text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-deep)] h-9 sm:h-10 px-3 text-xs sm:text-sm font-['Archivo_Narrow'] font-bold uppercase transition-all items-center gap-1 rounded-sm shadow-[2px_2px_0px_0px_var(--primary-gold)] shrink-0"
+            title={t.hero.reportExhibit}
+            aria-label={t.hero.reportExhibit}
+            className="header-add-exhibit hidden 2xl:flex border border-[var(--primary-gold)] text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-deep)] h-9 sm:h-10 px-3 text-xs sm:text-sm font-['Archivo_Narrow'] font-bold uppercase transition-all items-center justify-center gap-1 rounded-sm shadow-[2px_2px_0px_0px_var(--primary-gold)] shrink-0"
           >
-            <span className="material-symbols-outlined text-base sm:text-lg">add_location_alt</span>
-            <span>+ {t.hero.reportExhibit}</span>
+            <span className="material-symbols-outlined text-base sm:text-lg">add_location</span>
+            <span>{currentLang === "hy" ? "+ ԱՎԵԼԱՑՆԵԼ" : "+ ADD"}</span>
           </button>
 
           {/* Auth / Account Register Button */}
@@ -160,6 +162,8 @@ export default function Header({
               soundFX.playClick();
               onOpenAuth();
             }}
+            title={isGuest ? (currentLang === "hy" ? "Մուտք" : "Login") : currentUser.name}
+            aria-label={isGuest ? (currentLang === "hy" ? "Մուտք" : "Login") : currentUser.name}
             className="bg-[var(--bg-main)] border border-[var(--primary-gold)] text-[var(--primary-gold)] hover:bg-[var(--primary-gold)] hover:text-[var(--bg-deep)] h-9 sm:h-10 px-2 sm:px-3 text-xs sm:text-sm font-['Archivo_Narrow'] font-bold uppercase transition-all flex items-center justify-center gap-1 rounded-sm shadow-[2px_2px_0px_0px_var(--primary-gold)] shrink-0 min-w-[36px]"
           >
             <span className="material-symbols-outlined text-base sm:text-lg">

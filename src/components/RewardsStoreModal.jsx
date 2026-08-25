@@ -48,7 +48,7 @@ export default function RewardsStoreModal({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="bg-[#0b0e14] border-2 border-[var(--primary-gold)] p-4 sm:p-7 max-w-3xl lg:max-w-4xl w-full relative shadow-[0_0_50px_var(--primary-gold-glow)] rounded-2xl space-y-4 max-h-[90dvh] overflow-y-auto custom-scrollbar pb-28 sm:pb-8">
+      <div className="bg-[var(--bg-main)] border-2 border-[var(--primary-gold)] p-4 sm:p-7 max-w-3xl lg:max-w-4xl w-full relative shadow-[0_0_50px_var(--primary-gold-glow)] rounded-2xl space-y-4 max-h-[90dvh] overflow-y-auto custom-scrollbar pb-28 sm:pb-8">
         {/* Close Button */}
         <button
           onClick={() => {
@@ -72,7 +72,7 @@ export default function RewardsStoreModal({
             </h2>
           </div>
 
-          <div className="bg-[#121620] p-3 border-2 border-[var(--primary-gold)] rounded-xl text-right shadow-lg self-start sm:self-auto">
+          <div className="bg-[var(--surface-1)] p-3 border-2 border-[var(--primary-gold)] rounded-xl text-right shadow-lg self-start sm:self-auto">
             <span className="text-xs font-mono text-gray-400 block uppercase font-medium">YOUR BALANCE</span>
             <span className="font-['Outfit'] font-black text-[var(--primary-gold)] text-lg sm:text-xl">
               {userPoints} PTS
@@ -116,11 +116,11 @@ export default function RewardsStoreModal({
               return (
                 <div
                   key={reward.id}
-                  className="bg-[#121620] border border-white/10 hover:border-[var(--primary-gold)] p-4 sm:p-5 rounded-xl flex flex-col justify-between space-y-3.5 transition-all group relative overflow-hidden shadow-md"
+                  className="bg-[var(--surface-1)] border border-white/10 hover:border-[var(--primary-gold)] p-4 sm:p-5 rounded-xl flex flex-col justify-between space-y-3.5 transition-all group relative overflow-hidden shadow-md"
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-2xl p-2.5 bg-[#0b0e14] border border-white/10 rounded-lg">
+                      <span className="text-2xl p-2.5 bg-[var(--bg-main)] border border-white/10 rounded-lg">
                         <span className="material-symbols-outlined text-2xl" style={{ color: reward.color }}>
                           {reward.icon}
                         </span>
@@ -170,7 +170,7 @@ export default function RewardsStoreModal({
         {activeTab === 'my_coupons' && (
           <div>
             {myCoupons.length === 0 ? (
-              <div className="p-8 bg-[#121620] border border-white/10 rounded-xl text-center space-y-3">
+              <div className="p-8 bg-[var(--surface-1)] border border-white/10 rounded-xl text-center space-y-3">
                 <span className="material-symbols-outlined text-5xl text-gray-500">local_activity</span>
                 <h3 className="font-['Outfit'] text-base font-bold text-gray-300 uppercase">
                   {isArmenian ? 'ԴԵՌ ՉՈՒՆԵՔ ԱԿՏԻՎ ԿՈՒՊՈՆՆԵՐ' : 'NO ACTIVATED COUPONS YET'}
@@ -186,7 +186,7 @@ export default function RewardsStoreModal({
                 {myCoupons.map((coupon, idx) => (
                   <div
                     key={idx}
-                    className="p-4 bg-[#121620] border-2 border-[#10b981] rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3 shadow-lg"
+                    className="p-4 bg-[var(--surface-1)] border-2 border-[#10b981] rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3 shadow-lg"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
@@ -216,7 +216,7 @@ export default function RewardsStoreModal({
         {/* Single Coupon Code Presentation Modal Overlay */}
         {redeemedCodeModal && (
           <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg animate-fadeIn">
-            <div className="bg-[#0b0e14] border-2 border-[#10b981] p-6 max-w-sm w-full text-center space-y-4 rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.4)] relative">
+            <div className="bg-[var(--bg-main)] border-2 border-[#10b981] p-6 max-w-sm w-full text-center space-y-4 rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.4)] relative">
               <button
                 onClick={() => setRedeemedCodeModal(null)}
                 className="absolute top-3 right-3 text-gray-400 hover:text-white text-lg font-bold"
@@ -243,7 +243,7 @@ export default function RewardsStoreModal({
                 />
               </div>
 
-              <div className="p-2.5 bg-[#121620] border border-[#10b981]/40 rounded-lg font-mono text-xs text-[#10b981]">
+              <div className="p-2.5 bg-[var(--surface-1)] border border-[#10b981]/40 rounded-lg font-mono text-xs text-[#10b981]">
                 <span>COUPON: </span>
                 <span className="font-bold text-white tracking-widest">{redeemedCodeModal.couponCode}</span>
               </div>

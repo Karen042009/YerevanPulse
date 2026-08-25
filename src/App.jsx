@@ -17,7 +17,7 @@ import RewardsStoreModal from './components/RewardsStoreModal';
 import ThemeSelectorModal from './components/ThemeSelectorModal';
 import { initialExhibits, initialDistricts } from './data/exhibits';
 import { initialQuests } from './data/quests';
-import { applyTheme, getStoredTheme } from './utils/themes';
+import { applyTheme, getStoredTheme, themes as themeOptions } from './utils/themes';
 import { soundFX } from './utils/audioFX';
 import { readJson, readNumber, readString, writeJson, writeStorage } from './utils/storage';
 
@@ -217,11 +217,12 @@ export default function App() {
     soundFX.playSuccess();
 
     // Confetti celebration
+    const celebrationTheme = themeOptions.find((theme) => theme.id === currentTheme) || themeOptions[0];
     confetti({
       particleCount: 120,
       spread: 90,
       origin: { y: 0.65 },
-      colors: ['#00f5d4', '#ffc700', '#ffffff', '#78dc77', '#ff007a'],
+      colors: [celebrationTheme.secondaryColor, celebrationTheme.primaryColor, "#ffffff", "#78dc77", celebrationTheme.accentColor],
     });
   };
 
@@ -284,7 +285,10 @@ export default function App() {
   const cleanedCount = exhibits.filter((e) => e.cleaned).length;
 
   return (
-    <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] flex flex-col font-['Montserrat'] selection:bg-[var(--primary-gold)] selection:text-black transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] flex flex-col font-['Noto_Sans_Armenian'] selection:bg-[var(--primary-gold)] selection:text-black transition-colors duration-300">
+      <a href="#main-content" className="skip-link">
+        {currentLang === 'hy' ? 'Անցնել հիմնական բովանդակությանը' : 'Skip to main content'}
+      </a>
       {/* Universal Top Navigation Bar */}
       <Header
         activeTab={activeTab}
@@ -300,7 +304,7 @@ export default function App() {
       />
 
       {/* Main Content Layout Wrapper (Desktop Full Screen Grid vs Mobile Viewport) */}
-      <main className="flex-1 w-full max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-10 xl:px-12 py-4 pb-28 sm:pb-24 lg:py-6 lg:pb-12">
+      <main id="main-content" className="flex-1 w-full max-w-[1680px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 py-4 pb-28 sm:pb-24 lg:py-7 lg:pb-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Active Tab Content Column (Full width on Mobile, 8 cols on Laptop, 9 cols on Desktop) */}
           <div className="lg:col-span-8 xl:col-span-9 space-y-6">
@@ -361,11 +365,11 @@ export default function App() {
           {/* Desktop Right Sidebar Widget Column (Sticky Sidebar, 4 cols on Laptop, 3 cols on Desktop) */}
           <aside className="hidden lg:block lg:col-span-4 xl:col-span-3 space-y-6 sticky top-20">
             {/* User Profile Card Widget */}
-            <div className="museum-label-active p-5 space-y-4 shadow-2xl border-2 border-[#ffc700]">
+            <div className="museum-label-active p-5 space-y-4 shadow-2xl border-2 border-[var(--primary-gold)]">
               <div className="flex items-center gap-3">
-                <img src="/logo.png" alt="Yerevan Pulse" className="h-10 w-auto border border-[#ffc700] p-0.5 bg-black rounded" />
+                <img src="/logo.png" alt="Yerevan Pulse" className="h-10 w-auto border border-[var(--primary-gold)] p-0.5 bg-black rounded" />
                 <div>
-                  <h3 className="font-['Outfit'] text-sm font-black text-[#ffc700] uppercase tracking-wide">
+                  <h3 className="font-['Outfit'] text-sm font-black text-[var(--primary-gold)] uppercase tracking-wide">
                     YEREVAN PULSE DASHBOARD
                   </h3>
                   <span className="text-[10px] font-mono text-gray-300">
@@ -374,11 +378,11 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="bg-[#121620] p-3 border border-[#ffc700]/30 flex justify-between items-center text-xs rounded">
+              <div className="bg-[var(--surface-1)] p-3 border border-[var(--primary-gold)]/30 flex justify-between items-center text-xs rounded">
                 <span className="text-gray-300">
                   {currentLang === 'hy' ? 'ՎԱՍՏԱԿԱԾ ՄԻԱՎՈՐՆԵՐ․' : 'EARNED POINTS:'}
                 </span>
-                <span className="font-['Outfit'] font-black text-[#ffc700] text-sm">
+                <span className="font-['Outfit'] font-black text-[var(--primary-gold)] text-sm">
                   {currentUser.points + userPoints} PTS
                 </span>
               </div>
@@ -394,7 +398,7 @@ export default function App() {
 
                 <button
                   onClick={() => { soundFX.playClick(); setIsReportOpen(true); }}
-                  className="w-full bg-[#121620] text-[#00f5d4] border border-[#00f5d4]/60 hover:bg-[#00f5d4] hover:text-[#0b0e14] py-2.5 font-['Archivo_Narrow'] text-xs font-bold uppercase transition-all rounded"
+                  className="w-full bg-[var(--surface-1)] text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/60 hover:bg-[var(--accent-cyan)] hover:text-[var(--bg-main)] py-2.5 font-['Archivo_Narrow'] text-xs font-bold uppercase transition-all rounded"
                 >
                   {currentLang === 'hy' ? '+ ԱՎԵԼԱՑՆԵԼ ՆՈՐ ՑՈՒՑԱՆՄՈՒՇ' : '+ REPORT NEW EXHIBIT'}
                 </button>
@@ -410,23 +414,23 @@ export default function App() {
                 </h4>
                 <button 
                   onClick={() => { soundFX.playClick(); setActiveTab('map'); }} 
-                  className="text-[10px] text-[#ffc700] font-bold uppercase hover:underline"
+                  className="text-[10px] text-[var(--primary-gold)] font-bold uppercase hover:underline"
                 >
                   {currentLang === 'hy' ? 'ԲԱՑԵԼ ՔԱՐՏԵԶԸ ➔' : 'OPEN MAP ➔'}
                 </button>
               </div>
               <div 
                 onClick={() => { soundFX.playClick(); setActiveTab('map'); }}
-                className="bg-[#0b0e14] h-48 border border-[#ffc700]/30 rounded flex items-center justify-center p-3 text-center cursor-pointer hover:border-[#ffc700] transition-all relative overflow-hidden group"
+                className="bg-[var(--bg-main)] h-48 border border-[var(--primary-gold)]/30 rounded flex items-center justify-center p-3 text-center cursor-pointer hover:border-[var(--primary-gold)] transition-all relative overflow-hidden group"
               >
                 <div className="z-10">
-                  <span className="material-symbols-outlined text-4xl text-[#ffc700] mb-1 animate-pulse">map</span>
+                  <span className="material-symbols-outlined text-4xl text-[var(--primary-gold)] mb-1 animate-pulse">map</span>
                   <p className="font-['Outfit'] text-sm font-black text-white uppercase tracking-wider">
                     12,450 ԿԳ ՄԱՔՐՎԱԾ ԱՂԲ
                   </p>
-                  <p className="text-[10px] font-mono text-[#00f5d4] mt-1">12 ԱԿՏԻՎ ԹԱՂԱՄԱՍԵՐՈՒՄ</p>
+                  <p className="text-[10px] font-mono text-[var(--accent-cyan)] mt-1">12 ԱԿՏԻՎ ԹԱՂԱՄԱՍԵՐՈՒՄ</p>
                 </div>
-                <div className="absolute inset-0 bg-[radial-gradient(#ffc700_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity" />
+                <div className="absolute inset-0 bg-[radial-gradient(var(--primary-gold)_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity" />
               </div>
             </div>
 
@@ -436,11 +440,11 @@ export default function App() {
                 <h4 className="font-['Archivo_Narrow'] text-xs font-bold text-[#e2e2e2] uppercase">
                   {currentLang === 'hy' ? '⚡ LIVE ԳՈՐԾՈՂՈՒԹՅՈՒՆՆԵՐ' : '⚡ LIVE CIVIC FEED'}
                 </h4>
-                <span className="text-[10px] font-mono text-[#00f5d4]">REAL-TIME</span>
+                <span className="text-[10px] font-mono text-[var(--accent-cyan)]">REAL-TIME</span>
               </div>
 
               <div className="space-y-2 text-xs">
-                <div className="p-2.5 bg-[#0b0e14] border border-white/10 rounded flex items-center justify-between">
+                <div className="p-2.5 bg-[var(--bg-main)] border border-white/10 rounded flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-base">🍾</span>
                     <div>
@@ -451,7 +455,7 @@ export default function App() {
                   <span className="text-[9px] font-mono text-emerald-400">✓ DONE</span>
                 </div>
 
-                <div className="p-2.5 bg-[#0b0e14] border border-white/10 rounded flex items-center justify-between">
+                <div className="p-2.5 bg-[var(--bg-main)] border border-white/10 rounded flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-base">📱</span>
                     <div>
@@ -459,26 +463,26 @@ export default function App() {
                       <div className="text-[9px] font-mono text-gray-400">Արաբկիր • 80 PTS</div>
                     </div>
                   </div>
-                  <span className="text-[9px] font-mono text-[#ff007a]">NEW</span>
+                  <span className="text-[9px] font-mono text-[var(--accent-magenta)]">NEW</span>
                 </div>
               </div>
             </div>
 
             {/* Admin Curator Pending Verification Button */}
-            <div className="museum-label p-4 space-y-3 shadow-xl border-l-4 border-l-[#00f5d4]">
+            <div className="museum-label p-4 space-y-3 shadow-xl border-l-4 border-l-[var(--accent-cyan)]">
               <div className="flex justify-between items-center">
                 <span className="font-['Outfit'] text-xs font-bold text-white uppercase flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-sm text-[#00f5d4]">verified</span>
+                  <span className="material-symbols-outlined text-sm text-[var(--accent-cyan)]">verified</span>
                   <span>{currentLang === 'hy' ? '⏳ ՀԱՍՏԱՏՄԱՆ ՍՊԱՍՈՂ ՄԱՔՐՈՒՄՆԵՐ' : '⏳ PENDING CLEANUPS'}</span>
                 </span>
-                <span className="bg-[#00f5d4] text-black font-bold text-[10px] px-2 py-0.5 rounded-full font-mono">
+                <span className="bg-[var(--accent-cyan)] text-black font-bold text-[10px] px-2 py-0.5 rounded-full font-mono">
                   {exhibits.filter(e => e.pendingVerification).length}
                 </span>
               </div>
 
               <button
                 onClick={() => { soundFX.playClick(); setIsPendingAdminModalOpen(true); }}
-                className="w-full bg-[#121620] border border-[#00f5d4] text-[#00f5d4] hover:bg-[#00f5d4] hover:text-black py-2 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all rounded flex items-center justify-center gap-1.5"
+                className="w-full bg-[var(--surface-1)] border border-[var(--accent-cyan)] text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)] hover:text-black py-2 text-xs font-['Archivo_Narrow'] font-bold uppercase transition-all rounded flex items-center justify-center gap-1.5"
               >
                 <span className="material-symbols-outlined text-base">admin_panel_settings</span>
                 <span>{currentLang === 'hy' ? 'ԲԱՑԵԼ ԱԴՄԻՆ ՎԱՀԱՆԱԿԸ' : 'OPEN CURATOR PANEL'}</span>
@@ -490,8 +494,8 @@ export default function App() {
 
       {/* Submission Toast Banner */}
       {submissionToast && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-[#0b0e14] text-[#00f5d4] border-2 border-[#00f5d4] px-5 py-3 rounded-lg font-['Outfit'] font-bold text-xs sm:text-sm uppercase shadow-[0_0_30px_rgba(0,245,212,0.4)] animate-bounce flex items-center gap-2 max-w-md text-center">
-          <span className="material-symbols-outlined text-xl text-[#00f5d4]">task_alt</span>
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-[var(--bg-main)] text-[var(--accent-cyan)] border-2 border-[var(--accent-cyan)] px-5 py-3 rounded-lg font-['Outfit'] font-bold text-xs sm:text-sm uppercase shadow-[0_0_30px_var(--accent-cyan-glow)] animate-bounce flex items-center gap-2 max-w-md text-center">
+          <span className="material-symbols-outlined text-xl text-[var(--accent-cyan)]">task_alt</span>
           <span>{submissionToast}</span>
         </div>
       )}
@@ -574,7 +578,7 @@ export default function App() {
       />
 
       {/* Mobile Bottom Navigation Bar (Hidden on Desktop md:hidden) */}
-      <div className="lg:hidden">
+      <div className="xl:hidden">
         <BottomNav
           activeTab={activeTab}
           onChangeTab={setActiveTab}

@@ -6,22 +6,22 @@ export default function ExhibitQRModal({ exhibit, isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="bg-[#121414] border-2 border-[#ffd700] p-6 max-w-sm w-full relative shadow-[0_0_50px_rgba(255,215,0,0.3)] space-y-4 text-center">
+      <div className="bg-[var(--surface-1)] border-2 border-[var(--primary-gold)] p-6 max-w-sm w-full relative shadow-[0_0_50px_rgba(255,215,0,0.3)] space-y-4 text-center">
         {/* Close Button */}
         <button
           onClick={() => {
             soundFX.playClick();
             onClose();
           }}
-          className="absolute top-3 right-3 text-[#999077] hover:text-[#ffd700] p-1"
+          className="absolute top-3 right-3 text-[#999077] hover:text-[var(--primary-gold)] p-1"
         >
           <span className="material-symbols-outlined text-2xl">close</span>
         </button>
 
         {/* Printable Museum Label Plaque Preview */}
-        <div className="border-2 border-[#ffd700] bg-[#1a1c1c] p-5 space-y-3 sticker-effect relative">
-          <div className="flex justify-between items-center border-b border-[#4d4732] pb-2">
-            <span className="font-['Archivo_Narrow'] text-xs font-black text-[#ffd700] uppercase tracking-wider">
+        <div className="border-2 border-[var(--primary-gold)] bg-[var(--surface-2)] p-5 space-y-3 sticker-effect relative">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
+            <span className="font-['Archivo_Narrow'] text-xs font-black text-[var(--primary-gold)] uppercase tracking-wider">
               YEREVAN PULSE #EXHIBIT
             </span>
             <span className="text-[10px] font-mono text-[#d0c6ab]">
@@ -74,13 +74,13 @@ export default function ExhibitQRModal({ exhibit, isOpen, onClose }) {
               <rect x="65" y="85" width="15" height="5" fill="#000" />
 
               {/* Logo Badge in Center */}
-              <rect x="40" y="40" width="20" height="20" fill="#ffd700" stroke="#000" strokeWidth="2" />
+              <rect x="40" y="40" width="20" height="20" fill="var(--primary-gold)" stroke="#000" strokeWidth="2" />
               <text x="50" y="53" fontSize="10" textAnchor="middle" fontWeight="bold" fill="#000">YP</text>
             </svg>
           </div>
 
           <div className="text-left space-y-1">
-            <h3 className="font-['Archivo_Narrow'] text-base font-black text-[#ffd700] uppercase">
+            <h3 className="font-['Archivo_Narrow'] text-base font-black text-[var(--primary-gold)] uppercase">
               {exhibit.title}
             </h3>
             <p className="text-[11px] font-['Montserrat'] text-[#e2e2e2]">
@@ -101,7 +101,7 @@ export default function ExhibitQRModal({ exhibit, isOpen, onClose }) {
             soundFX.playSuccess();
             alert('Ցուցանակի ֆայլը պատրաստ է տպագրության (Print Ready)!');
           }}
-          className="w-full bg-[#ffd700] text-[#1a1a1a] py-3 font-['Archivo_Narrow'] text-xs font-black uppercase tracking-wider hover:bg-[#e9c400] transition-all border border-white"
+          className="w-full bg-[var(--primary-gold)] text-[var(--surface-2)] py-3 font-['Archivo_Narrow'] text-xs font-black uppercase tracking-wider hover:bg-[var(--primary-gold-bright)] transition-all border border-white"
         >
           🖨️ ՏՊԵԼ ԹԱՆԳԱՐԱՆԱՅԻՆ ՑՈՒՑԱՆԱԿԸ
         </button>

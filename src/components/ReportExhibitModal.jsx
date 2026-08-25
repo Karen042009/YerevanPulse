@@ -112,11 +112,11 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
 
   return (
     <div className="fixed inset-0 z-[70] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
-      <div className="bg-[#121620] border-2 border-[#ffc700] p-6 max-w-lg w-full shadow-[0_0_50px_rgba(255,199,0,0.25)] space-y-6 relative max-h-[90vh] overflow-y-auto rounded-lg">
+      <div className="bg-[var(--surface-1)] border-2 border-[var(--primary-gold)] p-6 max-w-lg w-full shadow-[0_0_50px_var(--primary-gold-glow)] space-y-6 relative max-h-[90vh] overflow-y-auto rounded-lg">
         {/* Header */}
         <div className="flex justify-between items-start border-b border-gray-700 pb-4">
           <div>
-            <span className="text-[10px] font-mono text-[#ffc700] uppercase tracking-widest bg-black px-2 py-0.5 border border-[#ffc700] rounded">
+            <span className="text-[10px] font-mono text-[var(--primary-gold)] uppercase tracking-widest bg-black px-2 py-0.5 border border-[var(--primary-gold)] rounded">
               + CIVIC REPORTING
             </span>
             <h2 className="font-['Outfit'] text-2xl font-black uppercase text-white mt-1">
@@ -128,7 +128,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
           </div>
           <button
             onClick={() => { soundFX.playClick(); onClose(); }}
-            className="text-gray-400 hover:text-[#ffc700] text-xl font-bold p-1"
+            className="text-gray-400 hover:text-[var(--primary-gold)] text-xl font-bold p-1"
           >
             ✕
           </button>
@@ -136,18 +136,18 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
 
         {/* Image Preview & Upload Box */}
         <div className="space-y-2">
-          <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase">
+          <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase">
             Ցուցանմուշի Լուսանկար / Image Upload
           </label>
           
-          <div className="relative h-48 w-full bg-black border-2 border-[#ffc700] overflow-hidden rounded flex items-center justify-center group">
+          <div className="relative h-48 w-full bg-black border-2 border-[var(--primary-gold)] overflow-hidden rounded flex items-center justify-center group">
             <img 
               src={imagePreview} 
               alt="Preview" 
               className="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity" 
             />
             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <label className="bg-[#ffc700] text-[#0b0e14] px-4 py-2 text-xs font-bold uppercase cursor-pointer rounded shadow-lg">
+              <label className="bg-[var(--primary-gold)] text-[var(--bg-main)] px-4 py-2 text-xs font-bold uppercase cursor-pointer rounded shadow-lg">
                 📷 Բեռնել Նկար (Upload Photo)
                 <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
               </label>
@@ -161,7 +161,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
                 key={idx}
                 onClick={() => setImagePreview(preset.url)}
                 className={`p-2 border text-xs font-['Archivo_Narrow'] font-bold flex items-center justify-center gap-1 transition-all rounded ${
-                  imagePreview === preset.url ? 'bg-[#ffc700] text-black border-white shadow-md' : 'bg-[#1a202c] text-gray-200 border-gray-700 hover:border-[#ffc700]'
+                  imagePreview === preset.url ? 'bg-[var(--primary-gold)] text-black border-white shadow-md' : 'bg-[var(--surface-2)] text-gray-200 border-gray-700 hover:border-[var(--primary-gold)]'
                 }`}
               >
                 <span>{preset.label}</span>
@@ -173,7 +173,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
         {/* Form Fields */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase mb-1">
               Ցուցանմուշի Անվանումը *
             </label>
             <input
@@ -182,19 +182,19 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
               placeholder="օր. Պլաստիկ Ջրի Շիշ #109"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
+              className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] px-3 py-2 text-xs text-white outline-none rounded"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
+              <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase mb-1">
                 Աղբի Կատեգորիա
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
+                className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] px-3 py-2 text-xs text-white outline-none rounded"
               >
                 <option value="Պլաստիկ">🍾 Պլաստիկ (450 տարի)</option>
                 <option value="Ծխախոտ">🚬 Ծխախոտ (12 տարի)</option>
@@ -206,13 +206,13 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
             </div>
 
             <div>
-              <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
+              <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase mb-1">
                 Թաղամաս
               </label>
               <select
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
-                className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
+                className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] px-3 py-2 text-xs text-white outline-none rounded"
               >
                 {districts.map((d) => (
                   <option key={d.id} value={d.name}>
@@ -224,7 +224,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
           </div>
 
           <div>
-            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase mb-1">
               Տեղակայում / Հասցե *
             </label>
             <input
@@ -233,12 +233,12 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
               placeholder="օր. Սարյան փողոց, Սուրճի կրպակի մոտ"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none rounded"
+              className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] px-3 py-2 text-xs text-white outline-none rounded"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase mb-1">
               Վտանգավորության Աստիճան
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -252,7 +252,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
                   key={sev.id}
                   onClick={() => setSeverity(sev.id)}
                   className={`py-2 text-[10px] font-['Space_Grotesk'] font-bold uppercase border transition-all rounded ${
-                    severity === sev.id ? 'bg-[#ffc700] text-black border-[#ffc700]' : `bg-[#0b0e14] ${sev.color}`
+                    severity === sev.id ? 'bg-[var(--primary-gold)] text-black border-[var(--primary-gold)]' : `bg-[var(--bg-main)] ${sev.color}`
                   }`}
                 >
                   {sev.label}
@@ -262,7 +262,7 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
           </div>
 
           <div>
-            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[#ffc700] uppercase mb-1">
+            <label className="block text-xs font-['Space_Grotesk'] font-bold text-[var(--primary-gold)] uppercase mb-1">
               «Թանգարանային» Նկարագրություն / Quote
             </label>
             <textarea
@@ -270,13 +270,13 @@ export default function ReportExhibitModal({ isOpen, onClose, onAddExhibit, dist
               placeholder="օր. Քաղաքային անփութության և հավերժական պլաստիկի սիմվոլ..."
               value={quote}
               onChange={(e) => setQuote(e.target.value)}
-              className="w-full bg-[#0b0e14] border border-gray-700 focus:border-[#ffc700] px-3 py-2 text-xs text-white outline-none resize-none rounded"
+              className="w-full bg-[var(--bg-main)] border border-gray-700 focus:border-[var(--primary-gold)] px-3 py-2 text-xs text-white outline-none resize-none rounded"
             />
           </div>
 
-          <div className="bg-[#0b0e14] p-3 border border-gray-700 flex justify-between items-center text-xs rounded">
+          <div className="bg-[var(--bg-main)] p-3 border border-gray-700 flex justify-between items-center text-xs rounded">
             <span className="text-gray-300">ՊԱՐԳԵՎԱՏՐՈՒՄ ՄԱՔՐԵԼՈՒ ՀԱՄԱՐ:</span>
-            <span className="font-['Space_Grotesk'] font-black text-[#ffc700]">
+            <span className="font-['Space_Grotesk'] font-black text-[var(--primary-gold)]">
               +{categoryPoints[category] || 50} PTS
             </span>
           </div>
